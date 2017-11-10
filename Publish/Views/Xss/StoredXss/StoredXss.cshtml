@@ -1,0 +1,108 @@
+﻿<div class="tab-pane rootTabContent" id="stored" role="tabpanel">
+    <div class="nav-tabs-custom">
+        <ul class="nav nav-tabs bg-light" role="tablist">
+            <li class="nav-item"><a class="storedTab nav-link active" data-toggle="tab" href="#storedDescription" role="tab">Nedir ?</a></li>
+            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_1" role="tab">Örnek 1</a></li>
+            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_2" role="tab">Örnek 2</a></li>
+            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_3" role="tab">Örnek 3</a></li>
+            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_4" role="tab">Örnek 4</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane storedTabContent active" id="storedDescription">
+                Stored XSS kalıcı XSS'tir
+            </div>
+            @* Stored XSS Scenario_1 *@
+            <div class="tab-pane storedTabContent" id="storedScenario_1">
+                <div class="card">
+                    <div class="card-header with-border bg-info">Yorum Gönder</div>
+                    <form action="#" onsubmit="return sendComment($('#storedModalNameSurname').val(),$('#storedModalEmail').val(),$('#storedModalComment').val());" class="form-horizontal">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label" for="storedModalNameSurname">İsim - Soyisim</label>
+                                <div class="col-md-3"><input type="text" id="storedModalNameSurname" class="form-control" placeholder="John Wick" required></div>
+                                <label class="col-md-1 col-form-label" for="storedModalEmail">Email</label>
+                                <div class="col-md-3"><input type="email" id="storedModalEmail" class="form-control" placeholder="example@example.com" required></div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label" for="storedModalComment">Mesajınız</label>
+                                <div class="col-md-10"><textarea id="storedModalComment" class="form-control" rows="4" placeholder="Enter ..." required></textarea></div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Gönder</button>
+                            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Sıfırla</button>
+                        </div>
+                    </form>
+                    <script>
+                        function sendComment(param1, param2, param3) {
+
+                            var newCommentList = $('#commentList').html() +
+                                '<tr>' +
+                                '<td>' + Date.now() + '</td>' +
+                                '<td>' + param1 + '</td>' +
+                                '<td>' + param2 + '</td>' +
+                                '<td>' + param3 + '</td>' +
+                                '<td class="text-center"><button type="button" class="btn btn-info" data-toggle="modal" onclick = "showComment(this)"><i class="fa fa-eye"></i></button ></td> ' +
+                                '</tr>';
+
+                            $('#commentList').html(newCommentList);
+                            $('#storedModalNameSurname').val('');
+                            $('#storedModalEmail').val('');
+                            $('#storedModalComment').val('');
+                        };
+                        function showComment(that) {
+                            var commentListItem = that.parentNode.parentNode.children;
+                            $('.modal-title').html(commentListItem[1].innerText + ' - ' + commentListItem[2].innerText);
+                            $('.modal-body').html(commentListItem[3].innerText);
+                            $('#modal-default').modal('show');
+                        }
+                    </script>
+                </div>
+                <div class="card">
+                    <div class="card-header bg-light"> Yorum Listesi </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>İsim - Soyisim</th>
+                                    <th>Email</th>
+                                    <th>Yorum</th>
+                                    <th>İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="commentList"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modal-default">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Kapat">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title"></h4>
+                            </div>
+                            <div class="modal-body">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-ban"></i>&nbsp;Kapat</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane storedTabContent" id="storedScenario_2">
+
+            </div>
+            <div class="tab-pane storedTabContent" id="storedScenario_3">
+
+            </div>
+            <div class="tab-pane storedTabContent" id="storedScenario_4">
+
+            </div>
+        </div>
+    </div>
+</div>

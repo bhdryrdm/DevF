@@ -1038,7 +1038,7 @@
     <Content Include="Views\ServerSide\ASP.NET_MVC\Models\Xss\ReflectedXss\RXSS_S3_LoginRequest.cshtml" />
     <Content Include="Views\ServerSide\ASP.NET_MVC\Models\Xss\ReflectedXss\RXSS_S3_RegisterRequest.cshtml" />
     <Content Include="Views\ServerSide\ASP.NET_MVC\Models\Xss\ReflectedXss\RXSS_S3_UserListResponse.cshtml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\BHDR.pubxml" />
     <None Include="Views\Shared\PartialLayout\_AsideMenu.cshtml" />
     <Content Include="Views\Xss\Index.cshtml" />
     <Content Include="Views\Xss\ReflectedXss\ReflectedXss.cshtml" />

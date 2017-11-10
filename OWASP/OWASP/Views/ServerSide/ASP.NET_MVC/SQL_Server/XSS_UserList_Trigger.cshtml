@@ -1,0 +1,17 @@
+﻿<div class="tab-pane serverSideTab" id="xss_userList_trigger">
+    <pre>
+        <code class="language-sql">
+            ALTER TRIGGER [dbo].[DeleteInXSSUser] ON [OWASP].[dbo].[XSS_User]
+            FOR INSERT
+            AS
+    
+            IF (SELECT Count(UserID) FROM XSS_User) > 5 
+	            Delete FROM XSS_User
+	            Where UserID IN (
+		            SELECT  TOP  1 UserID FROM XSS_User
+		            WHERE Email != 'admin@admin.com' AND Email != 'demo@admin.com'
+ 		            ORDER BY UserID 
+	            )
+        </code>
+    </pre>
+</div>

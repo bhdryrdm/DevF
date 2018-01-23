@@ -111,9 +111,10 @@
     <Content Include="Content\img\avatars\7.jpg" />
     <Content Include="Content\img\avatars\8.jpg" />
     <Content Include="Content\img\avatars\9.jpg" />
-    <Content Include="Content\img\favicon.png" />
-    <Content Include="Content\img\logo-symbol.png" />
+    <Content Include="Content\img\favicon1.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logo-symbol.png" />
+    <Content Include="Content\img\favicon.png" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\charts.js" />
     <Content Include="Content\js\main.js" />

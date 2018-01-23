@@ -1086,10 +1086,6 @@
       <Project>{8F471C52-EB74-471D-8B9B-FDC78772A583}</Project>
       <Name>DevF_LABS.ViewModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OWASP_DB\DevF_LABS.Data.csproj">
-      <Project>{8365b8b1-2341-4bfc-9d67-8a648197688a}</Project>
-      <Name>DevF_LABS.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1103,7 +1099,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52866</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -56,6 +56,10 @@
     <Folder Include="Mapping\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DevF_LABS.Data\DevF_LABS.Data.csproj">
+      <Project>{8365B8B1-2341-4BFC-9D67-8A648197688A}</Project>
+      <Name>DevF_LABS.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DevF_LABS.RequestResponse\DevF_LABS.RequestResponse.csproj">
       <Project>{9C2B4FA0-478E-4327-9B41-74327CC5DD48}</Project>
       <Name>DevF_LABS.RequestResponse</Name>
@@ -63,10 +67,6 @@
     <ProjectReference Include="..\DevF_LABS.ViewModel\DevF_LABS.ViewModel.csproj">
       <Project>{8F471C52-EB74-471D-8B9B-FDC78772A583}</Project>
       <Name>DevF_LABS.ViewModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OWASP_DB\DevF_LABS.Data.csproj">
-      <Project>{8365B8B1-2341-4BFC-9D67-8A648197688A}</Project>
-      <Name>DevF_LABS.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -63,8 +63,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OWASP_DB\DevF_LABS.Data.csproj">
-      <Project>{8365b8b1-2341-4bfc-9d67-8a648197688a}</Project>
+    <ProjectReference Include="..\DevF_LABS.Data\DevF_LABS.Data.csproj">
+      <Project>{8365B8B1-2341-4BFC-9D67-8A648197688A}</Project>
       <Name>DevF_LABS.Data</Name>
     </ProjectReference>
   </ItemGroup>

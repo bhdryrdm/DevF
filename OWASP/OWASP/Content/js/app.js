@@ -1,4 +1,4 @@
-/*****
+﻿/*****
 * CONFIGURATION
 */
     //Main navigation
@@ -143,4 +143,93 @@ function init(url) {
   /* ---------- Popover ---------- */
   $('[rel="popover"],[data-rel="popover"],[data-toggle="popover"]').popover();
 
+}
+
+devf = {
+
+    //Is null or empty control
+    Ine: function (text) {
+        if (text === null || text === undefined || text === "undefined" || text === "") {
+            return true;
+        }
+        return false;
+    },
+
+    IsString: function (text) {
+        return Object.prototype.toString.call(text) == '[object String]';
+    },
+
+    Swal: function (title, text, icon, button) {
+        swal({
+            title: title,
+            text: text,
+            icon: icon,
+            button: button,
+        });
+    },
+
+    AjaxHTMLRequest: function (type, data, dataType, url, successFunction, divSelector) {
+       
+        if (devf.Ine(successFunction)) {
+            successFunction = function (returnData) {
+                devf.Swal("Title",returnData.Message, returnData.IsSuccess);
+            }
+        }
+        var errorFunction = function (ex) {
+            devf.Swal("Error","İşlem sırasında hata oluştu. ( " + ex.statusText + " ) ","Close","error");
+
+        };
+
+        var beforeSendFunction = "";
+        var completeFunction = "";
+
+        if (devf.IsString(divSelector)) {
+            var element = $(divSelector);
+            beforeSendFunction = function () {
+                element.LoadingOverlay("show", {
+                    fade: [50, 1000]
+                });
+            };
+            completeFunction = function () {
+                element.LoadingOverlay("hide", {
+                    fade: [50, 1000]
+                });
+                try {
+                    fPosSet(300);
+                } catch (err) {
+                    console.log(err)
+                }
+            };
+
+        }
+        else {
+            var beforeSendFunction = function () {
+                $.LoadingOverlay("show", {
+                    fade: [500, 1000]
+                });
+            };
+            var completeFunction = function () {
+                $.LoadingOverlay("hide", {
+                    fade: [500, 1000]
+                });
+                try {
+                    fPosSet(300);
+                } catch (err) {
+                    console.log(err)
+                }
+            };
+        }
+        $.ajax({
+            type: type,
+            url: url,
+            data: data,
+            datatype: dataType,
+            contentType: false,
+            processData: false,
+            beforeSend: beforeSendFunction,
+            success: successFunction,
+            error: errorFunction,
+            complete: completeFunction
+        });
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity.Migrations;
 
-namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst
+namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst
 {
     public class MSSQL_EF_CF_Context_Config : DbMigrationsConfiguration<MSSQL_EF_CF_Context>
     {
@@ -8,7 +8,7 @@ namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "OWASP_DB.MSSQL.EntityFramework.CodeFirst";
+            ContextKey = "DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst";
         }
     }
 }

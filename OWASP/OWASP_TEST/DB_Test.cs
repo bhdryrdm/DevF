@@ -1,9 +1,8 @@
-﻿using System;
+﻿using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst;
+using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OWASP_DB.MSSQL.EntityFramework.CodeFirst.Tables;
-using OWASP_DB.MSSQL.EntityFramework.CodeFirst;
 
-namespace OWASP_TEST
+namespace DevF_LABS.Test
 {
     [TestClass]
     public class UnitTest1

@@ -1,4 +1,5 @@
-﻿<div class="tab-pane rootTabContent" id="reflected" role="tabpanel">
+﻿<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="tab-pane rootTabContent" id="reflected" role="tabpanel">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs bg-light" role="tablist">
             <li class="nav-item"><a class="reflectedTab nav-link active" data-toggle="tab" href="#reflectedDescription" role="tab">Nedir ?</a></li>
@@ -99,67 +100,53 @@
                                         <div class="form-group row">
                                             <label class="col-md-1 col-form-label" for="reflected_scenario_3_Email">Email</label>
                                             <div class="col-md-5">
-                                                <input type="email" id="reflected_scenario_3_Email" class="form-control" placeholder="example@example.com" required>
-                                                <span> Demo Kullanıcı Email <code>demo@admin.com</code></span>
+                                                <input type="email" id="reflected_scenario_3_Email" class="form-control mb-sm-2" placeholder="example@example.com" required>
+                                                <span> Demo Admin User Email <code>admin@devf.com</code></span>
+                                                <span> Demo Normal User Email <code>demo@devf.com</code></span>
                                             </div>
                                             <label class="col-md-1 col-form-label" for="reflected_scenario_3_Pasword">Parola</label>
                                             <div class="col-md-5">
-                                                <input type="password" id="reflected_scenario_3_Pasword" class="form-control" placeholder="•••••••" required>
-                                                <span> Demo Kullanıcı Parola <code>456</code></span>
+                                                <input type="password" id="reflected_scenario_3_Pasword" class="form-control mb-sm-2" placeholder="•••••••" required>
+                                                <span> Demo Admin User Parola <code>123</code></span>
+                                                <span> Demo Normal User Parola <code>456</code></span>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" onclick="getUserInformation('admin@admin.com','123')" class="btn btn-sm btn-info"><i class="fa fa-dot-circle-o"></i> Admin Girişi</button>
-                                        <button type="button" onclick="getUserInformation($('#reflected_scenario_3_Email').val(),$('#reflected_scenario_3_Pasword').val())" class="btn btn-sm btn-success"><i class="fa fa-dot-circle-o"></i> Giriş Yap</button>
-                                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Sıfırla</button>
+                                        @*<button type="button" onclick="getUserInformation('admin@devf.com','123')" class="btn btn-sm btn-info"><i class="fa fa-dot-circle-o"></i> Admin Girişi</button>*@
+                                        <button id="reflected_scenario_3_login" type="button" onclick="getUserInformation($('#reflected_scenario_3_Email').val(),$('#reflected_scenario_3_Pasword').val())" class="btn btn-sm btn-success"><i class="icons icon-login"></i> Giriş Yap</button>
+                                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Temizle</button>
                                     </div>
                                 </form>
                             </div>
                             <script>
                                 function getUserInformation(param1, param2) {
+
+                                    var success = function (returnData) {
+                                        if (returnData.length > 468) {
+                                            $('#scenario_3_userList').html(returnData);
+                                        }
+                                    };
+
                                     var form = new FormData();
                                     form.append("RXSS_S3_LoginRequest_Email", param1)
                                     form.append("RXSS_S3_LoginRequest_Password", param2)
-                                    $.ajax({
-                                        type: "POST",
-                                        url: '/XSS/RXSS_S3_Login',
-                                        data: form,
-                                        dataType: "html",
-                                        contentType: false,
-                                        processData: false,
-                                        success: function (returnData) {
-                                            if (returnData.length > 468) {
-                                                $('#scenario_3_userList').html(returnData);
-                                            }
-                                        },
-                                        error: function (jqXHR, textStatus, errorThrown) {
-                                            console.log('Hata oluştu!')
-                                        },
-
-                                    });
+                                    devf.AjaxHTMLRequest('POST', form, "html", '/XSS/RXSS_S3_Login', success, '#reflected_scenario_3_login');
                                 };
+
                                 function reflectedXSS_deleteUser(param1) {
+
+                                    var success = function (returnData) {
+                                        if (returnData.length > 468) {
+                                            $('#scenario_3_userList').html(returnData);
+                                        }
+                                    };
+
                                     var form = new FormData();
                                     form.append("userID", param1);
-                                    $.ajax({
-                                        type: "POST",
-                                        url: '/XSS/RXSS_S3_Delete',
-                                        data: form,
-                                        dataType: "html",
-                                        contentType: false,
-                                        processData: false,
-                                        success: function (returnData) {
-                                            if (returnData.length > 468) {
-                                                $('#scenario_3_userList').html(returnData);
-                                            }
-                                        },
-                                        error: function (jqXHR, textStatus, errorThrown) {
-                                            console.log('Hata oluştu!')
-                                        },
+                                    devf.AjaxHTMLRequest('POST', form, "html", '/XSS/RXSS_S3_Delete', success, '#remove_button_user_' + param1);
 
-                                    });
                                 }
                             </script>
                             @* Reflected XSS Scenario_3 User List *@
@@ -199,35 +186,33 @@
 
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" onclick="userRegister()" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Kayıt Ol</button>
+                                        <button id="reflected_scenario_3_register" type="submit" onclick="userRegister()" class="btn btn-sm btn-primary"><i class="fa fa-user-plus"></i> Kayıt Ol</button>
                                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Sıfırla</button>
                                     </div>
+                                    <div class="g-recaptcha" data-sitekey="6LfT5xMUAAAAAJu2QmB5neGTlWcudka3zf2E0wgy"></div>
+
                                 </form>
                             </div>
                             <script>
                                 function userRegister() {
+                                    var success = function (returnData) {
+                                        if (returnData[0].length > 468 && returnData[1].IsSuccess) {
+                                            $('#scenario_3_userList').html(returnData[0]);
+                                            devf.Swal("User Register", returnData[1].Message, "success", "Close");
+                                            grecaptcha.reset();
+                                        } else {
+                                            devf.Swal(returnData[1].ResponseCode, returnData[1].Message, "error", "Close");
+                                            grecaptcha.reload();
+                                        }
+                                    }
                                     var form = new FormData();
                                     form.append("RXSS_S3_RegisterRequest_UserName", $('#reflected_scenario_3_register_name').val());
                                     form.append("RXSS_S3_RegisterRequest_UserSurname", $('#reflected_scenario_3_register_surname').val());
                                     form.append("RXSS_S3_RegisterRequest_Email", $('#reflected_scenario_3_register_email').val());
                                     form.append("RXSS_S3_RegisterRequest_Password", $('#reflected_scenario_3_register_pasword').val());
-                                    $.ajax({
-                                        type: "POST",
-                                        url: '/XSS/RXSS_S3_Register',
-                                        data: form,
-                                        dataType: "html",
-                                        contentType: false,
-                                        processData: false,
-                                        success: function (returnData) {
-                                            if (returnData.length > 468) {
-                                                $('#scenario_3_userList').html(returnData);
-                                            }
-                                        },
-                                        error: function (jqXHR, textStatus, errorThrown) {
-                                            console.log('Hata oluştu!')
-                                        },
-
-                                    });
+                                    form.append("RXSS_S3_RegisterRequest_gReCaptcha", grecaptcha.getResponse());
+                                    devf.AjaxHTMLRequest('POST', form, "json", '/XSS/RXSS_S3_Register', success, '#reflected_scenario_3_register');
+                                  
                                 }
 
                             </script>

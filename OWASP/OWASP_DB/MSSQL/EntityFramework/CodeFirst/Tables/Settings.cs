@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst.Tables
+﻿namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables
 {
     public class Settings
     {

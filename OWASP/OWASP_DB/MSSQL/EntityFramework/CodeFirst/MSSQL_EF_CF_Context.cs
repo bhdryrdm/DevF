@@ -1,9 +1,9 @@
-﻿using OWASP_DB.MSSQL.EntityFramework.CodeFirst.Tables;
-using OWASP_DB.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
-using OWASP_DB.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS;
+﻿using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables;
+using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
+using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS;
 using System.Data.Entity;
 
-namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst
+namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst
 {
     public class MSSQL_EF_CF_Context : DbContext
     {

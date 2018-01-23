@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst.Tables.XSS
+namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.XSS
 {
     public class XSS_User
     {

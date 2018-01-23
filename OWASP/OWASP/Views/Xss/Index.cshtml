@@ -1,8 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "XSS Index";
+    ViewBag.Title = "XSS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <main class="main">
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
@@ -158,11 +159,11 @@
                             //Aktif olan tab ve content silinir
                             $(destinationTab).removeClass('active');
                             $(destinationTab + 'Content').removeClass('active');
-
-                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active d-block');
                             $(destinationTabContent).addClass('active');
                         };
-                        function serverSideTabClose(destinationTabContent) {
+                        function serverSideAllTabClose(destinationTabContent) {
                             $('#serverSide').css('display', 'none');
 
                             //Aktif olan tab ve content silinir
@@ -170,19 +171,46 @@
                             $(destinationTab + 'Content').removeClass('active');
                         };
 
+                        function closeTab(destinationTabContent) {
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).removeClass('active d-block');
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('d-none');
+                        }
                     </script>
                 </div>
                 <div class="col-md-10 mt-5" id="serverSide" style="display:none">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item"><a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab" aria-controls="xsscss">BaseController</a></li>
-                            <li class="nav-item"><a class="serverSideTab nav-link" data-toggle="tab" href="#xssController" role="tab" aria-controls="reflectedxss">XssController</a></li>
-                            <li class="nav-item"><a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_loginRequest" role="tab" aria-controls="xsscss">RXSS_S3_LoginRequest</a></li>
-                            <li class="nav-item"><a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_registerRequest" role="tab" aria-controls="reflectedxss">RXSS_S3_RegisterRequest</a></li>
-                            <li class="nav-item"><a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_userListResponse" role="tab" aria-controls="xsscss">RXSS_S3_UserListResponse</a></li>
-                            <li class="nav-item"><a class="serverSideTab nav-link" data-toggle="tab" href="#xss_userList_trigger" role="tab" aria-controls="reflectedxss">XSS_UserList_Trigger</a></li>
-                            <li class="nav-item"><a class="serverSideTab nav-link" data-toggle="tab" href="#testt" role="tab" aria-controls="reflectedxss">XSS_UserList_Trigger</a></li>
-                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab" aria-controls="xsscss"> BaseController 
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#baseController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#xssController" role="tab" aria-controls="reflectedxss">XssController 
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#xssController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_loginRequest" role="tab" aria-controls="xsscss">RXSS_S3_LoginRequest 
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#rxss_s3_loginRequest')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_registerRequest" role="tab" aria-controls="reflectedxss">RXSS_S3_RegisterRequest 
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#rxss_s3_registerRequest')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_userListResponse" role="tab" aria-controls="xsscss">RXSS_S3_UserListResponse 
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#rxss_s3_userListResponse')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#xss_userList_trigger" role="tab" aria-controls="reflectedxss">XSS_UserList_Trigger 
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#xss_userList_trigger')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
                         </ul>
                         <div class="tab-content" role="tabpanel">
                             @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BaseController.cshtml")

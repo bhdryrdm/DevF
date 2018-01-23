@@ -1,8 +1,8 @@
-﻿using OWASP_DB.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
+﻿using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS
+namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS
 {
     public class XSS_UserConfiguration : EntityTypeConfiguration<XSS_User>
     {
@@ -13,8 +13,6 @@ namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS
 
             //Primary Key
             this.HasKey<int>(s => s.UserID);
-
-
 
             this.Property(x => x.UserID)
                     .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
@@ -40,6 +38,8 @@ namespace OWASP_DB.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS
                    .HasColumnName("Email")
                    .HasColumnOrder(4)
                    .HasColumnType("nvarchar");
+
+            this.HasIndex(s => s.Email).IsUnique();
 
             this.Property(x => x.Password)
                    .IsRequired()

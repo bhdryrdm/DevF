@@ -1,5 +1,0 @@
-E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.ViewModel\bin\Debug\DevF_LABS.ViewModel.dll
-E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.ViewModel\bin\Debug\DevF_LABS.ViewModel.pdb
-E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.ViewModel\obj\Debug\DevF_LABS.ViewModel.csproj.CoreCompileInputs.cache
-E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.ViewModel\obj\Debug\DevF_LABS.ViewModel.dll
-E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.ViewModel\obj\Debug\DevF_LABS.ViewModel.pdb

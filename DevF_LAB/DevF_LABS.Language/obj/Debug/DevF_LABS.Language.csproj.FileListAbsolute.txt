@@ -1,0 +1,10 @@
+E:\01-GITLAB\12-OWASP\OWASP\OWASP_LANG\bin\Debug\DevF_LABS.Language.dll
+E:\01-GITLAB\12-OWASP\OWASP\OWASP_LANG\bin\Debug\DevF_LABS.Language.pdb
+E:\01-GITLAB\12-OWASP\OWASP\OWASP_LANG\obj\Debug\DevF_LABS.Language.csproj.CoreCompileInputs.cache
+E:\01-GITLAB\12-OWASP\OWASP\OWASP_LANG\obj\Debug\DevF_LABS.Language.dll
+E:\01-GITLAB\12-OWASP\OWASP\OWASP_LANG\obj\Debug\DevF_LABS.Language.pdb
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.Language\bin\Debug\DevF_LABS.Language.dll
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.Language\bin\Debug\DevF_LABS.Language.pdb
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.Language\obj\Debug\DevF_LABS.Language.csproj.CoreCompileInputs.cache
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.Language\obj\Debug\DevF_LABS.Language.dll
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.Language\obj\Debug\DevF_LABS.Language.pdb

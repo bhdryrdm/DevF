@@ -1,0 +1,8 @@
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\bin\Debug\DevF_LABS.RequestResponse.dll
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\bin\Debug\DevF_LABS.RequestResponse.pdb
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\bin\Debug\DevF_LABS.ViewModel.dll
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\bin\Debug\DevF_LABS.ViewModel.pdb
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\obj\Debug\DevF_LABS.RequestResponse.csprojResolveAssemblyReference.cache
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\obj\Debug\DevF_LABS.RequestResponse.csproj.CoreCompileInputs.cache
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\obj\Debug\DevF_LABS.RequestResponse.dll
+E:\01-GITLAB\12-OWASP\OWASP\DevF_LABS.RequestResponse\obj\Debug\DevF_LABS.RequestResponse.pdb

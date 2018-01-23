@@ -1,4 +1,15 @@
 OWASP/OWASP/obj/
 OWASP/.vs/
 OWASP/OWASP/Properties/PublishProfiles/
-OWASP/
+OWASP/DevF_LABS.Business/bin/
+OWASP/DevF_LABS.Business/obj/
+OWASP/DevF_LABS.RequestResponse/bin/
+OWASP/DevF_LABS.RequestResponse/obj/
+OWASP/DevF_LABS.ViewModel/obj/
+OWASP/OWASP/bin/
+OWASP/OWASP_DB/bin/
+OWASP/OWASP_DB/obj/
+OWASP/OWASP_LANG/bin/
+OWASP/OWASP_LANG/obj/
+OWASP/OWASP_TEST/bin/
+OWASP/OWASP_TEST/obj/

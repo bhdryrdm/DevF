@@ -176,7 +176,7 @@ devf = {
             }
         }
         var errorFunction = function (ex) {
-            devf.Swal("Error","İşlem sırasında hata oluştu. ( " + ex.statusText + " ) ","Close","error");
+            devf.Swal("Error","İşlem sırasında hata oluştu. ( " + ex.statusText + " ) ","error","Close");
 
         };
 

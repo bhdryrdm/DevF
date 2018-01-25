@@ -4,10 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace OWASP.Controllers
+namespace DevF_LABS.Presentation.Controllers
 {
     public class HomeController : BaseController
     {
         public ActionResult Index() => View();
+
+        
+        public ActionResult OnlineUserCount()
+        {
+            ViewData["OnlineSessionCount"] = (int)Session["OnlineSessionCount"];
+            return PartialView("~/Views/Shared/PartialLayout/_SessionCount.cshtml");
+        }
     }
 }

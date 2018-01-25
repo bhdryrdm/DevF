@@ -37,9 +37,13 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExpressMapper, Version=1.9.1.0, Culture=neutral, PublicKeyToken=ac363faa09311ba0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Expressmapper.1.9.1\lib\net46\ExpressMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,12 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessServices\XSS_BusinessServices.cs" />
+    <Compile Include="DomainModel\XSS\RXSS_S3_LoginDomainModel.cs" />
+    <Compile Include="DomainModel\XSS\RXSS_S3_RegisterDomainModel.cs" />
+    <Compile Include="Mapping_Express\Mapper_Bootstrapper.cs" />
+    <Compile Include="Mapping\XSS_Mapping.cs" />
+    <Compile Include="Mapping_Express\XSS_ExpressMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DomainModel\" />
-    <Folder Include="Mapping\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DevF_LABS.Data\DevF_LABS.Data.csproj">
       <Project>{8365B8B1-2341-4BFC-9D67-8A648197688A}</Project>

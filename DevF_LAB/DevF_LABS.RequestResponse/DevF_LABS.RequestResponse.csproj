@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,10 +47,12 @@
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_LoginRequest.cs" />
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_RegisterRequest.cs" />
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_UserListResponse.cs" />
+    <Compile Include="XSS\ReflectedXSS\RXSS_S3_DeleteRequest.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S1_CommentListResponse.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S1_CommentRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="XSS\DomXSS\" />
-    <Folder Include="XSS\StoredXSS\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DevF_LABS.ViewModel\DevF_LABS.ViewModel.csproj">

@@ -63,7 +63,7 @@
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reflectedScenario_3_description" role="tab">Yetkisiz Yetkili</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reflectedScenario_3_login" role="tab">Giriş Paneli</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reflectedScenario_3_register" role="tab">Kayıt Paneli</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reflectedScenario_3_protectionMethod" ondblclick="reflectedXSS_deleteUser(0)" role="tab">Korunma Yöntemleri</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#reflectedScenario_3_protectionMethod" ondblclick="reflectedXSS_deleteUser(0); return false;" role="tab">Korunma Yöntemleri</a></li>
                     </ul>
                     <div class="tab-content">
                         @* Reflected XSS Scenario_3 Description *@
@@ -95,7 +95,7 @@
 
                             <div class="card">
                                 <div class="card-header bg-success"><i class="icon-user"></i> Giriş Paneli <span class="pull-right">Server Side Code > ASP.NET MVC > Controllers > XssController - RXSS_S3_Login()</span></div>
-                                <form action="#" class="form-horizontal">
+                                <form action="#" class="form-horizontal" onsubmit="getUserInformation($('#reflected_scenario_3_Email').val(), $('#reflected_scenario_3_Pasword').val()); return false;">
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <label class="col-md-1 col-form-label" for="reflected_scenario_3_Email">Email</label>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="card-footer">
                                         @*<button type="button" onclick="getUserInformation('admin@devf.com','123')" class="btn btn-sm btn-info"><i class="fa fa-dot-circle-o"></i> Admin Girişi</button>*@
-                                        <button id="reflected_scenario_3_login" type="button" onclick="getUserInformation($('#reflected_scenario_3_Email').val(),$('#reflected_scenario_3_Pasword').val())" class="btn btn-sm btn-success"><i class="icons icon-login"></i> Giriş Yap</button>
+                                        <button id="reflected_scenario_3_login" type="submit" class="btn btn-sm btn-success"><i class="icons icon-login"></i> Giriş Yap</button>
                                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Temizle</button>
                                     </div>
                                 </form>
@@ -138,14 +138,18 @@
                                 function reflectedXSS_deleteUser(param1) {
 
                                     var success = function (returnData) {
-                                        if (returnData.length > 468) {
-                                            $('#scenario_3_userList').html(returnData);
+                                        if (returnData[0].length > 468 && returnData[1].IsSuccess) {
+                                            $('#scenario_3_userList').html(returnData[0]);
+                                            devf.Swal("User Delete", returnData[1].Message, "success", "Close");
+                                        } else {
+                                            devf.Swal(returnData[1].ResponseCode, returnData[1].Message, "error", "Close");
                                         }
+                                        
                                     };
 
                                     var form = new FormData();
-                                    form.append("userID", param1);
-                                    devf.AjaxHTMLRequest('POST', form, "html", '/XSS/RXSS_S3_Delete', success, '#remove_button_user_' + param1);
+                                    form.append("UserID", param1);
+                                    devf.AjaxHTMLRequest('POST', form, "json", '/XSS/RXSS_S3_Delete', success);
 
                                 }
                             </script>
@@ -156,7 +160,7 @@
                         <div class="tab-pane" id="reflectedScenario_3_register">
                             <div class="card">
                                 <div class="card-header bg-primary"> Kayıt Paneli </div>
-                                <form class="form-horizontal">
+                                <form action="#" class="form-horizontal" onsubmit="userRegister(); return false;">
                                     <div class="card-body">
 
                                         <div class="form-group row">
@@ -186,10 +190,10 @@
 
                                     </div>
                                     <div class="card-footer">
-                                        <button id="reflected_scenario_3_register" type="submit" onclick="userRegister()" class="btn btn-sm btn-primary"><i class="fa fa-user-plus"></i> Kayıt Ol</button>
+                                        <button id="reflected_scenario_3_register" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user-plus"></i> Kayıt Ol</button>
                                         <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Sıfırla</button>
                                     </div>
-                                    <div class="g-recaptcha" data-sitekey="6LfT5xMUAAAAAJu2QmB5neGTlWcudka3zf2E0wgy"></div>
+                                    <div id="registerReCaptcha"></div>
 
                                 </form>
                             </div>
@@ -199,10 +203,10 @@
                                         if (returnData[0].length > 468 && returnData[1].IsSuccess) {
                                             $('#scenario_3_userList').html(returnData[0]);
                                             devf.Swal("User Register", returnData[1].Message, "success", "Close");
-                                            grecaptcha.reset();
+                                            grecaptcha.reset(registerReCaptcha);
                                         } else {
                                             devf.Swal(returnData[1].ResponseCode, returnData[1].Message, "error", "Close");
-                                            grecaptcha.reload();
+                                            grecaptcha.reset(registerReCaptcha);
                                         }
                                     }
                                     var form = new FormData();
@@ -210,9 +214,9 @@
                                     form.append("RXSS_S3_RegisterRequest_UserSurname", $('#reflected_scenario_3_register_surname').val());
                                     form.append("RXSS_S3_RegisterRequest_Email", $('#reflected_scenario_3_register_email').val());
                                     form.append("RXSS_S3_RegisterRequest_Password", $('#reflected_scenario_3_register_pasword').val());
-                                    form.append("RXSS_S3_RegisterRequest_gReCaptcha", grecaptcha.getResponse());
+                                    form.append("RXSS_S3_RegisterRequest_gReCaptcha", grecaptcha.getResponse(registerReCaptcha));
                                     devf.AjaxHTMLRequest('POST', form, "json", '/XSS/RXSS_S3_Register', success, '#reflected_scenario_3_register');
-                                  
+
                                 }
 
                             </script>
@@ -240,7 +244,6 @@
                                 fonksiyonunda X görülen yere silmek istediğiniz kullanıcı ID'sini giriniz.
                             </p>
                         </div>
-
                     </div>
                 </div>
             </div>

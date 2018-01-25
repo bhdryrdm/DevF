@@ -1,13 +1,16 @@
-﻿using Newtonsoft.Json;
+﻿using DevF_LABS.Presentation.Filter;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Configuration;
 using System.Web.Mvc;
 
-namespace OWASP.Controllers
+namespace DevF_LABS.Presentation.Controllers
 {
+    [ValidateModelFilter]
     public class BaseController : Controller
     {
+        
         public class CaptchaResponse
         {
             [JsonProperty("success")]

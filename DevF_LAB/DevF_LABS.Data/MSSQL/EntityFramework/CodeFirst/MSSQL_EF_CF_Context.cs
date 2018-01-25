@@ -15,12 +15,14 @@ namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst
         }
 
         public DbSet<XSS_User> XSS_User { get; set; }
+        public DbSet<XSS_Comment> XSS_Comment { get; set; }
         public DbSet<Settings> Settings { get; set; }
 
         //Fluent API Configurations
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new XSS_UserConfiguration());
+            modelBuilder.Configurations.Add(new XSS_CommentConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

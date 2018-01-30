@@ -2,9 +2,11 @@
 using DevF_LABS.Business.Mapping;
 using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst;
 using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
+using DevF_LABS.RequestResponse;
 using DevF_LABS.RequestResponse.XSS.ReflectedXSS;
 using DevF_LABS.RequestResponse.XSS.StoredXSS;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DevF_LABS.Business.BusinessServices
@@ -53,6 +55,7 @@ namespace DevF_LABS.Business.BusinessServices
                 catch (Exception ex)
                 {
                     response.Message = "Kullanıcı kaydı başarısız" + ex.Message;
+                    response.ResponseCode = 500;
                 }
                 response.UserList = XSS_Mapping.XSS_User_To_RXSS_S3_UserView(dbContext.XSS_User.ToList());
             }
@@ -99,15 +102,76 @@ namespace DevF_LABS.Business.BusinessServices
                     dbContext.XSS_Comment.Add(XSS_Mapping.SXSS_S1_CommentRequest_To_XSS_Comment(request));
                     dbContext.SaveChanges();
 
-                    response.CommentList = XSS_Mapping.XSS_Comment_To_SXSS_S1_CommentView(dbContext.XSS_Comment.ToList());
+                    response.CommentList = XSS_Mapping.XSS_Comment_To_SXSS_S1_CommentView(dbContext.XSS_Comment.OrderByDescending(x => x.ID).Take(5).ToList());
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                    throw;
+                    response.Message = "Yorum kaydı başarısız" + ex.Message;
+                    response.ResponseCode = 500;
                 }
             }
             return response;
         }
+
+        public static SXSS_S1_CommentListResponse SXSS_S1_CommentList(string sessionID)
+        {
+            SXSS_S1_CommentListResponse response = new SXSS_S1_CommentListResponse();
+            using (var dbContext = new MSSQL_EF_CF_Context())
+            {
+                try
+                {
+                    response.CommentList = XSS_Mapping.XSS_Comment_To_SXSS_S1_CommentView(dbContext.XSS_Comment.OrderByDescending(x => x.ID).Take(5).ToList());
+                }
+                catch (Exception ex)
+                {
+                    response.Message = "Yorumlar getirilirken hata oluştu! " + ex.Message;
+                    response.ResponseCode = 500;
+                }
+            }
+            return response;
+        }
+
+        public static BaseResponse SXSS_S2_SaveStolenCookie(SXSS_S2_StealRequest request)
+        {
+            BaseResponse response = new BaseResponse();
+            using (var dbContext = new MSSQL_EF_CF_Context())
+            {
+                try
+                {
+                    foreach (var item in XSS_Mapping.SXSS_S2_StealRequest_To_XSS_Cookie(request))
+                    {
+                        dbContext.XSS_Cookie.Add(item);
+                    }
+                    dbContext.SaveChanges();
+                    response.Message = "Maalesef Cookieleriniz çalındı! :(";
+                }
+                catch (Exception ex)
+                {
+                    response.Message = "Cookie kaydı başarısız" + ex.Message;
+                    response.ResponseCode = 500;
+                }
+            }
+            return response;
+        }
+
+        public static SXSS_S2_CookieListResponse SXSS_S2_CookieList(string sessionID)
+        {
+            SXSS_S2_CookieListResponse response = new SXSS_S2_CookieListResponse();
+            using (var dbContext = new MSSQL_EF_CF_Context())
+            {
+                try
+                {
+                    IEnumerable<XSS_Cookie> cookieList = dbContext.XSS_Cookie.Where(x => x.SessionID == sessionID).ToList().GroupBy(x => x.CookieName).Select(x => x.First());
+                    response.CookieList = XSS_Mapping.XSS_Cookie_To_SXSS_S2_CookieView(cookieList.ToList());
+                }
+                catch (Exception ex)
+                {
+                    response.Message = "Cookieler listelenirken hata oluştu! " + ex.Message;
+                    response.ResponseCode = 500;
+                }
+            }
+            return response;
+        }
+
     }
 }

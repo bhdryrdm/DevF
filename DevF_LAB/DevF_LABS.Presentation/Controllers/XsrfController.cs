@@ -7,5 +7,6 @@ namespace OWASP.Controllers
 {
     public class XsrfController
     {
+        
     }
 }

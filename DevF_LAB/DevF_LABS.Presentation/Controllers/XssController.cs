@@ -1,9 +1,13 @@
 ﻿using DevF_LABS.Business.BusinessServices;
+using DevF_LABS.Helper;
+using DevF_LABS.RequestResponse;
 using DevF_LABS.RequestResponse.XSS.ReflectedXSS;
 using DevF_LABS.RequestResponse.XSS.StoredXSS;
-using OWASP.Helper;
 using System;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DevF_LABS.Presentation.Controllers
 {
@@ -45,7 +49,7 @@ namespace DevF_LABS.Presentation.Controllers
         }
 
         [HttpPost]
-        public ActionResult RXSS_S3_Delete(RXSS_S3_DeleteRequest request)
+        public JsonResult RXSS_S3_Delete(RXSS_S3_DeleteRequest request)
         {
             RXSS_S3_UserListResponse response = new RXSS_S3_UserListResponse();
 
@@ -64,21 +68,96 @@ namespace DevF_LABS.Presentation.Controllers
         }
 
         [HttpPost]
-        public ActionResult SXSS_S1_Comment(SXSS_S1_CommentRequest request)
+        public JsonResult SXSS_S1_Comment(SXSS_S1_CommentRequest request)
         {
-            
             SXSS_S1_CommentListResponse response = new SXSS_S1_CommentListResponse();
             if (!GoogleRecaptchaControl(request.SXSS_S1_CommentRequest_gReCaptcha))
             {
                 response.IsSuccess = false;
-                response.Message = "gReCaptcha bilgisi doğrulanamadı!";
+                response.Message = "Not valid gReCaptcha!";
                 response.ResponseCode = 400;
             }
             else
             {
                 response = XSS_BusinessServices.SXSS_S1_Comment(request);
             }
-            return PartialView("~/Views/Xss/StoredXss/_CommentList.cshtml", response);
+            string commentListHTML = RazorViewToString.RenderRazorViewToString(this, "~/Views/Xss/StoredXss/_CommentList.cshtml", response);
+            return Json(new object[] { commentListHTML, response });
+        }
+
+        [HttpPost]
+        public JsonResult SXSS_S1_CommentList()
+        {
+            SXSS_S1_CommentListResponse response = XSS_BusinessServices.SXSS_S1_CommentList(Session.SessionID);
+            string commentListHTML = RazorViewToString.RenderRazorViewToString(this, "~/Views/Xss/StoredXss/_CommentList.cshtml", response);
+            return Json(new object[] { commentListHTML, response });
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult SXSS_S1_CommentValidateFalse(SXSS_S1_CommentRequest request)
+        {
+            SXSS_S1_CommentListResponse response = new SXSS_S1_CommentListResponse();
+            if (!GoogleRecaptchaControl(request.SXSS_S1_CommentRequest_gReCaptcha))
+            {
+                response.IsSuccess = false;
+                response.Message = "Not valid gReCaptcha!";
+                response.ResponseCode = 400;
+            }
+            else
+            {
+                response = XSS_BusinessServices.SXSS_S1_Comment(request);
+            }
+            string commentListHTML = RazorViewToString.RenderRazorViewToString(this, "~/Views/Xss/StoredXss/_CommentList.cshtml", response);
+            return Json(new object[] { commentListHTML, response });
+        }
+
+        [HttpPost]
+        public JsonResult SXSS_S2_AddCookie(SXSS_S2_SaveCookieRequest request)
+        {
+            BaseResponse response = new BaseResponse();
+            if (!GoogleRecaptchaControl(request.SXSS_S2_SaveCookeRequest_gReCaptcha))
+            {
+                response.IsSuccess = false;
+                response.Message = "Not valid gReCaptcha!";
+                response.ResponseCode = 400;
+            }
+            else
+            {
+                HttpCookie httpCookie = new HttpCookie(request.SXSS_S2_SaveCookeRequest_CookieName, request.SXSS_S2_SaveCookeRequest_CookieValue);
+                httpCookie.Expires = DateTime.Now.AddMonths(1);
+                httpCookie.Path = FormsAuthentication.FormsCookiePath;
+
+                if (Request.Cookies.AllKeys.Contains(request.SXSS_S2_SaveCookeRequest_CookieName))
+                {
+                    Response.SetCookie(httpCookie);
+                }
+                else
+                {
+                    Response.AppendCookie(httpCookie);
+                }
+            }
+            return Json(response);
+        }
+
+        [HttpPost]
+        public JsonResult SXSS_S2_SaveStolenCookie(SXSS_S2_StealRequest request)
+        {
+            request.SessionID = Session.SessionID;
+            BaseResponse response = XSS_BusinessServices.SXSS_S2_SaveStolenCookie(request);
+            return Json(response);
+        }
+
+        public ActionResult SXSS_S2_StolenCookieList()
+        {
+            SXSS_S2_CookieListResponse response = XSS_BusinessServices.SXSS_S2_CookieList(Session.SessionID);
+            return View("~/Views/Xss/StoredXss/CookieList.cshtml", response);
+        }
+
+        [HttpPost]
+        public JsonResult SXSS_S3_CKEditor(SXSS_S3_CKEditor_Request request)
+        {
+            return Json("");
         }
     }
 }

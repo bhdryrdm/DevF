@@ -1,4 +1,6 @@
-﻿
-<li class="nav-item d-md-down-none">
-    <a class="nav-link" href="#"><i class="icon-user"></i><span class="badge badge-pill badge-danger">@ViewData["OnlineSessionCount"]</span></a>
+﻿<li class="nav-item d-md-down-none">
+
+    <button type="button" class="nav-link" data-html="true" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="@ViewData["SessionUserList"]" data-original-title="" title="Last 10 Session User">
+        <i class="font-2xl icon-user"></i><span class="badge badge-pill badge-success"> @ViewData["SessionCount"]</span>
+    </button>
 </li>

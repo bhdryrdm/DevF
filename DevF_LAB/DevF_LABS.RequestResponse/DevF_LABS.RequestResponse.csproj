@@ -50,6 +50,10 @@
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_DeleteRequest.cs" />
     <Compile Include="XSS\StoredXSS\SXSS_S1_CommentListResponse.cs" />
     <Compile Include="XSS\StoredXSS\SXSS_S1_CommentRequest.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S2_CookieListResponse.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S2_SaveCookieRequest.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S2_StealRequest.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S3_CKEditor_Request.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="XSS\DomXSS\" />

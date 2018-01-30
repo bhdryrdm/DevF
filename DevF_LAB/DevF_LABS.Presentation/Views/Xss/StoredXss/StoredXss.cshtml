@@ -1,36 +1,55 @@
-﻿<div class="tab-pane rootTabContent" id="stored" role="tabpanel">
+﻿<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="tab-pane rootTabContent" id="stored" role="tabpanel">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs bg-light" role="tablist">
             <li class="nav-item"><a class="storedTab nav-link active" data-toggle="tab" href="#storedDescription" role="tab">Nedir ?</a></li>
-            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_1" role="tab">Örnek 1</a></li>
-            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_2" role="tab">Örnek 2</a></li>
-            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_3" role="tab">Örnek 3</a></li>
-            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_4" role="tab">Örnek 4</a></li>
+            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_1" role="tab">Senaryo 1</a></li>
+            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_2" role="tab">Senaryo 2</a></li>
+            <li class="nav-item"><a class="storedTab nav-link" data-toggle="tab" href="#storedScenario_3" role="tab">Senaryo 3</a></li>
         </ul>
         <div class="tab-content">
+            @* Stored XSS Nedir ? *@
             <div class="tab-pane storedTabContent active" id="storedDescription">
-                Stored XSS kalıcı XSS'tir
+                <b>Stored XSS Nedir ?</b>
+                <p class="mt-3">Stored XSS Türkçeye çevrildiğinde kalıcı yada saklanan manasına gelmektedir.Stored XSS bulunan bir sayfada bu zafiyetten herkes etkilenmektedir.</p>
+                <p class="mt-3">Özellikle yorum, üye ismi, editör gibi kullanıcıdan alınan girdilerin kontrolsüz bir şekilde veritabanında yada herhangi bir ortamda saklanması sonucu</p>
+                <p class="mt-3">Stored XSS ortaya çıkar ve çok ciddi zararlara sebep olabilir.</p>
             </div>
             @* Stored XSS Scenario_1 *@
             <div class="tab-pane storedTabContent" id="storedScenario_1">
                 <div class="card">
-                    <div class="card-header with-border bg-info">Yorum Gönder</div>
+                    <div class="card-header with-border bg-info">
+                        Yorum Gönder
+                        <div class="pull-right">
+                            <label class="col-form-label" for="antiXSSControl"> Validate Input Kontrolünü Kapat &nbsp;</label>
+                            <label class="switch switch-text switch-pill switch-primary">
+                                <input id="validateInputControlCheckBox" type="checkbox" class="switch-input">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                        </div>
+                    </div>
                     <form action="#" onsubmit="sendComment(); return false;" class="form-horizontal">
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label" for="storedModalNameSurname">İsim - Soyisim</label>
+                                <label class="col-md-2 col-form-label" for="storedModalNameSurname">İsim | Soyisim</label>
                                 <div class="col-md-3"><input type="text" id="storedModalNameSurname" class="form-control" placeholder="John Wick" required></div>
                                 <label class="col-md-1 col-form-label" for="storedModalEmail">Email</label>
                                 <div class="col-md-3"><input type="email" id="storedModalEmail" class="form-control" placeholder="example@example.com" required></div>
                                 <label class="col-md-2 col-form-label" for="saveDatabase">Veritabanına Kaydet</label>
-                                <div class="col-md-1 m-lg-auto"><input id="saveDatabase" type="checkbox" class="form-control"></div>
+
+                                <label class="switch switch-text switch-pill switch-primary">
+                                    <input id="saveDatabase" type="checkbox" class="switch-input">
+                                    <span class="switch-label" data-on="On" data-off="Off"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-2 col-form-label" for="storedModalComment">Öneri | Yorum</label>
                                 <div class="col-md-6"><textarea id="storedModalComment" class="form-control" rows="3" placeholder="Message..." required></textarea></div>
                                 <div id="commentReCaptcha"></div>
                             </div>
-                            
+
                         </div>
                         <div class="card-footer">
                             <button id="sendCommentButton" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-send"></i> Gönder</button>
@@ -42,17 +61,26 @@
 
                             if ($('#saveDatabase').is(':checked')) {
                                 var success = function (returnData) {
-                                        $('#commentList').html(returnData);
-                                        devf.Swal("Comment Register", returnData[1].Message, "success", "Close");
-                                        grecaptcha.reset(commentReCaptcha);
+                                    if (returnData[1].IsSuccess) {
+                                        devf.Swal(returnData[1].ResponseCode + " - Comment Register", returnData[1].Message, "success", "Close");
+                                        $('#commentList').html(returnData[0]);
+                                    } else {
+                                        devf.Swal(returnData[1].ResponseCode + " - Comment Register", returnData[1].Message, "error", "Close");
+                                    }
+                                }
+                                var postURL = '';
+                                if ($('#validateInputControlCheckBox').is(':checked')) {
+                                    postURL = '/XSS/SXSS_S1_CommentValidateFalse';
+                                } else {
+                                    postURL = '/XSS/SXSS_S1_Comment';
                                 }
                                 var form = new FormData();
                                 form.append("SXSS_S1_CommentRequest_Name", $('#storedModalNameSurname').val());
                                 form.append("SXSS_S1_CommentRequest_Comment", $('#storedModalComment').val());
                                 form.append("SXSS_S1_CommentRequest_Email", $('#storedModalEmail').val());
                                 form.append("SXSS_S1_CommentRequest_gReCaptcha", grecaptcha.getResponse(commentReCaptcha));
-                                devf.AjaxHTMLRequest('POST', form, "html", '/XSS/SXSS_S1_Comment', success, '#sendCommentButton');
-
+                                grecaptcha.reset(commentReCaptcha);
+                                devf.AjaxHTMLRequest('POST', form, "json", postURL, success, '#sendCommentButton');
                             } else {
                                 var newCommentList = $('#commentList').html() +
                                     '<tr>' +
@@ -65,7 +93,7 @@
                                     '</tr>';
                                 $('#commentList').html(newCommentList);
                             }
-                          
+
                             $('#storedModalNameSurname').val('');
                             $('#storedModalEmail').val('');
                             $('#storedModalComment').val('');
@@ -75,11 +103,16 @@
                             $('.modal-title').html(commentListItem[1].innerText + ' - ' + commentListItem[2].innerText);
                             $('.modal-body').html(commentListItem[3].innerText);
                             $('#modal-default').modal('show');
-                        }
+                        };
                     </script>
                 </div>
                 <div class="card">
-                    <div class="card-header bg-light"> Yorum Listesi </div>
+                    <div class="card-header bg-light">
+                        Yorum Listesi
+                        <div class="pull-right">
+                            <button id="commentListButton" type="button" onclick="commentListFunction(); return false;" class="btn btn-primary btn-sm">Son 5 Yorumu Listele</button>
+                        </div>
+                    </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover table-bordered">
                             <thead>
@@ -95,6 +128,18 @@
                             <tbody id="commentList"></tbody>
                         </table>
                     </div>
+                    <script>
+                        function commentListFunction() {
+                            var success = function (returnData) {
+                                if (returnData[1].IsSuccess) {
+                                    $('#commentList').html(returnData[0]);
+                                } else {
+                                    devf.Swal(returnData[1].ResponseCode + " - Comment List", returnData[1].Message, "error", "Close");
+                                }
+                            }
+                            devf.AjaxHTMLRequest('POST', '', "json", '/XSS/SXSS_S1_CommentList', success, '#commentListButton');
+                        }
+                    </script>
                 </div>
 
                 <div class="modal fade" id="modal-default">
@@ -112,14 +157,137 @@
                     </div>
                 </div>
             </div>
+            @* Stored XSS Scenario_2 *@
             <div class="tab-pane storedTabContent" id="storedScenario_2">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_2_description" role="tab">Session Hijacking</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_2_cookie" role="tab">Cookie</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_2_test" role="tab">Korunma</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        @* Stored XSS Scenario_2 Description *@
+                        <div class="tab-pane" id="storedScenario_2_description">
+
+                        </div>
+                        @* Stored XSS Scenario_2 Cookie *@
+                        <div class="tab-pane" id="storedScenario_2_cookie">
+
+                            <div class="row">
+
+                                <div class="form-group col-sm-3">
+                                    <div class="form-group">
+                                        <label for="cookieName">Cookie Name</label>
+                                        <input type="text" class="form-control" id="cookieName" placeholder="MyCookieName">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-3">
+                                    <div class="form-group">
+                                        <label for="cookieValue">Cookie Value</label>
+                                        <input type="text" class="form-control" id="cookieValue" placeholder="MyCookieValue">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-3">
+                                    <div class="form-group">
+                                        <label for="saveCustomCookieButton">&nbsp;</label>
+                                        <button id="saveCustomCookieButton" type="button" onclick="saveCustomCookie()" class="btn btn-primary form-control"><i class="fa fa-save"></i>&nbsp;Custom Cookie Save</button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    <div style="margin-left :-10px;" id="cookieReCaptcha"></div>
+                                </div>
+                            </div>
+
+
+                            <script>
+
+                                function saveCustomCookie() {
+                                    var success = function (returnData) {
+                                        if (returnData.IsSuccess) {
+                                            devf.Swal("Save Cookie", returnData.Message, "success", "Close");
+                                        } else {
+                                            devf.Swal("Save Cookie", returnData.Message, "error", "Close");
+                                        }
+                                    }
+                                    var form = new FormData();
+                                    form.append("SXSS_S2_SaveCookeRequest_CookieName", $('#cookieName').val());
+                                    form.append("SXSS_S2_SaveCookeRequest_CookieValue", $('#cookieValue').val());
+                                    form.append("SXSS_S2_SaveCookeRequest_gReCaptcha", grecaptcha.getResponse(cookieReCaptcha));
+                                    devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S2_AddCookie', success, '#saveCustomCookieButton');
+                                };
+
+                            </script>
+                        </div>
+                        @* Stored XSS Scenario_2 Register Panel *@
+                        <div class="tab-pane" id="storedScenario_2_test">
+
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
+            @* Stored XSS Scenario_3 *@
             <div class="tab-pane storedTabContent" id="storedScenario_3">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_description" role="tab">Editor</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_ckEditor" role="tab">CKEditor</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_test" role="tab">Korunma</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        @* Stored XSS Scenario_3 Description *@
+                        <div class="tab-pane" id="storedScenario_3_description">
 
-            </div>
-            <div class="tab-pane storedTabContent" id="storedScenario_4">
+                        </div>
+                        @* Stored XSS Scenario_3 CKEditor *@
+                        <div class="tab-pane" id="storedScenario_3_ckEditor">
+                            <div class="card">
+                                <div class="card-header with-border bg-info">
+                                    CKEditor
+                                    <div class="pull-right">
+                                        <label class="col-form-label" for="antiXSSControl"> Validate Input Kontrolünü Kapat &nbsp;</label>
+                                        <label class="switch switch-text switch-pill switch-primary">
+                                            <input id="validateInputControlCheckBox" type="checkbox" class="switch-input">
+                                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                                            <span class="switch-handle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <textarea id="ckEditor" rows="10"></textarea>
+                                </div>
+                                <div class="card-footer">
+                                    <button id="sendCKEditorButton" type="button" onclick="sendCKEditor()" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+                                </div>
+                                <script>
 
+                                    function sendCKEditor() {
+                                        var success = function (returnData) {
+                                            if (returnData.IsSuccess) {
+                                                devf.Swal("Save Cookie", returnData.Message, "success", "Close");
+                                            } else {
+                                                devf.Swal("Save Cookie", returnData.Message, "error", "Close");
+                                            }
+                                        }
+                                        var form = new FormData();
+                                        form.append("SXSS_S2_SaveCookeRequest_CookieName", $('#cookieName').val());
+                                        form.append("SXSS_S2_SaveCookeRequest_gReCaptcha", grecaptcha.getResponse(cookieReCaptcha));
+                                        devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S2_AddCookie', success, '#sendCKEditorButton');
+                                    };
+
+                                </script>
+                            </div>
+                        </div>
+                        @* Stored XSS Scenario_3  *@
+                        <div class="tab-pane" id="storedScenario_3_test">
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@
     <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_Layout.cshtml</WebStackScaffolding_LayoutPageFile>
     <NameOfLastUsedPublishProfile>BHDR</NameOfLastUsedPublishProfile>
     <ProjectView>ProjectFiles</ProjectView>
+    <ToolsVersionPromptShown>2.6</ToolsVersionPromptShown>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

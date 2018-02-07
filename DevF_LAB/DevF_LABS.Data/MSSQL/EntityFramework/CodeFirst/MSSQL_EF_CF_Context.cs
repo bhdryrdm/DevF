@@ -15,6 +15,7 @@ namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst
         }
 
         public DbSet<XSS_User> XSS_User { get; set; }
+        public DbSet<XSS_Cookie> XSS_Cookie { get; set; }
         public DbSet<XSS_Comment> XSS_Comment { get; set; }
         public DbSet<Settings> Settings { get; set; }
 
@@ -23,6 +24,7 @@ namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst
         {
             modelBuilder.Configurations.Add(new XSS_UserConfiguration());
             modelBuilder.Configurations.Add(new XSS_CommentConfiguration());
+            modelBuilder.Configurations.Add(new XSS_CookieConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

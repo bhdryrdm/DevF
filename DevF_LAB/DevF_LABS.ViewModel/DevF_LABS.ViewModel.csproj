@@ -43,10 +43,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_UserView.cs" />
-    <Compile Include="XSS\ReflectedXSS\SXSS_S1_CommentView.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S1_CommentView.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S2_CookieView.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="XSS\StoredXSS\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

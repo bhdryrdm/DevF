@@ -1,4 +1,4 @@
-﻿using DevF_LABS.ViewModel.XSS.ReflectedXSS;
+﻿using DevF_LABS.ViewModel.XSS.Stored_XSS;
 using System.Collections.Generic;
 
 namespace DevF_LABS.RequestResponse.XSS.StoredXSS

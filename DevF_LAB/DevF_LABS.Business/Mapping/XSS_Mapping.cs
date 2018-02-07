@@ -3,8 +3,9 @@ using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
 using DevF_LABS.RequestResponse.XSS.ReflectedXSS;
 using DevF_LABS.RequestResponse.XSS.StoredXSS;
 using DevF_LABS.ViewModel.XSS.ReflectedXSS;
+using DevF_LABS.ViewModel.XSS.Stored_XSS;
+using DevF_LABS.ViewModel.XSS.StoredXSS;
 using ExpressMapper;
-using ExpressMapper.Extensions;
 using System.Collections.Generic;
 
 namespace DevF_LABS.Business.Mapping
@@ -48,8 +49,8 @@ namespace DevF_LABS.Business.Mapping
 
         public static XSS_Comment SXSS_S1_CommentRequest_To_XSS_Comment(SXSS_S1_CommentRequest request)
         {
-            return Mapper.Map<SXSS_S1_CommentRequest,XSS_Comment>(request);
-        } 
+            return Mapper.Map<SXSS_S1_CommentRequest, XSS_Comment>(request);
+        }
 
         // EntityModel List --> ViewModel List
         public static List<SXSS_S1_CommentView> XSS_Comment_To_SXSS_S1_CommentView(List<XSS_Comment> commentEntityList)
@@ -68,5 +69,38 @@ namespace DevF_LABS.Business.Mapping
             return Mapper.Map<XSS_Comment, SXSS_S1_CommentView>(entity);
         }
 
+        // Steal Request List --> EntityModel
+        public static List<XSS_Cookie> SXSS_S2_StealRequest_To_XSS_Cookie(SXSS_S2_StealRequest request)
+        {
+            List<XSS_Cookie> cookieList = new List<XSS_Cookie>();
+            foreach (string cookie in request.SXSS_S2_StealRequest_Cookie.Split(';'))
+            {
+                XSS_Cookie xss_Cookie = new XSS_Cookie
+                {
+                    SessionID = request.SessionID,
+                    CookieName = cookie.Split('=')[0],
+                    CookieValue = cookie.Split('=')[1],
+                };
+                cookieList.Add(xss_Cookie);
+            }
+            return cookieList;
+        }
+
+        // EntityModel List --> ViewModel List
+        public static List<SXSS_S2_CookieView> XSS_Cookie_To_SXSS_S2_CookieView(List<XSS_Cookie> cookieEntityList)
+        {
+            List<SXSS_S2_CookieView> cookieList = new List<SXSS_S2_CookieView>();
+            foreach (var cookie in cookieEntityList)
+            {
+                cookieList.Add(XSS_Cookie_To_SXSS_S2_CookieView(cookie));
+            }
+            return cookieList;
+        }
+
+        // EntityModel --> ViewModel
+        public static SXSS_S2_CookieView XSS_Cookie_To_SXSS_S2_CookieView(XSS_Cookie entity)
+        {
+            return Mapper.Map<XSS_Cookie, SXSS_S2_CookieView>(entity);
+        }
     }
 }

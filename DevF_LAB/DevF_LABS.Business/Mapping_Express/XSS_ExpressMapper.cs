@@ -3,6 +3,7 @@ using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
 using DevF_LABS.RequestResponse.XSS.ReflectedXSS;
 using DevF_LABS.RequestResponse.XSS.StoredXSS;
 using DevF_LABS.ViewModel.XSS.ReflectedXSS;
+using DevF_LABS.ViewModel.XSS.Stored_XSS;
 using ExpressMapper;
 using System;
 

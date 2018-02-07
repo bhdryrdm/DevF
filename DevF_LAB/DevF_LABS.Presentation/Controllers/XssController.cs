@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Lang = DevF_LABS.Language.Presentation.Controllers.XssController;
 
 namespace DevF_LABS.Presentation.Controllers
 {
@@ -36,7 +37,7 @@ namespace DevF_LABS.Presentation.Controllers
             if (!GoogleRecaptchaControl(request.RXSS_S3_RegisterRequest_gReCaptcha))
             {
                 response.IsSuccess = false;
-                response.Message = "gReCaptcha bilgisi doğrulanamadı!";
+                response.Message = Lang.Global_GReCaptcha;
                 response.ResponseCode = 400;
             }
             else
@@ -61,7 +62,7 @@ namespace DevF_LABS.Presentation.Controllers
             else
             {
                 response.IsSuccess = false;
-                response.Message = "İşlem yetkiniz bulunmamaktadır!";
+                response.Message = Lang.Global_Unauthorize;
                 response.ResponseCode = 403;
             }
             string userListHTML = RazorViewToString.RenderRazorViewToString(this, "~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
@@ -166,8 +167,5 @@ namespace DevF_LABS.Presentation.Controllers
             return Json("");
         }
         #endregion
-
-
-
     }
 }

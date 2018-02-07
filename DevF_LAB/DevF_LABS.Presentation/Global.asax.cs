@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Linq;
 using System.Net;
+using System.Threading;
+using System.Globalization;
 
 namespace DevF_LABS.Presentation
 {
@@ -24,7 +26,29 @@ namespace DevF_LABS.Presentation
 
         protected void Application_BeginRequest()
         {
+            HttpCookie cookie = HttpContext.Current.Request.Cookies["Language"];
+            if (cookie != null)
+            {
+                switch (cookie.Value)
+                {
+                    case "English":
+                        SetLanguage("en-GB");
+                        break;
+                    case "Turkish":
+                        SetLanguage("tr-TR");
+                        break;
+                    default:
+                        SetLanguage("en-GB");
+                        break;
+                }
+            }
             
+        }
+
+        private void SetLanguage(string language)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(language);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(language);
         }
 
         protected void Application_EndRequest()

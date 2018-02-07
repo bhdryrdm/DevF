@@ -13,6 +13,10 @@
     </ul>
     <ul class="nav navbar-nav ml-auto">
         @Html.Action("OnlineUserCount", "Home")
+        <li>
+            <button id="enLang" onclick="switchLanguage('en','#enLang')"><i class="flag-icon flag-icon-gb h4" title="gb"></i></button>
+            <button id="trLang" onclick="switchLanguage('tr','#trLang')"><i class="flag-icon flag-icon-tr h4" title="tr"></i></button>
+        </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="~/Content/img/avatars/6.jpg" class="img-avatar">
@@ -31,4 +35,18 @@
     <button class="navbar-toggler aside-menu-toggler" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <script>
+        function switchLanguage(lang, loadingId) {
+            var success = function (returnData) {
+                if (returnData.IsSuccess) {
+                    location.reload();
+                } else {
+                    devf.Swal(returnData.ResponseCode + " - Switch Language", returnData.Message, "error", "Close");
+                }
+            }
+            var form = new FormData();
+            form.append("lang", lang);
+            devf.AjaxHTMLRequest('POST', form, "json", '/Language/SwitchLanguage', success, 'loadingId');
+        }
+    </script>
 </header>

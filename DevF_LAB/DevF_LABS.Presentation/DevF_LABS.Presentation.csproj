@@ -128,6 +128,7 @@
     <Content Include="Content\comingsoon\js\simplyCountdown.js" />
     <Content Include="Content\comingsoon\w3layouts-License.txt" />
     <Content Include="Content\css\chart.css" />
+    <Content Include="Content\css\flags.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\iCheck\icheck.js" />
     <Content Include="Content\iCheck\icheck.min.js" />
@@ -254,6 +255,8 @@
     <Content Include="Content\img\avatars\8.jpg" />
     <Content Include="Content\img\avatars\9.jpg" />
     <Content Include="Content\img\favicon1.png" />
+    <Content Include="Content\img\language-icon\gb.svg" />
+    <Content Include="Content\img\language-icon\tr.svg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo-symbol.png" />
     <Content Include="Content\img\favicon.png" />
@@ -1197,7 +1200,9 @@
     <Content Include="Content\plugin\simple-line-icons\fonts\Simple-Line-Icons.svg" />
     <Content Include="Content\plugin\sweetalert2\sweetalert2.all.min.js" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\Style-I-Script\_Layout_Scripts.cshtml" />
     <Content Include="Views\Shared\PartialLayout\_Header.cshtml" />
     <Content Include="Views\Shared\PartialLayout\_Sidebar.cshtml" />
@@ -1208,6 +1213,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XsrfController.cs" />
     <Compile Include="Controllers\XssController.cs" />
@@ -1571,7 +1577,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Language\" />
+  </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Content\plugin\popper.js\index.d.ts" />
   </ItemGroup>
@@ -1582,6 +1590,10 @@
     <ProjectReference Include="..\DevF_LABS.Business\DevF_LABS.Business.csproj">
       <Project>{CBF14B2C-92E7-4844-B11F-AA7CF906F6C3}</Project>
       <Name>DevF_LABS.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevF_LABS.Language\DevF_LABS.Language.csproj">
+      <Project>{1a748301-37b2-487d-af6a-a79e25c33462}</Project>
+      <Name>DevF_LABS.Language</Name>
     </ProjectReference>
     <ProjectReference Include="..\DevF_LABS.RequestResponse\DevF_LABS.RequestResponse.csproj">
       <Project>{9C2B4FA0-478E-4327-9B41-74327CC5DD48}</Project>

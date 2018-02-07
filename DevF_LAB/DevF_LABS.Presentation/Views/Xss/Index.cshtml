@@ -1,9 +1,10 @@
-﻿
+﻿@using System.Web.Configuration;
+
 @{
     ViewBag.Title = "XSS";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string gReCaptcha = WebConfigurationManager.AppSettings["gReCaptcha_PublicKey"].ToString();
 }
-
 <main class="main">
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
@@ -101,26 +102,32 @@
                             var registerReCaptcha = document.getElementById('registerReCaptcha');
                             var commentReCaptcha = document.getElementById('commentReCaptcha');
                             var cookieReCaptcha = document.getElementById('cookieReCaptcha');
+                            var ckEditorReCaptcha = document.getElementById('ckEditorReCaptcha');
                             var myCallBack = function () {
-                                //Render the recaptcha1 on the element with ID "recaptcha1"
+
                                 registerReCaptcha = grecaptcha.render('registerReCaptcha', {
-                                    'sitekey': '6LfT5xMUAAAAAJu2QmB5neGTlWcudka3zf2E0wgy', //Replace this with your Site key
+                                    'sitekey': '@gReCaptcha',
                                     'theme': 'light'
                                 });
-
                                 grecaptcha.reset(registerReCaptcha);
-                                //Render the recaptcha2 on the element with ID "recaptcha2"
+
                                 commentReCaptcha = grecaptcha.render('commentReCaptcha', {
-                                    'sitekey': '6LfT5xMUAAAAAJu2QmB5neGTlWcudka3zf2E0wgy', //Replace this with your Site key
+                                    'sitekey': '@gReCaptcha',
                                     'theme': 'light'
                                 });
                                 grecaptcha.reset(commentReCaptcha);
 
                                 cookieReCaptcha = grecaptcha.render('cookieReCaptcha', {
-                                    'sitekey': '6LfT5xMUAAAAAJu2QmB5neGTlWcudka3zf2E0wgy', //Replace this with your Site key
+                                    'sitekey': '@gReCaptcha',
                                     'theme': 'light'
                                 });
                                 grecaptcha.reset(cookieReCaptcha);
+
+                                ckEditorReCaptcha = grecaptcha.render('ckEditorReCaptcha', {
+                                    'sitekey': '@gReCaptcha',
+                                    'theme': 'light'
+                                });
+                                grecaptcha.reset(ckEditorReCaptcha);
                             };
                         </script>
                         <div class="tab-pane rootTabContent active" id="xss">

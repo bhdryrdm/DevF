@@ -14666,7 +14666,7 @@ base-chart.chart {
     .brand-minimized .app-header.navbar .navbar-brand {
         width: 50px;
         background-color: #fff;
-        background-image: url("../img/logo-symbol.png");
+        background-image: url("../img/logo.png");
         background-size: 24px;
         border-bottom: 1px solid #a4b7c1;
     }

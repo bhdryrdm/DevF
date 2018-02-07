@@ -140,7 +140,8 @@ namespace DevF_LABS.Business.BusinessServices
                 {
                     foreach (var item in XSS_Mapping.SXSS_S2_StealRequest_To_XSS_Cookie(request))
                     {
-                        dbContext.XSS_Cookie.Add(item);
+                        if(dbContext.XSS_Cookie.FirstOrDefault(x => x.CookieName == item.CookieName && x.CookieValue == item.CookieValue && x.SessionID == item.SessionID) == null)
+                            dbContext.XSS_Cookie.Add(item);
                     }
                     dbContext.SaveChanges();
                     response.Message = "Maalesef Cookieleriniz çalındı! :(";

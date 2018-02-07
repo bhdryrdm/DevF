@@ -93,8 +93,14 @@
                         <div class="tab-pane" id="reflectedScenario_3_login">
 
                             <div class="card">
-                                <div class="card-header bg-success"><i class="icon-user"></i> Giriş Paneli <span class="pull-right">Server Side Code > ASP.NET MVC > Controllers > XssController - RXSS_S3_Login()</span></div>
                                 <form action="#" class="form-horizontal" onsubmit="getUserInformation($('#reflected_scenario_3_Email').val(), $('#reflected_scenario_3_Pasword').val()); return false;">
+                                    <div class="card-header">
+                                        <i class="icon-user"></i> Giriş Paneli
+                                        <button id="reflected_scenario_3_login" type="submit" class="btn btn-sm btn-success pull-right"><i class="icons icon-login"></i> Giriş Yap</button>
+                                        <button type="reset" class="btn btn-sm btn-danger pull-right" style="margin-right:5px;"><i class="fa fa-paint-brush"></i> Sıfırla</button>
+                                         <span class="pull-right" style="margin-right:5px;"><i class="fa fa-file-code-o"></i> Server Side Code > ASP.NET MVC > Controllers > XssController - RXSS_S3_Login()</span>
+
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-group row">
                                             <label class="col-md-1 col-form-label" for="reflected_scenario_3_Email">Email</label>
@@ -112,20 +118,18 @@
                                         </div>
 
                                     </div>
-                                    <div class="card-footer">
-                                        @*<button type="button" onclick="getUserInformation('admin@devf.com','123')" class="btn btn-sm btn-info"><i class="fa fa-dot-circle-o"></i> Admin Girişi</button>*@
-                                        <button id="reflected_scenario_3_login" type="submit" class="btn btn-sm btn-success"><i class="icons icon-login"></i> Giriş Yap</button>
-                                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Temizle</button>
-                                    </div>
                                 </form>
                             </div>
                             <script>
                                 function getUserInformation(param1, param2) {
 
                                     var success = function (returnData) {
-                                        if (returnData.length > 468) {
+                                        if (returnData.length > 468 && returnData.IsSuccess) {
                                             $('#scenario_3_userList').html(returnData);
+                                        } else {
+                                            devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
                                         }
+
                                     };
 
                                     var form = new FormData();
@@ -158,42 +162,63 @@
                         @* Reflected XSS Scenario_3 Register Panel *@
                         <div class="tab-pane" id="reflectedScenario_3_register">
                             <div class="card">
-                                <div class="card-header bg-primary"> Kayıt Paneli </div>
                                 <form action="#" class="form-horizontal" onsubmit="userRegister(); return false;">
+                                    <div class="card-header">
+                                        <i class="fa fa-address-card-o"></i> Kayıt Paneli
+                                        <button id="reflected_scenario_3_register" type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-user-plus"></i> Kayıt Ol</button>
+                                        <button type="reset" class="btn btn-sm btn-danger pull-right" style="margin-right:5px;"><i class="fa fa-paint-brush"></i> Sıfırla</button>
+                                    </div>
                                     <div class="card-body">
-
-                                        <div class="form-group row">
-                                            <label class="col-md-3 col-form-label" for="reflected_scenario_3_register_name">İsim</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="reflected_scenario_3_register_name" class="form-control" placeholder="John" required>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                                            </div>
+                                                            <input type="text" id="reflected_scenario_3_register_name" class="form-control" placeholder="Bahadır" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-group"></i></span>
+                                                            </div>
+                                                            <input type="text" id="reflected_scenario_3_register_surname" class="form-control" placeholder="Yardım" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
+                                                            </div>
+                                                            <input type="email" id="reflected_scenario_3_register_email" class="form-control" placeholder="example@example.com" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                                                            </div>
+                                                            <input type="password" id="reflected_scenario_3_register_pasword" class="form-control" placeholder="•••••••" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div id="registerReCaptcha" class="col-sm-4 form-group"></div>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-3 col-form-label" for="reflected_scenario_3_register_surname">Soyisim</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="reflected_scenario_3_register_surname" class="form-control" placeholder="Bill" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-3 col-form-label" for="reflected_scenario_3_register_email">Email</label>
-                                            <div class="col-md-9">
-                                                <input type="email" id="reflected_scenario_3_register_email" class="form-control" placeholder="example@example.com" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-md-3 col-form-label" for="reflected_scenario_3_register_pasword">Parola</label>
-                                            <div class="col-md-9">
-                                                <input type="password" id="reflected_scenario_3_register_pasword" class="form-control" placeholder="•••••••" required>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                    <div class="card-footer">
-                                        <button id="reflected_scenario_3_register" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-user-plus"></i> Kayıt Ol</button>
-                                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Sıfırla</button>
-                                    </div>
-                                    <div id="registerReCaptcha"></div>
-
                                 </form>
                             </div>
                             <script>

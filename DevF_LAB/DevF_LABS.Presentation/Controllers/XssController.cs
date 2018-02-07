@@ -19,11 +19,12 @@ namespace DevF_LABS.Presentation.Controllers
             return View("");
         }
 
+        #region Reflected XSS
         [HttpPost]
         public ActionResult RXSS_S3_Login(RXSS_S3_LoginRequest request)
         {
             RXSS_S3_UserListResponse response = XSS_BusinessServices.RXSS_S3_Login(request);
-            Session["LoginUserRole"] = response.LoginUser != null ? response.LoginUser.UserRole: "User" ;
+            Session["LoginUserRole" + Session.SessionID] = response.LoginUser != null ? response.LoginUser.UserRole : "User";
             return PartialView("~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
         }
 
@@ -41,11 +42,11 @@ namespace DevF_LABS.Presentation.Controllers
             else
             {
                 response = XSS_BusinessServices.RXSS_S3_Register(request);
-                Session["LoginUserRole"] = response.LoginUser.UserRole;
+                Session["LoginUserRole" + Session.SessionID] = response.LoginUser.UserRole;
             }
 
-            string userListHTML = RazorViewToString.RenderRazorViewToString(this,"~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
-            return Json(new object[]{ userListHTML, response });
+            string userListHTML = RazorViewToString.RenderRazorViewToString(this, "~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
+            return Json(new object[] { userListHTML, response });
         }
 
         [HttpPost]
@@ -53,9 +54,9 @@ namespace DevF_LABS.Presentation.Controllers
         {
             RXSS_S3_UserListResponse response = new RXSS_S3_UserListResponse();
 
-            if (Session["LoginUserRole"].ToString() == "Admin")
+            if (Session["LoginUserRole" + Session.SessionID].ToString() == "Admin")
             {
-                 response = XSS_BusinessServices.RXSS_S3_Delete(request);
+                response = XSS_BusinessServices.RXSS_S3_Delete(request);
             }
             else
             {
@@ -66,7 +67,9 @@ namespace DevF_LABS.Presentation.Controllers
             string userListHTML = RazorViewToString.RenderRazorViewToString(this, "~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
             return Json(new object[] { userListHTML, response });
         }
+        #endregion
 
+        #region Stored XSS
         [HttpPost]
         public JsonResult SXSS_S1_Comment(SXSS_S1_CommentRequest request)
         {
@@ -128,6 +131,9 @@ namespace DevF_LABS.Presentation.Controllers
                 httpCookie.Expires = DateTime.Now.AddMonths(1);
                 httpCookie.Path = FormsAuthentication.FormsCookiePath;
 
+                // SSL sertifikası bulunan domainler için kullanılması yararlıdır.Http üzerinden cookie gönderilemez
+                // httpCookie.Secure = true;
+
                 if (Request.Cookies.AllKeys.Contains(request.SXSS_S2_SaveCookeRequest_CookieName))
                 {
                     Response.SetCookie(httpCookie);
@@ -159,5 +165,9 @@ namespace DevF_LABS.Presentation.Controllers
         {
             return Json("");
         }
+        #endregion
+
+
+
     }
 }

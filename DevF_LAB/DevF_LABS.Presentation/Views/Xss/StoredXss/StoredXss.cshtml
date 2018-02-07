@@ -17,142 +17,189 @@
             </div>
             @* Stored XSS Scenario_1 *@
             <div class="tab-pane storedTabContent" id="storedScenario_1">
-                <div class="card">
-                    <div class="card-header with-border bg-info">
-                        Yorum Gönder
-                        <div class="pull-right">
-                            <label class="col-form-label" for="antiXSSControl"> Validate Input Kontrolünü Kapat &nbsp;</label>
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_1_description" role="tab">Forum</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_1_comment" role="tab">Message</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_1_protect" role="tab">Korunma Yöntemleri</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        @* Stored XSS Scenario_1 Description *@
+                        <div class="tab-pane" id="storedScenario_1_description">
+                            <b>Forumlar </b>
+                            <p>Forumlar yada birçok kullanıcının birbiri ile iletişimde ve paylaşımda olduğu web siteleri kullanıcıların girmiş olduğu verilerle doludur.</p>
+                            <p>Kullanıcıdan alınan verilerin kontrol edilmeyerek saklanması sonucunda ortaya Stored XSS zafiyeti çıkması çok büyüktür.</p>
+                            <p>Bu tip durumlara özellikle forumlar, haber siteleri, öneri, yorum, geri bildirim kısımlarından alınan verilerde karşılaşılmaktadır.</p>
+                            <br /><br />
+
+                            <b> Message Uygulaması Bilinmesi Gerekenler </b>
+                            <p> Message uygulamasında kullanıcıdan alınan veriler belirli parametreler sayesinde veritabanına yazılmaktadır.</p>
+                            <p> Uygulamayı iyi anlayabilmek adına lütfen aşağıdaki bilgileri okuyunuz.</p>
+
+                            <b class="col-form-label"> Validate Input Kontrolünü Nedir ? &nbsp;</b>
                             <label class="switch switch-text switch-pill switch-primary">
-                                <input id="validateInputControlCheckBox" type="checkbox" class="switch-input">
+                                <input type="checkbox" class="switch-input">
                                 <span class="switch-label" data-on="On" data-off="Off"></span>
                                 <span class="switch-handle"></span>
                             </label>
-                        </div>
-                    </div>
-                    <form action="#" onsubmit="sendComment(); return false;" class="form-horizontal">
-                        <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label" for="storedModalNameSurname">İsim | Soyisim</label>
-                                <div class="col-md-3"><input type="text" id="storedModalNameSurname" class="form-control" placeholder="John Wick" required></div>
-                                <label class="col-md-1 col-form-label" for="storedModalEmail">Email</label>
-                                <div class="col-md-3"><input type="email" id="storedModalEmail" class="form-control" placeholder="example@example.com" required></div>
-                                <label class="col-md-2 col-form-label" for="saveDatabase">Veritabanına Kaydet</label>
+                            <p>Validate Input Kontrolü ASP.NET tarafından default olarak sağlanmaktadır.Yani geliştirilen yazılım içerisinde Validate Input false edilmediği takdirde</p>
+                            <p>zaralı olan scriptler 500 Hatası döndürecektir.</p>
+                            <p>Validate Input Kontrolü kapatılırsa uygulamaya zararlı script göndermeniz olanaklı hale gelecektir.</p>
 
-                                <label class="switch switch-text switch-pill switch-primary">
-                                    <input id="saveDatabase" type="checkbox" class="switch-input">
-                                    <span class="switch-label" data-on="On" data-off="Off"></span>
-                                    <span class="switch-handle"></span>
-                                </label>
+                            <b class="col-form-label"> Veritabanına Kaydet Nedir ? &nbsp;</b>
+                            <label class="switch switch-text switch-pill switch-primary">
+                                <input type="checkbox" class="switch-input">
+                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                <span class="switch-handle"></span>
+                            </label>
+                            <p>Veritabanına Kaydet kontrolü kullanıcıdan alınan verilerin veritabanı üzerine kayıt edilip edilmeyeceği kontrolünü sağlar.</p>
+                            <p>Veritabanına kayıt edilmeyen kullanıcı verileri Jquery ile listeye eklenecektir.</p>
+                        </div>
+                        @* Stored XSS Scenario_1 Comment *@
+                        <div class="tab-pane" id="storedScenario_1_comment">
+                            <div class="card">
+                                <div class="card-header with-border bg-info">
+                                    Öneri | Yorum Gönder
+                                    <div class="pull-right">
+                                        <label class="col-form-label" for="antiXSSControl"> Validate Input Kontrolünü Kapat &nbsp;</label>
+                                        <label class="switch switch-text switch-pill switch-primary">
+                                            <input id="validateInputControlCheckBox" type="checkbox" class="switch-input">
+                                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                                            <span class="switch-handle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <form action="#" onsubmit="sendComment(); return false;" class="form-horizontal">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label" for="storedModalNameSurname">İsim | Soyisim</label>
+                                            <div class="col-md-3"><input type="text" id="storedModalNameSurname" class="form-control" placeholder="John Wick" required></div>
+                                            <label class="col-md-1 col-form-label" for="storedModalEmail">Email</label>
+                                            <div class="col-md-3"><input type="email" id="storedModalEmail" class="form-control" placeholder="example@example.com" required></div>
+                                            <label class="col-md-2 col-form-label" for="saveDatabase">Veritabanına Kaydet</label>
+
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input id="saveDatabase" type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-2 col-form-label" for="storedModalComment">Öneri | Yorum</label>
+                                            <div class="col-md-6"><textarea id="storedModalComment" class="form-control" rows="3" placeholder="Message..." required></textarea></div>
+                                            <div id="commentReCaptcha"></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <button id="sendCommentButton" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-send"></i> Gönder</button>
+                                        <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Sıfırla</button>
+                                    </div>
+                                </form>
+                                <script>
+                                    function sendComment() {
+
+                                        if ($('#saveDatabase').is(':checked')) {
+                                            var success = function (returnData) {
+                                                if (returnData[1].IsSuccess) {
+                                                    devf.Swal(returnData[1].ResponseCode + " - Comment Register", returnData[1].Message, "success", "Close");
+                                                    $('#commentList').html(returnData[0]);
+                                                } else {
+                                                    devf.Swal(returnData[1].ResponseCode + " - Comment Register", returnData[1].Message, "error", "Close");
+                                                }
+                                            }
+                                            var postURL = '';
+                                            if ($('#validateInputControlCheckBox').is(':checked')) {
+                                                postURL = '/XSS/SXSS_S1_CommentValidateFalse';
+                                            } else {
+                                                postURL = '/XSS/SXSS_S1_Comment';
+                                            }
+                                            var form = new FormData();
+                                            form.append("SXSS_S1_CommentRequest_Name", $('#storedModalNameSurname').val());
+                                            form.append("SXSS_S1_CommentRequest_Comment", $('#storedModalComment').val());
+                                            form.append("SXSS_S1_CommentRequest_Email", $('#storedModalEmail').val());
+                                            form.append("SXSS_S1_CommentRequest_gReCaptcha", grecaptcha.getResponse(commentReCaptcha));
+                                            grecaptcha.reset(commentReCaptcha);
+                                            devf.AjaxHTMLRequest('POST', form, "json", postURL, success, '#sendCommentButton');
+                                        } else {
+                                            var newCommentList = $('#commentList').html() +
+                                                '<tr>' +
+                                                '<td>' + Date.now() + '</td>' +
+                                                '<td>' + $('#storedModalNameSurname').val() + '</td>' +
+                                                '<td>' + $('#storedModalEmail').val() + '</td>' +
+                                                '<td>' + $('#storedModalComment').val() + '</td>' +
+                                                '<td>' + Date.now() + '</td>' +
+                                                '<td class="text-center"><button type="button" class="btn btn-info" data-toggle="modal" onclick = "showComment(this)"><i class="fa fa-eye"></i></button ></td> ' +
+                                                '</tr>';
+                                            $('#commentList').html(newCommentList);
+                                        }
+
+                                        $('#storedModalNameSurname').val('');
+                                        $('#storedModalEmail').val('');
+                                        $('#storedModalComment').val('');
+                                    };
+                                    function showComment(that) {
+                                        var commentListItem = that.parentNode.parentNode.children;
+                                        $('.modal-title').html(commentListItem[1].innerText + ' - ' + commentListItem[2].innerText);
+                                        $('.modal-body').html(commentListItem[3].innerText);
+                                        $('#modal-default').modal('show');
+                                    };
+                                </script>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label" for="storedModalComment">Öneri | Yorum</label>
-                                <div class="col-md-6"><textarea id="storedModalComment" class="form-control" rows="3" placeholder="Message..." required></textarea></div>
-                                <div id="commentReCaptcha"></div>
-                            </div>
-
-                        </div>
-                        <div class="card-footer">
-                            <button id="sendCommentButton" type="submit" class="btn btn-sm btn-primary"><i class="fa fa-send"></i> Gönder</button>
-                            <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-paint-brush"></i> Sıfırla</button>
-                        </div>
-                    </form>
-                    <script>
-                        function sendComment() {
-
-                            if ($('#saveDatabase').is(':checked')) {
-                                var success = function (returnData) {
-                                    if (returnData[1].IsSuccess) {
-                                        devf.Swal(returnData[1].ResponseCode + " - Comment Register", returnData[1].Message, "success", "Close");
-                                        $('#commentList').html(returnData[0]);
-                                    } else {
-                                        devf.Swal(returnData[1].ResponseCode + " - Comment Register", returnData[1].Message, "error", "Close");
+                            <div class="card">
+                                <div class="card-header bg-light">
+                                    Yorum Listesi
+                                    <div class="pull-right">
+                                        <button id="commentListButton" type="button" onclick="commentListFunction(); return false;" class="btn btn-primary btn-sm">Son 5 Yorumu Listele</button>
+                                    </div>
+                                </div>
+                                <div class="card-body table-responsive">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>İsim - Soyisim</th>
+                                                <th>Email</th>
+                                                <th>Yorum</th>
+                                                <th>Tarih</th>
+                                                <th>Detay</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="commentList"></tbody>
+                                    </table>
+                                </div>
+                                <script>
+                                    function commentListFunction() {
+                                        var success = function (returnData) {
+                                            if (returnData[1].IsSuccess) {
+                                                $('#commentList').html(returnData[0]);
+                                            } else {
+                                                devf.Swal(returnData[1].ResponseCode + " - Comment List", returnData[1].Message, "error", "Close");
+                                            }
+                                        }
+                                        devf.AjaxHTMLRequest('POST', '', "json", '/XSS/SXSS_S1_CommentList', success, '#commentListButton');
                                     }
-                                }
-                                var postURL = '';
-                                if ($('#validateInputControlCheckBox').is(':checked')) {
-                                    postURL = '/XSS/SXSS_S1_CommentValidateFalse';
-                                } else {
-                                    postURL = '/XSS/SXSS_S1_Comment';
-                                }
-                                var form = new FormData();
-                                form.append("SXSS_S1_CommentRequest_Name", $('#storedModalNameSurname').val());
-                                form.append("SXSS_S1_CommentRequest_Comment", $('#storedModalComment').val());
-                                form.append("SXSS_S1_CommentRequest_Email", $('#storedModalEmail').val());
-                                form.append("SXSS_S1_CommentRequest_gReCaptcha", grecaptcha.getResponse(commentReCaptcha));
-                                grecaptcha.reset(commentReCaptcha);
-                                devf.AjaxHTMLRequest('POST', form, "json", postURL, success, '#sendCommentButton');
-                            } else {
-                                var newCommentList = $('#commentList').html() +
-                                    '<tr>' +
-                                    '<td>' + Date.now() + '</td>' +
-                                    '<td>' + $('#storedModalNameSurname').val() + '</td>' +
-                                    '<td>' + $('#storedModalEmail').val() + '</td>' +
-                                    '<td>' + $('#storedModalComment').val() + '</td>' +
-                                    '<td>' + Date.now() + '</td>' +
-                                    '<td class="text-center"><button type="button" class="btn btn-info" data-toggle="modal" onclick = "showComment(this)"><i class="fa fa-eye"></i></button ></td> ' +
-                                    '</tr>';
-                                $('#commentList').html(newCommentList);
-                            }
+                                </script>
+                            </div>
 
-                            $('#storedModalNameSurname').val('');
-                            $('#storedModalEmail').val('');
-                            $('#storedModalComment').val('');
-                        };
-                        function showComment(that) {
-                            var commentListItem = that.parentNode.parentNode.children;
-                            $('.modal-title').html(commentListItem[1].innerText + ' - ' + commentListItem[2].innerText);
-                            $('.modal-body').html(commentListItem[3].innerText);
-                            $('#modal-default').modal('show');
-                        };
-                    </script>
-                </div>
-                <div class="card">
-                    <div class="card-header bg-light">
-                        Yorum Listesi
-                        <div class="pull-right">
-                            <button id="commentListButton" type="button" onclick="commentListFunction(); return false;" class="btn btn-primary btn-sm">Son 5 Yorumu Listele</button>
+                            <div class="modal fade" id="modal-default">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title"></h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-ban"></i>&nbsp;Kapat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-body table-responsive">
-                        <table class="table table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>İsim - Soyisim</th>
-                                    <th>Email</th>
-                                    <th>Yorum</th>
-                                    <th>Tarih</th>
-                                    <th>Detay</th>
-                                </tr>
-                            </thead>
-                            <tbody id="commentList"></tbody>
-                        </table>
-                    </div>
-                    <script>
-                        function commentListFunction() {
-                            var success = function (returnData) {
-                                if (returnData[1].IsSuccess) {
-                                    $('#commentList').html(returnData[0]);
-                                } else {
-                                    devf.Swal(returnData[1].ResponseCode + " - Comment List", returnData[1].Message, "error", "Close");
-                                }
-                            }
-                            devf.AjaxHTMLRequest('POST', '', "json", '/XSS/SXSS_S1_CommentList', success, '#commentListButton');
-                        }
-                    </script>
-                </div>
-
-                <div class="modal fade" id="modal-default">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"></h4>
-                            </div>
-                            <div class="modal-body">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger pull-right" data-dismiss="modal"><i class="fa fa-ban"></i>&nbsp;Kapat</button>
-                            </div>
+                        @* Stored XSS Scenario_1 Protection Method *@
+                        <div class="tab-pane" id="storedScenario_1_protect">
+                            Senaryo 3 Korunma Yöntemlerine Bknz.
                         </div>
                     </div>
                 </div>
@@ -163,12 +210,36 @@
                     <ul class="nav nav-tabs bg-light" role="tablist">
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_2_description" role="tab">Session Hijacking</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_2_cookie" role="tab">Cookie</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_2_test" role="tab">Korunma</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_2_test" role="tab">Korunma Yöntemleri</a></li>
                     </ul>
                     <div class="tab-content">
                         @* Stored XSS Scenario_2 Description *@
                         <div class="tab-pane" id="storedScenario_2_description">
-
+                            <div class="row"> 
+                                <div class="col-md-6">
+                                    <b>Nedir ?</b>
+                                    <p>Session kelime anlamı olarak oturum anlamına gelmektedir.</p>
+                                    <p>Kullanıcı girişi bulunan web sitelerinde kullanıcı sayfaya girdiği bilgilerle oturum açar ve giriş yapan kullanıcıya ait sessionId tanımlanır.</p>
+                                    <p>Bu sayede kullanıcının herhangi bir sayfa değiştirmesi sonucu tekrar oturum doğrulama bilgisine gerek kalmaz.</p>
+                                    <p>Fakat durumun böyle gerçekleşmesi birtakım zafiyetler ortaya çıkarmaktadır.</p>
+                                    <p>Eğer kullanıcıya ait olan SessionId saldırganlar tarafından ele geçerilirse saldırganların herhangi bir şekilde parola ele geçirmesine gerek kalmaz.</p>
+                                    <p>Bu tip saldırılar çok ciddi sonuçlar doğurmaktadır.</p>
+                                    <p>Zafiyet ismi de Session Hijacking yani "Oturum Çalma" olarak isimlendirilir.</p>
+                                    <p>
+                                        Senaryo 1 Message Uygulamasında aşağıdaki kodu script tagleri arasına yazarak mesajınızı görüntüleyen kişilerin cookielerini çalabilirsiniz.
+                                        Buradaki senaryo gönderilen mesajın detaylarına bakılmasına bağlanılmıştır fakat saldırgan bunu sayfa yüklendiği anda yapabilir.
+                                    </p>
+                                    <p style="font-size:15px">
+                                        <code>
+                                            $(document).ready(function () { var form = new FormData(); form.append('SXSS_S2_StealRequest_Cookie', document.cookie); devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S2_SaveStolenCookie'); });
+                                        </code>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="https://www.owasp.org/images/c/cb/Session_Hijacking_3.JPG" alt="" />
+                                </div>
+                            </div>
+                           
                         </div>
                         @* Stored XSS Scenario_2 Cookie *@
                         <div class="tab-pane" id="storedScenario_2_cookie">
@@ -220,10 +291,16 @@
 
                             </script>
                         </div>
-                        @* Stored XSS Scenario_2 Register Panel *@
+                        @* Stored XSS Scenario_2 Protection Method *@
                         <div class="tab-pane" id="storedScenario_2_test">
-
-
+                            <b> Neler Yapılabilir ?</b><br /><br />
+                            <ul>
+                                <li><p>SessionId giriş yapılan IP adresi ile eşleştirilip kontrol edilebilir.</p></li>
+                                <li>
+                                    <p>Önemli verilere sahip olunan yerlerde özellikle bankacılık uygulamalarında yada parola değişimlerinde </p>
+                                    <p>kullanıcı oturum açmış olsa dahi tekrar parola girmesi yada 2FA(Two Factor Authenticator) gibi önlemler alınabilir. </p>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -235,12 +312,16 @@
                     <ul class="nav nav-tabs bg-light" role="tablist">
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_description" role="tab">Editor</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_ckEditor" role="tab">CKEditor</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_test" role="tab">Korunma</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_protect" role="tab">Korunma Yöntemleri</a></li>
                     </ul>
                     <div class="tab-content">
                         @* Stored XSS Scenario_3 Description *@
                         <div class="tab-pane" id="storedScenario_3_description">
-
+                            <b>Nedir ?</b>
+                            <p> Günümüzdeki birçok Web Uygulamasında sayfaların kullanıcılar tarafından inşa edilmesi beklenir.</p>
+                            <p> Özellikle Admin Panelleri yada CMS gibi kısımlarda kullanıcıların hazırladıkları içeriklerin sayfada nasıl gözükeceğini görebilmeleri için</p>
+                            <p> CKEditör vb. gibi HTML editörlerinden yararlanılır.</p>
+                            <p> HTML Editörler içeriği HTML olarak hazırlar ve o şekilde sunar böylece saldırgan için zararlı script yazılacak alan editörler olur.</p>
                         </div>
                         @* Stored XSS Scenario_3 CKEditor *@
                         <div class="tab-pane" id="storedScenario_3_ckEditor">
@@ -260,29 +341,36 @@
                                     <textarea id="ckEditor" rows="10"></textarea>
                                 </div>
                                 <div class="card-footer">
-                                    <button id="sendCKEditorButton" type="button" onclick="sendCKEditor()" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+                                    <div class="row">
+                                        <div class="form-group col-sm-4">
+                                            <div style="margin-left :-10px;" id="ckEditorReCaptcha"></div>
+                                        </div>
+                                        <div class="form-group col-sm-8 pull-right">
+                                            <button id="sendCKEditorButton" type="button" onclick="sendCKEditor()" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <script>
 
                                     function sendCKEditor() {
                                         var success = function (returnData) {
                                             if (returnData.IsSuccess) {
-                                                devf.Swal("Save Cookie", returnData.Message, "success", "Close");
+                                                devf.Swal("CKEditor", returnData.Message, "success", "Close");
                                             } else {
-                                                devf.Swal("Save Cookie", returnData.Message, "error", "Close");
+                                                devf.Swal("CKEditor", returnData.Message, "error", "Close");
                                             }
                                         }
                                         var form = new FormData();
-                                        form.append("SXSS_S2_SaveCookeRequest_CookieName", $('#cookieName').val());
-                                        form.append("SXSS_S2_SaveCookeRequest_gReCaptcha", grecaptcha.getResponse(cookieReCaptcha));
-                                        devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S2_AddCookie', success, '#sendCKEditorButton');
+                                        form.append("SXSS_S3_CKEditorRequest_Value", CKEDITOR.instances["ckEditor"].getData());
+                                        form.append("SXSS_S3_CKEditorRequest_gReCaptcha", grecaptcha.getResponse(ckEditorReCaptcha));
+                                        devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S3_CKEditor', success, '#sendCKEditorButton');
                                     };
 
                                 </script>
                             </div>
                         </div>
-                        @* Stored XSS Scenario_3  *@
-                        <div class="tab-pane" id="storedScenario_3_test">
+                        @* Stored XSS Scenario_3 Protection Method *@
+                        <div class="tab-pane" id="storedScenario_3_protect">
 
 
                         </div>

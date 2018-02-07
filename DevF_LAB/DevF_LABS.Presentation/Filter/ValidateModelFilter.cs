@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using DevF_LABS.RequestResponse;
+using System.Net;
 using System.Text;
 using System.Web.Mvc;
 
@@ -19,11 +20,11 @@ namespace DevF_LABS.Presentation.Filter
                     {
                         foreach (var item in value.Errors)
                         {
-                            sb.Append(item.ErrorMessage);
+                            sb.Append($"<br /><b>{item.ErrorMessage}</b>");
                         }
                     }
                 }
-                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.BadRequest, sb.ToString());
+                filterContext.Result = new JsonResult { Data = new BaseResponse { IsSuccess = false, Message = sb.ToString(), ResponseCode = 400 } };
             }
             else
             {

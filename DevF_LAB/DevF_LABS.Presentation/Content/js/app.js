@@ -159,12 +159,15 @@ devf = {
         return Object.prototype.toString.call(text) == '[object String]';
     },
 
-    Swal: function (title, text, icon, button) {
+    Swal: function (title, html, type) {
         swal({
-            title: title,
-            text: text,
-            icon: icon,
-            button: button,
+            position: 'bottom-end',
+            title : "<span>" + title + "</span>",
+            html: html,
+            type: type,
+            showConfirmButton: false,
+            timer: 5000,
+            footer: '<img src="/Content/img/logo.png" style="width:112px;height:40px;" />',
         });
     },
 

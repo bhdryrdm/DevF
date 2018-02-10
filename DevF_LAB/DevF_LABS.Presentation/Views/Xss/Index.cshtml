@@ -1,0 +1,264 @@
+﻿@using System.Web.Configuration;
+
+@{
+    ViewBag.Title = "XSS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string gReCaptcha = WebConfigurationManager.AppSettings["gReCaptcha_PublicKey"].ToString();
+}
+<main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+        <li class="breadcrumb-item"><a href="#">XSS</a></li>
+        <li class="breadcrumb-item active">Index</li>
+        <!-- Breadcrumb Menu-->
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-2 mb-4">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">XSS / CSS</a>
+                            <ul>
+                                <li><a href="#xss" data-toggle="tab" onclick="activeTabFile('.rootTab','#xss')">XSS Nedir ?</a> </li>
+                                <li>
+                                    <a href="#">Reflected XSS</a>
+                                    <ul>
+                                        <li> <a href="#reflectedDescription" data-toggle="tab" onclick="activeTabFile('.reflectedTab','#reflectedDescription','.rootTab','#reflected')">Nedir ?</a> </li>
+                                        <li> <a href="#reflectedScenario_1" data-toggle="tab" onclick="activeTabFile('.reflectedTab','#reflectedScenario_1','.rootTab','#reflected')">Senaryo 1</a> </li>
+                                        <li> <a href="#reflectedScenario_2" data-toggle="tab" onclick="activeTabFile('.reflectedTab','#reflectedScenario_2','.rootTab','#reflected')">Senaryo 2</a> </li>
+                                        <li> <a href="#reflectedScenario_3" data-toggle="tab" onclick="activeTabFile('.reflectedTab','#reflectedScenario_3','.rootTab','#reflected')">Senaryo 3</a> </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Stored XSS</a>
+                                    <ul>
+                                        <li> <a href="#storedDescription" data-toggle="tab" onclick="activeTabFile('.storedTab','#storedDescription','.rootTab','#stored')">Nedir ?</a> </li>
+                                        <li> <a href="#storedScenario_1" data-toggle="tab" onclick="activeTabFile('.storedTab','#storedScenario_1','.rootTab','#stored')">Senaryo 1</a> </li>
+                                        <li> <a href="#storedScenario_2" data-toggle="tab" onclick="activeTabFile('.storedTab','#storedScenario_2','.rootTab','#stored')">Senaryo 2</a> </li>
+                                        <li> <a href="#storedScenario_3" data-toggle="tab" onclick="activeTabFile('.storedTab','#storedScenario_3','.rootTab','#stored')">Senaryo 3</a> </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">DOM XSS</a>
+                                    <ul>
+                                        <li>
+
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#xssSource" onclick="activeTabFile('.rootTab','#xssSource')" data-toggle="tab">Kaynaklar</a> </li>
+                                <li><a href="#xssExample" onclick="activeTabFile('.rootTab','#xssExample')" data-toggle="tab">Alıştırmalar</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function activeTabFile(destinationTab, destinationTabContent, parentTab, parentTabContent, grandParent, grandParentContent) {
+
+                            if (parentTab != '' && !$(parentTabContent).hasClass('active')) {
+                                // Aktif olan parent tab ve contenti silinir
+                                $(parentTab).removeClass('active');
+                                $(parentTab + 'Content').removeClass('active');
+                                //Aktif olması istenen parent tab ve contenti eklenir
+                                $($('li').find('a[href$="' + parentTabContent + '"]')[0]).addClass('active');
+                                $(parentTabContent).addClass('active');
+                            }
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            //Aktif olması istenen tab ve content aktif edilir
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                    </script>
+                </div>
+                <div class="col-md-10" id="xsscss">
+
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#xss" role="tab" aria-controls="xsscss">XSS / CSS</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#reflected" role="tab" aria-controls="reflectedxss">Reflected XSS</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#stored" role="tab" aria-controls="storedxss">Stored XSS</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#dom" role="tab" aria-controls="domxss">DOM XSS</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#xssSource" role="tab" aria-controls="source">Kaynaklar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#xssExample" role="tab" aria-controls="practice">Alıştırmalar</a></li>
+                    </ul>
+
+                    <div class="tab-content" role="tabpanel">
+                        <script src="https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit" async defer></script>
+                        <script>
+                            var registerReCaptcha = document.getElementById('registerReCaptcha');
+                            var commentReCaptcha = document.getElementById('commentReCaptcha');
+                            var cookieReCaptcha = document.getElementById('cookieReCaptcha');
+                            var ckEditorReCaptcha = document.getElementById('ckEditorReCaptcha');
+                            var myCallBack = function () {
+
+                                registerReCaptcha = grecaptcha.render('registerReCaptcha', {
+                                    'sitekey': '@gReCaptcha',
+                                    'theme': 'light'
+                                });
+                                grecaptcha.reset(registerReCaptcha);
+
+                                commentReCaptcha = grecaptcha.render('commentReCaptcha', {
+                                    'sitekey': '@gReCaptcha',
+                                    'theme': 'light'
+                                });
+                                grecaptcha.reset(commentReCaptcha);
+
+                                cookieReCaptcha = grecaptcha.render('cookieReCaptcha', {
+                                    'sitekey': '@gReCaptcha',
+                                    'theme': 'light'
+                                });
+                                grecaptcha.reset(cookieReCaptcha);
+
+                                ckEditorReCaptcha = grecaptcha.render('ckEditorReCaptcha', {
+                                    'sitekey': '@gReCaptcha',
+                                    'theme': 'light'
+                                });
+                                grecaptcha.reset(ckEditorReCaptcha);
+                            };
+                        </script>
+                        <div class="tab-pane rootTabContent active" id="xss">
+                            <b>XSS(Cross Site Scripting) Nedir ?</b>
+                            <p class="mt-3">Siteler Arası Komut Dosyası Oluşturma (XSS), bir saldırganın yasal bir web sitesine veya web uygulamasına kötü niyetli komut dosyaları</p>
+                            <p class="mt-3">(yaygın olarak kötü amaçlı bir yük olarak da ifade edilebilir) uygulayabileceği istemci tarafı kodu enjeksiyon saldırısına değinmektedir.</p>
+                            <p class="mt-3">XSS, web uygulama güvenlik açıklarının en yaygın örneğidir ve bir web uygulaması ürettiği çıktıda doğrulanmamış veya kodlanmamış kullanıcı girişi kullandığında oluşur.</p>
+                            <p class="mt-3">XSS'den yararlanarak, bir saldırgan doğrudan kurbanını hedeflemez. Bunun yerine, bir saldırgan, kurbanının tarayıcısına kötü niyetli bir komut</p>
+                            <p class="mt-3">dosyası sunmak için savunmasız web sitesini araç olarak kullanan bir web sitesi veya web uygulaması içindeki bir güvenlik açığından yararlanır.</p>
+                            <p class="mt-3">XSS, VBScript, ActiveX ve Flash (şimdiye kadar eski veya eskimiş olarak kabul edilmekle birlikte) avantajından yararlanabilirken</p>
+                            <p class="mt-3">tartışmasız bir şekilde en çok suistimal edilen JavaScript'tir - başlıca nedeni, JavaScript'in çoğu tarama deneyiminin temelini oluşturmasıdır.</p>
+                        </div>
+                        @Html.Partial("~/Views/Xss/ReflectedXss/ReflectedXss.cshtml")
+                        @Html.Partial("~/Views/Xss/StoredXss/StoredXss.cshtml")
+                        @Html.Partial("~/Views/Xss/DomXss/DomXss.cshtml")
+                        @Html.Partial("~/Views/Xss/_XssSourceWebSites.cshtml")
+                        @Html.Partial("~/Views/Xss/_XssPracticeWebSites.cshtml")
+                    </div>
+
+                </div>
+                <div class="col-md-2 mb-4 mt-5">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Server Side Code</a>
+                            <ul>
+                                <li>
+                                    <a href="#">ASP.NET MVC</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Controllers</a>
+                                            <ul>
+                                                <li><a href="#baseController" onclick="serverSideTab('.serverSideTab','#baseController')" data-toggle="tab">BaseController</a> </li>
+                                                <li><a href="#xssController" onclick="serverSideTab('.serverSideTab','#xssController')" data-toggle="tab">XssController</a> </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Models</a>
+                                            <ul>
+                                                <li><a href="#rxss_s3_loginRequest" onclick="serverSideTab('.serverSideTab','#rxss_s3_loginRequest')" data-toggle="tab">RXSS_S3_LoginRequest</a> </li>
+                                                <li><a href="#rxss_s3_registerRequest" onclick="serverSideTab('.serverSideTab','#rxss_s3_registerRequest')" data-toggle="tab">RXSS_S3_RegisterRequest</a> </li>
+                                                <li><a href="#rxss_s3_userListResponse" onclick="serverSideTab('.serverSideTab','#rxss_s3_userListResponse')" data-toggle="tab">RXSS_S3_UserListResponse</a> </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">SQL Server</a>
+                                            <ul>
+                                                <li><a href="#xss_userList_trigger" onclick="serverSideTab('.serverSideTab','#xss_userList_trigger')" data-toggle="tab">XSS_UserList_Trigger</a> </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active d-block');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideAllTabClose(destinationTabContent) {
+                            $('#serverSide').css('display', 'none');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+                        };
+
+                        function closeTab(destinationTabContent) {
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).removeClass('active d-block');
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('d-none');
+                        }
+                    </script>
+                </div>
+                <div class="col-md-10 mt-5" id="serverSide" style="display:none">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab" aria-controls="xsscss">
+                                    BaseController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#baseController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#xssController" role="tab" aria-controls="reflectedxss">
+                                    XssController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#xssController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_loginRequest" role="tab" aria-controls="xsscss">
+                                    RXSS_S3_LoginRequest
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#rxss_s3_loginRequest')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_registerRequest" role="tab" aria-controls="reflectedxss">
+                                    RXSS_S3_RegisterRequest
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#rxss_s3_registerRequest')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#rxss_s3_userListResponse" role="tab" aria-controls="xsscss">
+                                    RXSS_S3_UserListResponse
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#rxss_s3_userListResponse')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#xss_userList_trigger" role="tab" aria-controls="reflectedxss">
+                                    XSS_UserList_Trigger
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#xss_userList_trigger')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
+                        </ul>
+                        <div class="tab-content" role="tabpanel">
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BaseController.cshtml")
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/XssController.cshtml")
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Models/Xss/ReflectedXss/RXSS_S3_LoginRequest.cshtml")
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Models/Xss/ReflectedXss/RXSS_S3_RegisterRequest.cshtml")
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Models/Xss/ReflectedXss/RXSS_S3_UserListResponse.cshtml")
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/SQL_Server/XSS_UserList_Trigger.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

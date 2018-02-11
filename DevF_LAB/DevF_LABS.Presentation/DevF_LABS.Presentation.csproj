@@ -260,6 +260,7 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo-symbol.png" />
     <Content Include="Content\img\favicon.png" />
+    <Content Include="Content\img\owasplogo.png" />
     <Content Include="Content\img\xssimage\OGAME_XSS4.jpg" />
     <Content Include="Content\img\xssimage\OGAME_XSS5.jpg" />
     <Content Include="Content\img\xssimage\OGAME_XSS6.jpg" />
@@ -1218,6 +1219,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InjectionController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XsrfController.cs" />
@@ -1576,6 +1578,7 @@
     <None Include="Properties\PublishProfiles\DevF_LABS.pubxml" />
     <Content Include="Views\Xss\StoredXss\CookieList.cshtml" />
     <Content Include="Views\Xss\_FoundXss.cshtml" />
+    <Content Include="Views\Injection\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -141,13 +141,16 @@
                                 function reflectedXSS_deleteUser(param1) {
 
                                     var success = function (returnData) {
-                                        if (returnData[0].length > 468 && returnData[1].IsSuccess) {
-                                            $('#scenario_3_userList').html(returnData[0]);
-                                            devf.Swal("User Delete", returnData[1].Message, "success", "Close");
+                                        if (!returnData.IsSuccess) {
+                                            devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
                                         } else {
-                                            devf.Swal(returnData[1].ResponseCode, returnData[1].Message, "error", "Close");
+                                            if (returnData[0].length > 468 && returnData[1].IsSuccess) {
+                                                $('#scenario_3_userList').html(returnData[0]);
+                                                devf.Swal("User Delete", returnData[1].Message, "success", "Close");
+                                            } else {
+                                                devf.Swal(returnData[1].ResponseCode, returnData[1].Message, "error", "Close");
+                                            }
                                         }
-                                        
                                     };
 
                                     var form = new FormData();

@@ -260,6 +260,11 @@
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo-symbol.png" />
     <Content Include="Content\img\favicon.png" />
+    <Content Include="Content\img\xssimage\OGAME_XSS4.jpg" />
+    <Content Include="Content\img\xssimage\OGAME_XSS5.jpg" />
+    <Content Include="Content\img\xssimage\OGAME_XSS6.jpg" />
+    <Content Include="Content\img\xssimage\Screenshot_1.png" />
+    <Content Include="Content\img\xssimage\Screenshot_2.png" />
     <Content Include="Content\js\app.js" />
     <Content Include="Content\js\charts.js" />
     <Content Include="Content\js\main.js" />
@@ -1570,6 +1575,7 @@
     <Content Include="Views\User\_SessionUserList.cshtml" />
     <None Include="Properties\PublishProfiles\DevF_LABS.pubxml" />
     <Content Include="Views\Xss\StoredXss\CookieList.cshtml" />
+    <Content Include="Views\Xss\_FoundXss.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1577,9 +1583,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Language\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <TypeScriptCompile Include="Content\plugin\popper.js\index.d.ts" />
   </ItemGroup>

@@ -8,7 +8,7 @@
 <main class="main">
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Ana Sayfa</a></li>
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item"><a href="#">XSS</a></li>
         <li class="breadcrumb-item active">Index</li>
         <!-- Breadcrumb Menu-->
@@ -50,6 +50,7 @@
                                 </li>
                                 <li><a href="#xssSource" onclick="activeTabFile('.rootTab','#xssSource')" data-toggle="tab">Kaynaklar</a> </li>
                                 <li><a href="#xssExample" onclick="activeTabFile('.rootTab','#xssExample')" data-toggle="tab">Alıştırmalar</a> </li>
+                                <li><a href="#xssFound" onclick="activeTabFile('.rootTab','#xssFound')" data-toggle="tab">Bulunan XSS</a> </li>
                             </ul>
                         </li>
                     </ul>
@@ -94,6 +95,7 @@
                         <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#dom" role="tab" aria-controls="domxss">DOM XSS</a></li>
                         <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#xssSource" role="tab" aria-controls="source">Kaynaklar</a></li>
                         <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#xssExample" role="tab" aria-controls="practice">Alıştırmalar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#xssFound" role="tab" aria-controls="found">Bulunan XSS</a></li>
                     </ul>
 
                     <div class="tab-content" role="tabpanel">
@@ -145,6 +147,7 @@
                         @Html.Partial("~/Views/Xss/DomXss/DomXss.cshtml")
                         @Html.Partial("~/Views/Xss/_XssSourceWebSites.cshtml")
                         @Html.Partial("~/Views/Xss/_XssPracticeWebSites.cshtml")
+                        @Html.Partial("~/Views/Xss/_FoundXss.cshtml")
                     </div>
 
                 </div>

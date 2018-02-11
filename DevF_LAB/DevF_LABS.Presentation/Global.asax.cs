@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace DevF_LABS.Presentation
 {
@@ -20,8 +21,7 @@ namespace DevF_LABS.Presentation
             Mapper_Bootstrapper.RegisterMapping();
 
             Application["LiveSessionsCount"] = 0;
-
-
+            
         }
 
         protected void Application_BeginRequest()
@@ -42,7 +42,6 @@ namespace DevF_LABS.Presentation
                         break;
                 }
             }
-            
         }
 
         private void SetLanguage(string language)
@@ -64,7 +63,7 @@ namespace DevF_LABS.Presentation
             SessionUserModel sessionUserModel = new SessionUserModel
             {
                 IsMobile = Request.Browser.IsMobileDevice ? "Mobile" : "Web",
-                IPAddress = Request.UserHostAddress,
+                IPAddress = MaskIpAddress(Request.UserHostAddress),
                 SessionID = Session.SessionID,
                 OperatingSystem = GetUserPlatform(Request.UserAgent),
                 CreatedTime = DateTime.Now
@@ -73,6 +72,19 @@ namespace DevF_LABS.Presentation
             SessionCountHelper.SessionUserList.Add(sessionUserModel);
             SessionCountHelper.SessionCount = (int)Application["LiveSessionsCount"];
             Application.UnLock();
+        }
+
+        private string MaskIpAddress(string ipAddress)
+        {
+            string ipAddressOktet = string.Empty;
+            if (!String.IsNullOrEmpty(ipAddress))
+            {
+                ipAddressOktet += ipAddress.Split('.').FirstOrDefault() ?? "";
+                ipAddressOktet += ".***";
+                ipAddressOktet += ".***";
+                ipAddressOktet += "." + ipAddress.Split('.').LastOrDefault() ?? "";
+            }
+            return ipAddressOktet;
         }
 
         protected void Session_End(object sender, EventArgs e)

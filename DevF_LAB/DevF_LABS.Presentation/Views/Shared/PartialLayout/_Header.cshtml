@@ -14,8 +14,7 @@
     <ul class="nav navbar-nav ml-auto">
         @Html.Action("OnlineUserCount", "Home")
         <li>
-            <button id="enLang" onclick="switchLanguage('en','#enLang')"><i class="flag-icon flag-icon-gb h4" title="gb"></i></button>
-            <button id="trLang" onclick="switchLanguage('tr','#trLang')"><i class="flag-icon flag-icon-tr h4" title="tr"></i></button>
+           
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -23,12 +22,10 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-header text-center">
-                    <strong>İletişim</strong>
+                    <strong>Dil Seçimi</strong>
                 </div>
-                <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
-                <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comments<span class="badge badge-warning">42</span></a>
+                <a class="dropdown-item" id="enLang" href="javascript:switchLanguage('en','#enLang');"><i class="flag-icon flag-icon-gb h5" title="gb"></i>English</a>
+                <a class="dropdown-item" id="trLang" href="javascript:switchLanguage('tr','#trLang');"><i class="flag-icon flag-icon-tr h5" title="tr"></i>Turkish</a>
             </div>
         </li>
     </ul>

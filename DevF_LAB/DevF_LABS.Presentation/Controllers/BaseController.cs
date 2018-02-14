@@ -10,7 +10,7 @@ namespace DevF_LABS.Presentation.Controllers
     [ValidateModelFilter]
     public class BaseController : Controller
     {
-        
+        public string ConnectionString { get; set; } = WebConfigurationManager.ConnectionStrings["MSSQL_EF_CF_Context"].ConnectionString;
         public class CaptchaResponse
         {
             [JsonProperty("success")]

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Injection\SQLInjection\SI_S1_UserView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_UserView.cs" />
     <Compile Include="XSS\StoredXSS\SXSS_S1_CommentView.cs" />

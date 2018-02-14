@@ -52,6 +52,7 @@
     <Compile Include="MSSQL\EntityFramework\CodeFirst\TablesConfiguration\XSS\XSS_CommentConfiguration.cs" />
     <Compile Include="MSSQL\EntityFramework\CodeFirst\TablesConfiguration\XSS\XSS_CookieConfiguration.cs" />
     <Compile Include="MSSQL\EntityFramework\CodeFirst\TablesConfiguration\XSS\XSS_UserConfiguration.cs" />
+    <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\Injection\SQLInjection_User.cs" />
     <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\Settings.cs" />
     <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\XSS\XSS_Comment.cs" />
     <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\XSS\XSS_Cookie.cs" />

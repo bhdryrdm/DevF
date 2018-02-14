@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\inetpub\Devf</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\bhdryrdm\Desktop\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/AntiXssLibrary.dll">
@@ -37,10 +37,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2018 19:04:58</publishTime>
     </File>
     <File Include="bin/DevF_LABS.Presentation.dll">
-      <publishTime>02/12/2018 23:12:26</publishTime>
+      <publishTime>02/13/2018 01:52:30</publishTime>
     </File>
     <File Include="bin/DevF_LABS.Presentation.pdb">
-      <publishTime>02/12/2018 23:12:26</publishTime>
+      <publishTime>02/13/2018 01:52:30</publishTime>
     </File>
     <File Include="bin/DevF_LABS.RequestResponse.dll">
       <publishTime>02/10/2018 19:04:58</publishTime>
@@ -4449,9 +4449,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/plugin/simple-line-icons/scss/simple-line-icons.scss">
       <publishTime>02/10/2018 18:59:29</publishTime>
     </File>
-    <File Include="Content/plugin/sweetalert/sweetalert.min.js">
-      <publishTime>01/25/2018 11:51:24</publishTime>
-    </File>
     <File Include="Content/plugin/sweetalert2/sweetalert2.all.min.js">
       <publishTime>02/10/2018 18:07:42</publishTime>
     </File>
@@ -4552,7 +4549,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2018 18:59:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/12/2018 23:12:28</publishTime>
+      <publishTime>02/13/2018 01:52:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

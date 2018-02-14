@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseResponse.cs" />
+    <Compile Include="Injection\SQLInjection\SI_S1_GetUserByIDRequest.cs" />
+    <Compile Include="Injection\SQLInjection\SI_S1_UserListResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_LoginRequest.cs" />
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_RegisterRequest.cs" />

@@ -1575,6 +1575,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
     <Content Include="Views\User\_SessionUserList.cshtml" />
+    <None Include="Properties\PublishProfiles\AWS_DevFLABs.pubxml" />
     <None Include="Properties\PublishProfiles\DevF_LABS.pubxml" />
     <Content Include="Views\Xss\StoredXss\CookieList.cshtml" />
     <Content Include="Views\Xss\_FoundXss.cshtml" />

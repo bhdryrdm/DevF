@@ -1,4 +1,5 @@
 ﻿using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables;
+using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.Injection;
 using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.Tables.XSS;
 using DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS;
 using System.Data.Entity;
@@ -14,9 +15,17 @@ namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MsSQL_Context>());
         }
 
+        #region XSS
         public DbSet<XSS_User> XSS_User { get; set; }
         public DbSet<XSS_Cookie> XSS_Cookie { get; set; }
         public DbSet<XSS_Comment> XSS_Comment { get; set; }
+        #endregion
+
+        #region Injection
+        public DbSet<SQLInjection_User> SQL_User { get; set; }
+        #endregion
+
+
         public DbSet<Settings> Settings { get; set; }
 
         //Fluent API Configurations

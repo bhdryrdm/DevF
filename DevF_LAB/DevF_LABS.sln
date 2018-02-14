@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Resources", "02-Resources", "{36AC300D-3C23-43FB-95F9-25C4FCCB6609}"
 EndProject
@@ -28,11 +28,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevF_LABS.Test", "DevF_LABS.Test\DevF_LABS.Test.csproj", "{4ECD48FE-DF80-4A6C-9322-EE38F88D3CB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevF_LABS.Data", "DevF_LABS.Data\DevF_LABS.Data.csproj", "{8365B8B1-2341-4BFC-9D67-8A648197688A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EF54EE7-A622-4084-A60F-A7AE740E258C}"
-	ProjectSection(SolutionItems) = preProject
-		Resources.Designer.t4 = Resources.Designer.t4
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

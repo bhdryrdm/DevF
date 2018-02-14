@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using DevF_LABS.RequestResponse.Injection.SQLInjection;
+using DevF_LABS.RequestResponse;
 
 namespace DevF_LABS.Presentation.Controllers
 {
@@ -10,20 +12,30 @@ namespace DevF_LABS.Presentation.Controllers
     {
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public JsonResult SQLI_S1_Login(SQLI_S1_LoginRequest request)
+        {
+            SQLUser user = new SQLUser();
+            string sqlQuery = $"SELECT * FROM SQLInjection_User WHERE Username=N'{request.Username}' AND Password=N'{request.Password}'";
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(base.ConnectionString))
                 {
                     sqlConnection.Open();
-                    using (SqlCommand cmd = new SqlCommand("", sqlConnection))
+                    using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection))
                     {
-                        using(SqlDataReader reader = cmd.ExecuteReader())
+                        cmd.Parameters.AddWithValue("Username", request.Username);
+                        cmd.Parameters.AddWithValue("Password", request.Password);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader != null)
                             {
                                 while (reader.Read())
                                 {
-                                    
+                                    user.Username = reader.GetString(1);
+                                    user.Password = reader.GetString(3);
                                 }
                             }
                         }
@@ -32,9 +44,16 @@ namespace DevF_LABS.Presentation.Controllers
             }
             catch (Exception ex)
             {
-
+                user.Message = "Hata oluştu";
+                user.ResponseCode = 500;
             }
-            return View();
+            return Json(user,JsonRequestBehavior.AllowGet);
+        }
+
+        public class SQLUser : BaseResponse
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
     }
 }

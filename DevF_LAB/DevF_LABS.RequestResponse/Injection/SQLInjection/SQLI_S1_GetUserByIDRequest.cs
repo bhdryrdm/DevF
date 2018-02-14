@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DevF_LABS.RequestResponse.Injection.SQLInjection
 {
-    public class SI_S1_GetUserByIDRequest
+    public class SQLI_S1_GetUserByIDRequest
     {
         public int UserID { get; set; }
     }

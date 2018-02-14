@@ -61,7 +61,7 @@
                                 <div class="card-header with-border bg-info">
                                     Öneri | Yorum Gönder
                                     <div class="pull-right">
-                                        <label class="col-form-label" for="antiXSSControl"> Validate Input Kontrolünü Kapat &nbsp;</label>
+                                        <label class="col-form-label" for="validateInputControlCheckBox"> Validate Input Kontrolünü Kapat &nbsp;</label>
                                         <label class="switch switch-text switch-pill switch-primary">
                                             <input id="validateInputControlCheckBox" type="checkbox" class="switch-input">
                                             <span class="switch-label" data-on="On" data-off="Off"></span>
@@ -226,7 +226,8 @@
                                     <p>Bu tip saldırılar çok ciddi sonuçlar doğurmaktadır.</p>
                                     <p>Zafiyet ismi de Session Hijacking yani "Oturum Çalma" olarak isimlendirilir.</p>
                                     <p>
-                                        Senaryo 1 Message Uygulamasında aşağıdaki kodu script tagleri arasına yazarak mesajınızı görüntüleyen kişilerin cookielerini çalabilirsiniz.
+                                        Senaryo 1 Message Uygulamasında aşağıdaki kodu script tagleri arasına yazarak İsim|Soyisim yada Öneri|Yorum kısmında göndererek
+                                        mesajınızı görüntüleyen kişilerin cookielerini çalabilirsiniz.
                                         Buradaki senaryo gönderilen mesajın detaylarına bakılmasına bağlanılmıştır fakat saldırgan bunu sayfa yüklendiği anda yapabilir.
                                     </p>
                                     <p style="font-size:15px">
@@ -244,30 +245,45 @@
                         @* Stored XSS Scenario_2 Cookie *@
                         <div class="tab-pane" id="storedScenario_2_cookie">
 
-                            <div class="row">
-
-                                <div class="form-group col-sm-3">
-                                    <div class="form-group">
-                                        <label for="cookieName">Cookie Name</label>
-                                        <input type="text" class="form-control" id="cookieName" placeholder="MyCookieName">
+                            <div class="card">
+                                <div class="card-header with-border bg-info">
+                                    <div class="row">
+                                        <div class="mt-2 col-2">Save Cookie</div>
+                                        <div class="pull-right offset-8 col-2">
+                                            <label class="col-form-label" style="margin-top:-2px;" for="httponlyCookie"> Httponly Cookie &nbsp;</label>
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input id="httponlyCookie" type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-3">
+                                            <div class="form-group">
+                                                <label for="cookieName">Cookie Name</label>
+                                                <input type="text" class="form-control" id="cookieName" placeholder="MyCookieName">
+                                            </div>
+                                        </div>
 
-                                <div class="form-group col-sm-3">
-                                    <div class="form-group">
-                                        <label for="cookieValue">Cookie Value</label>
-                                        <input type="text" class="form-control" id="cookieValue" placeholder="MyCookieValue">
+                                        <div class="form-group col-sm-3">
+                                            <div class="form-group">
+                                                <label for="cookieValue">Cookie Value</label>
+                                                <input type="text" class="form-control" id="cookieValue" placeholder="MyCookieValue">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="cookieReCaptcha"></div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <div class="form-group">
+                                                <label for="saveCustomCookieButton">&nbsp;</label>
+                                                <button id="saveCustomCookieButton" type="button" onclick="saveCustomCookie()" class="btn btn-primary form-control"><i class="fa fa-save"></i>&nbsp;Custom Cookie Save</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group col-sm-3">
-                                    <div class="form-group">
-                                        <label for="saveCustomCookieButton">&nbsp;</label>
-                                        <button id="saveCustomCookieButton" type="button" onclick="saveCustomCookie()" class="btn btn-primary form-control"><i class="fa fa-save"></i>&nbsp;Custom Cookie Save</button>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-3">
-                                    <div style="margin-left :-10px;" id="cookieReCaptcha"></div>
                                 </div>
                             </div>
 
@@ -285,6 +301,7 @@
                                     var form = new FormData();
                                     form.append("SXSS_S2_SaveCookeRequest_CookieName", $('#cookieName').val());
                                     form.append("SXSS_S2_SaveCookeRequest_CookieValue", $('#cookieValue').val());
+                                    form.append("SXSS_S2_SaveCookeRequest_CookieHttponly", $('#httponlyCookie').is(':checked'));
                                     form.append("SXSS_S2_SaveCookeRequest_gReCaptcha", grecaptcha.getResponse(cookieReCaptcha));
                                     devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S2_AddCookie', success, '#saveCustomCookieButton');
                                 };

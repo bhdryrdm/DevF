@@ -131,6 +131,10 @@ namespace DevF_LABS.Presentation.Controllers
                 HttpCookie httpCookie = new HttpCookie(request.SXSS_S2_SaveCookeRequest_CookieName, request.SXSS_S2_SaveCookeRequest_CookieValue);
                 httpCookie.Expires = DateTime.Now.AddMonths(1);
                 httpCookie.Path = FormsAuthentication.FormsCookiePath;
+                if (request.SXSS_S2_SaveCookeRequest_CookieHttponly)
+                {
+                    httpCookie.HttpOnly = true;
+                }
 
                 // SSL sertifikası bulunan domainler için kullanılması yararlıdır.Http üzerinden cookie gönderilemez
                 // httpCookie.Secure = true;

@@ -29,6 +29,7 @@ namespace DevF_LABS.Presentation.Controllers
             HttpCookie httpCookie = new HttpCookie("Language", language);
             httpCookie.Expires = DateTime.Now.AddMonths(1);
             httpCookie.Path = FormsAuthentication.FormsCookiePath;
+            httpCookie.HttpOnly = true;
 
             // SSL sertifikası bulunan domainler için kullanılması yararlıdır.Http üzerinden cookie gönderilemez
             // httpCookie.Secure = true;

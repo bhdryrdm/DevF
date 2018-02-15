@@ -18,7 +18,7 @@ namespace DevF_LABS.Presentation.Controllers
         public JsonResult SQLI_S1_Login(SQLI_S1_LoginRequest request)
         {
             SQLUser user = new SQLUser();
-            string sqlQuery = $"SELECT * FROM SQLInjection_User WHERE Username=N'{request.Username}' AND Password=N'{request.Password}'";
+            string sqlQuery = $"SELECT * FROM SQLInjection_User WHERE Username=@Username AND Password=@Password";
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(base.ConnectionString))
@@ -26,8 +26,15 @@ namespace DevF_LABS.Presentation.Controllers
                     sqlConnection.Open();
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection))
                     {
-                        cmd.Parameters.AddWithValue("Username", request.Username);
-                        cmd.Parameters.AddWithValue("Password", request.Password);
+                        
+                        SqlParameter sqlParameter = new SqlParameter();
+                        sqlParameter.ParameterName = "@Username";
+                        sqlParameter.Value = request.Username;
+                        cmd.Parameters.Add(sqlParameter);
+
+                        cmd.Parameters.AddWithValue("@Password", request.Password);
+
+
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader != null)

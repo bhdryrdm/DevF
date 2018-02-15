@@ -16,7 +16,7 @@ namespace DevF_LABS.Presentation.Controllers
     {
         public ActionResult Index()
         {
-            Session["LoginUserRole"] = "";
+            Session["LoginUserRole" + Session.SessionID] = "";
             return View("");
         }
 

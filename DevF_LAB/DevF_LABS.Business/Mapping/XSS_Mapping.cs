@@ -102,5 +102,17 @@ namespace DevF_LABS.Business.Mapping
         {
             return Mapper.Map<XSS_Cookie, SXSS_S2_CookieView>(entity);
         }
+
+        // Editor Request --> EntityModel
+        public static XSS_Editor SXSS_S3_CKEditor_Request_To_XSS_Editor(SXSS_S3_CKEditor_Request request)
+        {
+            return Mapper.Map<SXSS_S3_CKEditor_Request, XSS_Editor>(request);
+        }
+
+        // EntityModel --> ViewModel
+        public static SXSS_S3_EditorView XSS_Editor_To_SXSS_S3_EditorView(XSS_Editor entity)
+        {
+            return Mapper.Map<XSS_Editor, SXSS_S3_EditorView>(entity);
+        }
     }
 }

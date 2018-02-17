@@ -42,6 +42,9 @@ namespace DevF_LABS.Business.Mapping_AutoMapper
                 .Member(y => y.SXSS_S1_Comment, z => z.Comment)
                 .Member(y => y.SXSS_S1_Email, z => z.Email)
                 .Member(y => y.SXSS_S1_Name, z => z.Name);
+
+            Mapper.Register<SXSS_S3_CKEditor_Request, XSS_Editor>()
+                .Member(y => y.Content, z => z.SXSS_S3_CKEditorRequest_Value);
         }
     }
 }

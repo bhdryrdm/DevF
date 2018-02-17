@@ -56,6 +56,7 @@
     <Compile Include="XSS\StoredXSS\SXSS_S2_SaveCookieRequest.cs" />
     <Compile Include="XSS\StoredXSS\SXSS_S2_StealRequest.cs" />
     <Compile Include="XSS\StoredXSS\SXSS_S3_CKEditor_Request.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S3_CKEditor_Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="XSS\DomXSS\" />

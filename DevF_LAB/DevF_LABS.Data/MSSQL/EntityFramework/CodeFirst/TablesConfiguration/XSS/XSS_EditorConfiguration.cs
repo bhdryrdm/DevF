@@ -4,12 +4,12 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS
 {
-    public class XSS_CookieConfiguration : EntityTypeConfiguration<XSS_Cookie>
+    public class XSS_EditorConfiguration : EntityTypeConfiguration<XSS_Editor>
     {
-        public XSS_CookieConfiguration()
+        public XSS_EditorConfiguration()
         {
             //Tablo ismi
-            this.ToTable("XSS_Cookie");
+            this.ToTable("XSS_Editor");
 
             //Primary Key
             this.HasKey<int>(s => s.ID);
@@ -21,25 +21,11 @@ namespace DevF_LABS.Data.MSSQL.EntityFramework.CodeFirst.TablesConfiguration.XSS
                     .HasColumnOrder(1)
                     .HasColumnType("int");
 
-            this.Property(x => x.CookieName)
+            this.Property(x => x.Content)
                     .IsRequired()
-                    .HasColumnName("CookieName")
+                    .HasColumnName("Content")
                     .HasColumnOrder(2)
                     .HasColumnType("nvarchar");
-
-            this.Property(x => x.CookieValue)
-                   .IsRequired()
-                   .HasColumnName("CookieValue")
-                   .HasColumnOrder(3)
-                   .HasColumnType("nvarchar");
-
-            this.Property(x => x.SessionID)
-                   .IsRequired()
-                   .HasMaxLength(100)
-                   .HasColumnName("SessionID")
-                   .HasColumnOrder(4)
-                   .HasColumnType("nvarchar");
-
         }
     }
 }

@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8365B8B1-2341-4BFC-9D67-8A648197688A}</ProjectGuid>
+    <ProjectGuid>{1DE0C939-E9E4-49E3-9062-8605FC847DEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DevF_LABS.Data</RootNamespace>
-    <AssemblyName>DevF_LABS.Data</AssemblyName>
+    <RootNamespace>DevF_LABS.Repository</RootNamespace>
+    <AssemblyName>DevF_LABS.Repository</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +62,7 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,24 +71,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\MSSQL_EF_CF_Context.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\MSSQL_EF_CF_Context_Config.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\TablesConfiguration\XSS\XSS_CommentConfiguration.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\TablesConfiguration\XSS\XSS_CookieConfiguration.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\TablesConfiguration\XSS\XSS_UserConfiguration.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\Injection\SQLInjection_User.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\Settings.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\XSS\XSS_Comment.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\XSS\XSS_Cookie.cs" />
-    <Compile Include="MSSQL\EntityFramework\CodeFirst\Tables\XSS\XSS_User.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Mongo_DB_Repository\IRepositories\ISQLInjection_User_MongoRepository.cs" />
+    <Compile Include="Mongo_DB_Repository\Mongo_BaseRepository.cs" />
+    <Compile Include="Mongo_DB_Repository\Mongo_UnitOfWork.cs" />
+    <Compile Include="Mongo_DB_Repository\Repositories\SQLInjection_User_MongoRepository.cs" />
+    <Compile Include="MSSQL_EF_Repository\IRepositories\ISQLInjection_User_Repository.cs" />
+    <Compile Include="MSSQL_EF_Repository\IRepositories\IXSS_Comment_Repository.cs" />
+    <Compile Include="MSSQL_EF_Repository\MSSQL_BaseRepository.cs" />
+    <Compile Include="MSSQL_EF_Repository\MSSQL_UnitOfWork.cs" />
+    <Compile Include="MSSQL_EF_Repository\Repositories\SQLInjection_User_Repository.cs" />
+    <Compile Include="MSSQL_EF_Repository\Repositories\XSS_Comment_Repository.cs" />
+    <Compile Include="MSSQL_EF_Repository\Repositories\XSS_Cookie_Repository.cs" />
+    <Compile Include="MSSQL_EF_Repository\Repositories\XSS_User_Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Mongo\" />
+    <ProjectReference Include="..\DevF_LABS.Data\DevF_LABS.Data.csproj">
+      <Project>{8365b8b1-2341-4bfc-9d67-8a648197688a}</Project>
+      <Name>DevF_LABS.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1587,6 +1587,7 @@
     <Content Include="Views\Xss\StoredXss\CookieList.cshtml" />
     <Content Include="Views\Xss\_FoundXss.cshtml" />
     <Content Include="Views\Injection\Index.cshtml" />
+    <Content Include="Views\Xss\StoredXss\EditorContent.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

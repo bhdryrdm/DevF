@@ -15,5 +15,6 @@ namespace DevF_LABS.RequestResponse.XSS.StoredXSS
 
         [Required(ErrorMessage = "GReCaptcha zorunlu alandır!")]
         public string SXSS_S3_CKEditorRequest_gReCaptcha { get; set; }
+
     }
 }

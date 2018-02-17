@@ -46,6 +46,7 @@
     <Compile Include="XSS\ReflectedXSS\RXSS_S3_UserView.cs" />
     <Compile Include="XSS\StoredXSS\SXSS_S1_CommentView.cs" />
     <Compile Include="XSS\StoredXSS\SXSS_S2_CookieView.cs" />
+    <Compile Include="XSS\StoredXSS\SXSS_S3_EditorView.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

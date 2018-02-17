@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Security.AntiXss;
 using Lang = DevF_LABS.Language.Presentation.Controllers.XssController;
 
 namespace DevF_LABS.Presentation.Controllers
@@ -166,9 +167,20 @@ namespace DevF_LABS.Presentation.Controllers
         }
 
         [HttpPost]
-        public JsonResult SXSS_S3_CKEditor(SXSS_S3_CKEditor_Request request)
+        [ValidateInput(false)]
+        public JsonResult SXSS_S3_SetCKEditorContent(SXSS_S3_CKEditor_Request request)
         {
-            return Json("");
+            BaseResponse response = XSS_BusinessServices.SXSS_S3_SetCKEditorContent(request);
+            return Json(response);
+        }
+
+        [HttpPost]
+        public JsonResult SXSS_S3_GetCKEditorContent(bool antiXSSControl)
+        {
+            SXSS_S3_CKEditor_Response response = XSS_BusinessServices.SXSS_S3_GetCKEditorContent();
+            if(antiXSSControl)
+                response.SXSS_S3_Editor.Content = AntiXssEncoder.HtmlEncode(response.SXSS_S3_Editor.Content, false);
+            return Json(response);
         }
         #endregion
     }

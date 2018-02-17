@@ -61,7 +61,7 @@
                                 <div class="card-header with-border bg-info">
                                     Öneri | Yorum Gönder
                                     <div class="pull-right">
-                                        <label class="col-form-label" for="antiXSSControl"> Validate Input Kontrolünü Kapat &nbsp;</label>
+                                        <label class="col-form-label" for="validateInputControlCheckBox"> Validate Input Kontrolünü Kapat &nbsp;</label>
                                         <label class="switch switch-text switch-pill switch-primary">
                                             <input id="validateInputControlCheckBox" type="checkbox" class="switch-input">
                                             <span class="switch-label" data-on="On" data-off="Off"></span>
@@ -226,7 +226,8 @@
                                     <p>Bu tip saldırılar çok ciddi sonuçlar doğurmaktadır.</p>
                                     <p>Zafiyet ismi de Session Hijacking yani "Oturum Çalma" olarak isimlendirilir.</p>
                                     <p>
-                                        Senaryo 1 Message Uygulamasında aşağıdaki kodu script tagleri arasına yazarak mesajınızı görüntüleyen kişilerin cookielerini çalabilirsiniz.
+                                        Senaryo 1 Message Uygulamasında aşağıdaki kodu script tagleri arasına yazarak İsim|Soyisim yada Öneri|Yorum kısmında göndererek
+                                        mesajınızı görüntüleyen kişilerin cookielerini çalabilirsiniz.
                                         Buradaki senaryo gönderilen mesajın detaylarına bakılmasına bağlanılmıştır fakat saldırgan bunu sayfa yüklendiği anda yapabilir.
                                     </p>
                                     <p style="font-size:15px">
@@ -244,30 +245,45 @@
                         @* Stored XSS Scenario_2 Cookie *@
                         <div class="tab-pane" id="storedScenario_2_cookie">
 
-                            <div class="row">
-
-                                <div class="form-group col-sm-3">
-                                    <div class="form-group">
-                                        <label for="cookieName">Cookie Name</label>
-                                        <input type="text" class="form-control" id="cookieName" placeholder="MyCookieName">
+                            <div class="card">
+                                <div class="card-header with-border bg-info">
+                                    <div class="row">
+                                        <div class="mt-2 col-2">Save Cookie</div>
+                                        <div class="pull-right offset-8 col-2">
+                                            <label class="col-form-label" style="margin-top:-2px;" for="httponlyCookie"> HttpOnly Cookie &nbsp;</label>
+                                            <label class="switch switch-text switch-pill switch-primary">
+                                                <input id="httponlyCookie" type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="form-group col-sm-3">
+                                            <div class="form-group">
+                                                <label for="cookieName">Cookie Name</label>
+                                                <input type="text" class="form-control" id="cookieName" placeholder="MyCookieName">
+                                            </div>
+                                        </div>
 
-                                <div class="form-group col-sm-3">
-                                    <div class="form-group">
-                                        <label for="cookieValue">Cookie Value</label>
-                                        <input type="text" class="form-control" id="cookieValue" placeholder="MyCookieValue">
+                                        <div class="form-group col-sm-3">
+                                            <div class="form-group">
+                                                <label for="cookieValue">Cookie Value</label>
+                                                <input type="text" class="form-control" id="cookieValue" placeholder="MyCookieValue">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div id="cookieReCaptcha"></div>
+                                        </div>
+                                        <div class="form-group col-sm-2">
+                                            <div class="form-group">
+                                                <label for="saveCustomCookieButton">&nbsp;</label>
+                                                <button id="saveCustomCookieButton" type="button" onclick="saveCustomCookie()" class="btn btn-primary form-control"><i class="fa fa-save"></i>&nbsp;Custom Cookie Save</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="form-group col-sm-3">
-                                    <div class="form-group">
-                                        <label for="saveCustomCookieButton">&nbsp;</label>
-                                        <button id="saveCustomCookieButton" type="button" onclick="saveCustomCookie()" class="btn btn-primary form-control"><i class="fa fa-save"></i>&nbsp;Custom Cookie Save</button>
-                                    </div>
-                                </div>
-                                <div class="form-group col-sm-3">
-                                    <div style="margin-left :-10px;" id="cookieReCaptcha"></div>
                                 </div>
                             </div>
 
@@ -285,6 +301,7 @@
                                     var form = new FormData();
                                     form.append("SXSS_S2_SaveCookeRequest_CookieName", $('#cookieName').val());
                                     form.append("SXSS_S2_SaveCookeRequest_CookieValue", $('#cookieValue').val());
+                                    form.append("SXSS_S2_SaveCookeRequest_CookieHttponly", $('#httponlyCookie').is(':checked'));
                                     form.append("SXSS_S2_SaveCookeRequest_gReCaptcha", grecaptcha.getResponse(cookieReCaptcha));
                                     devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S2_AddCookie', success, '#saveCustomCookieButton');
                                 };
@@ -295,10 +312,10 @@
                         <div class="tab-pane" id="storedScenario_2_test">
                             <b> Neler Yapılabilir ?</b><br /><br />
                             <ul>
+                                <li><p>Oluşturulmak istenen cookie için HttpOnly flagi işaretlenerek script içersinde cookie kullanımının önüne geçilebilinir.</p></li>
                                 <li><p>SessionId giriş yapılan IP adresi ile eşleştirilip kontrol edilebilir.</p></li>
                                 <li>
-                                    <p>Önemli verilere sahip olunan yerlerde özellikle bankacılık uygulamalarında yada parola değişimlerinde </p>
-                                    <p>kullanıcı oturum açmış olsa dahi tekrar parola girmesi yada 2FA(Two Factor Authenticator) gibi önlemler alınabilir. </p>
+                                    <p>Önemli verilere sahip olunan yerlerde özellikle bankacılık uygulamalarında yada parola değişimlerinde kullanıcı oturum açmış olsa dahi tekrar parola girmesi yada 2FA(Two Factor Authenticator) gibi önlemler alınabilir. </p>
                                 </li>
                             </ul>
                         </div>
@@ -312,6 +329,7 @@
                     <ul class="nav nav-tabs bg-light" role="tablist">
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_description" role="tab">Editor</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_ckEditor" role="tab">CKEditor</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_ckEditorContent" role="tab">CKEditor İçerik</a></li>
                         <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#storedScenario_3_protect" role="tab">Korunma Yöntemleri</a></li>
                     </ul>
                     <div class="tab-content">
@@ -328,31 +346,31 @@
                             <div class="card">
                                 <div class="card-header with-border bg-info">
                                     CKEditor
-                                    <div class="pull-right">
-                                        <label class="col-form-label" for="antiXSSControl"> Validate Input Kontrolünü Kapat &nbsp;</label>
-                                        <label class="switch switch-text switch-pill switch-primary">
-                                            <input id="validateInputControlCheckBox" type="checkbox" class="switch-input">
-                                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                                            <span class="switch-handle"></span>
-                                        </label>
-                                    </div>
                                 </div>
                                 <div class="card-body">
                                     <textarea id="ckEditor" rows="10"></textarea>
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <div class="form-group col-sm-4">
-                                            <div style="margin-left :-10px;" id="ckEditorReCaptcha"></div>
+                                        <div class="col-7">
+                                            <p class="mt-2">
+                                                CKEditör yazılan içeriği html &lt;p&gt; tagi içerisinde göndermektedir.
+                                            </p>
+                                            <p> <b class="text-blue"> Örnek Payload </b><h6><code>&lt;script&gt;alert('bhdryrdm')&lt;/script&gt;</code></h6></p>
                                         </div>
-                                        <div class="form-group col-sm-8 pull-right">
-                                            <button id="sendCKEditorButton" type="button" onclick="sendCKEditor()" class="btn btn-sm btn-primary"><i class="fa fa-save"></i> Kaydet</button>
+                                        <div class="col-5 row">
+                                            <div class="form-group">
+                                                <div id="ckEditorReCaptcha"></div>
+                                            </div>
+                                            <div class="form-group ml-5 mt-4">
+                                                <button id="sendCKEditorButton" type="button" onclick="sendCKEditorContent()" class="btn btn-sm btn-blue"><i class="fa fa-save"></i> Kaydet</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <script>
 
-                                    function sendCKEditor() {
+                                    function sendCKEditorContent() {
                                         var success = function (returnData) {
                                             if (returnData.IsSuccess) {
                                                 devf.Swal("CKEditor", returnData.Message, "success", "Close");
@@ -363,16 +381,59 @@
                                         var form = new FormData();
                                         form.append("SXSS_S3_CKEditorRequest_Value", CKEDITOR.instances["ckEditor"].getData());
                                         form.append("SXSS_S3_CKEditorRequest_gReCaptcha", grecaptcha.getResponse(ckEditorReCaptcha));
-                                        devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S3_CKEditor', success, '#sendCKEditorButton');
+                                        form.append("SXSS_S3_CKeditorRequest_AntiXSSControl", $('#antiXssControlCheck').is(':checked'))
+                                        devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S3_SetCKEditorContent', success, '#sendCKEditorButton');
                                     };
-
                                 </script>
                             </div>
                         </div>
+                        @* Stored XSS Scenario_3 CKEditor_Content *@
+                        <div class="tab-pane" id="storedScenario_3_ckEditorContent">
+                            <div class="card">
+                                <div class="card-header with-border" style="max-height:50px;">
+                                    Son Eklenen CKEditor İçeriği
+                                    <div class="pull-right">
+                                        <div class="form-group ml-3">
+                                            <label class="col-form-label" for="antiXssControlCheck"> Anti XSS Koruması &nbsp;</label>
+                                            <label class="switch switch-text switch-pill switch-primary mr-4 mt-1" >
+                                                <input id="antiXssControlCheck" type="checkbox" class="switch-input">
+                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
+                                            <button id="getCKEditorContentButton" type="button" onclick="getlastCKEditorContent()" class="btn btn-sm btn-primary"><i class="fa fa-newspaper-o"></i> Son İçerik</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="lastCKEditorContent">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                function getlastCKEditorContent() {
+                                    var success = function (returnData) {
+                                        if (returnData.IsSuccess) {
+                                            $("#lastCKEditorContent").html(returnData.SXSS_S3_Editor.Content);
+                                        } else {
+                                            devf.Swal("CKEditor", returnData.Message, "error", "Close");
+                                        }
+                                    }
+                                    var form = new FormData();
+                                    form.append("antiXSSControl", $('#antiXssControlCheck').is(':checked'))
+                                    devf.AjaxHTMLRequest('POST', form, "json", '/XSS/SXSS_S3_GetCKEditorContent', success, '#getCKEditorContentButton');
+                                }
+                            </script>
+                        </div>
+
                         @* Stored XSS Scenario_3 Protection Method *@
                         <div class="tab-pane" id="storedScenario_3_protect">
-
-
+                            <b> Neler Yapılabilir ?</b><br /><br />
+                            <ul>
+                                <li><p> Kullanılan yazılım dillerinin XSS Koruması sağlayan kütüphaneleri kullanılabilir.(.NET için AntiXSS)</p></li>
+                                <li><p> WhiteList yada blacklist yaklaşımı kullanılabilir.</p></li>
+                                <li><p> Kullanıcıdan veri alınırken yada veri tekrar gösterilirken kesinlikle validasyon yapılmalıdır. </p></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

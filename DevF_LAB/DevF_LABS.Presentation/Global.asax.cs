@@ -9,17 +9,19 @@ using System.Net;
 using System.Threading;
 using System.Globalization;
 using System.Collections.Generic;
+using DevF_LABS.Presentation.Redis;
 
 namespace DevF_LABS.Presentation
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        RedisCacheManager redisCacheManager = RedisCacheManager.CreateRedisDatabase();
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             Mapper_Bootstrapper.RegisterMapping();
-
+            redisCacheManager.Clear();
             Application["LiveSessionsCount"] = 0;
             
         }
@@ -52,25 +54,27 @@ namespace DevF_LABS.Presentation
 
         protected void Application_EndRequest()
         {
-            //HttpContext.Current.Response.AddHeader("Test", "Test");
-            //HttpContext.Current.Response.AddHeader("X-Frame-Options", "DENY");
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
             Application.Lock();
             Application["LiveSessionsCount"] = (int)Application["LiveSessionsCount"] + 1;
+
+            // Redis User Liste aktif kullanıcıyı ekle
             SessionUserModel sessionUserModel = new SessionUserModel
             {
+                SessionID = Session.SessionID,
                 IsMobile = Request.Browser.IsMobileDevice ? "Mobile" : "Web",
                 IPAddress = MaskIpAddress(Request.UserHostAddress),
-                SessionID = Session.SessionID,
                 OperatingSystem = GetUserPlatform(Request.UserAgent),
                 CreatedTime = DateTime.Now
             };
+            redisCacheManager.Set("SessionUsers", sessionUserModel, 30);
 
-            SessionCountHelper.SessionUserList.Add(sessionUserModel);
-            SessionCountHelper.SessionCount = (int)Application["LiveSessionsCount"];
+            // Redis aktif user sayısını güncelle
+            redisCacheManager.Remove("LiveSessionCount");
+            redisCacheManager.Set("LiveSessionCount",(int)Application["LiveSessionsCount"],3600);
             Application.UnLock();
         }
 
@@ -91,9 +95,16 @@ namespace DevF_LABS.Presentation
         {
             Application.Lock();
             Application["LiveSessionsCount"] = (int)Application["LiveSessionsCount"] - 1;
-            SessionUserModel deletedModel = SessionCountHelper.SessionUserList.FirstOrDefault(x => x.SessionID == Session.SessionID);
-            SessionCountHelper.SessionUserList.Remove(deletedModel);
-            SessionCountHelper.SessionCount = (int)Application["LiveSessionsCount"];
+
+            // Redis User List üzerinden aktif kullanıcıyı sil
+            List<SessionUserModel> redisSessionUserList = redisCacheManager.Get<List<SessionUserModel>>("SessionUsers");
+            SessionUserModel deletedModel = redisSessionUserList.FirstOrDefault(x => x.SessionID == Session.SessionID);
+            redisCacheManager.RemoveByModel("SessionUsers", deletedModel);
+
+            // Redis aktif user sayısını güncelle
+            redisCacheManager.Remove("LiveSessionCount");
+            redisCacheManager.Set("LiveSessionCount",(int)Application["LiveSessionsCount"],3600);
+
             Application.UnLock();
         }
 

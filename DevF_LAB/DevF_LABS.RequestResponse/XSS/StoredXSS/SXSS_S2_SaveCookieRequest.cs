@@ -17,6 +17,9 @@ namespace DevF_LABS.RequestResponse.XSS.StoredXSS
         [StringLength(30, ErrorMessage = "Cookie değeri 30 karakterden fazla olamaz!")]
         public string SXSS_S2_SaveCookeRequest_CookieValue { get; set; }
 
+        [Required(ErrorMessage = "Cookie Httponly bilgisi zorunlu alandır!")]
+        public bool SXSS_S2_SaveCookeRequest_CookieHttponly { get; set; }
+
         [Required(ErrorMessage = "GReCaptcha zorunlu alandır!")]
         public string SXSS_S2_SaveCookeRequest_gReCaptcha { get; set; }
     }

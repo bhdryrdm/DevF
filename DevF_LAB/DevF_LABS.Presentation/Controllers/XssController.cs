@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.Security.AntiXss;
 using Lang = DevF_LABS.Language.Presentation.Controllers.XssController;
 
 namespace DevF_LABS.Presentation.Controllers
@@ -16,7 +17,7 @@ namespace DevF_LABS.Presentation.Controllers
     {
         public ActionResult Index()
         {
-            Session["LoginUserRole" + Session.SessionID] = "";
+            Session["LoginUserRole"] = "";
             return View("");
         }
 
@@ -25,7 +26,7 @@ namespace DevF_LABS.Presentation.Controllers
         public ActionResult RXSS_S3_Login(RXSS_S3_LoginRequest request)
         {
             RXSS_S3_UserListResponse response = XSS_BusinessServices.RXSS_S3_Login(request);
-            Session["LoginUserRole" + Session.SessionID] = response.LoginUser != null ? response.LoginUser.UserRole : "User";
+            Session["LoginUserRole" + Session.SessionID] = response.LoginUser.UserRole ??  "User";
             return PartialView("~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
         }
 
@@ -131,7 +132,11 @@ namespace DevF_LABS.Presentation.Controllers
                 HttpCookie httpCookie = new HttpCookie(request.SXSS_S2_SaveCookeRequest_CookieName, request.SXSS_S2_SaveCookeRequest_CookieValue);
                 httpCookie.Expires = DateTime.Now.AddMonths(1);
                 httpCookie.Path = FormsAuthentication.FormsCookiePath;
-                httpCookie.HttpOnly = true;
+                if (request.SXSS_S2_SaveCookeRequest_CookieHttponly)
+                {
+                    httpCookie.HttpOnly = true;
+                }
+
                 // SSL sertifikası bulunan domainler için kullanılması yararlıdır.Http üzerinden cookie gönderilemez
                 // httpCookie.Secure = true;
 
@@ -162,9 +167,20 @@ namespace DevF_LABS.Presentation.Controllers
         }
 
         [HttpPost]
-        public JsonResult SXSS_S3_CKEditor(SXSS_S3_CKEditor_Request request)
+        [ValidateInput(false)]
+        public JsonResult SXSS_S3_SetCKEditorContent(SXSS_S3_CKEditor_Request request)
         {
-            return Json("");
+            BaseResponse response = XSS_BusinessServices.SXSS_S3_SetCKEditorContent(request);
+            return Json(response);
+        }
+
+        [HttpPost]
+        public JsonResult SXSS_S3_GetCKEditorContent(bool antiXSSControl)
+        {
+            SXSS_S3_CKEditor_Response response = XSS_BusinessServices.SXSS_S3_GetCKEditorContent();
+            if(antiXSSControl)
+                response.SXSS_S3_Editor.Content = AntiXssEncoder.HtmlEncode(response.SXSS_S3_Editor.Content, false);
+            return Json(response);
         }
         #endregion
     }

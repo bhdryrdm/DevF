@@ -174,5 +174,42 @@ namespace DevF_LABS.Business.BusinessServices
             return response;
         }
 
+        public static BaseResponse SXSS_S3_SetCKEditorContent(SXSS_S3_CKEditor_Request request)
+        {
+            BaseResponse response = new BaseResponse();
+            using (var dbContext = new MSSQL_EF_CF_Context())
+            {
+                try
+                {
+                    dbContext.XSS_Editor.Add(XSS_Mapping.SXSS_S3_CKEditor_Request_To_XSS_Editor(request));
+                    dbContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    response.Message = "CKEditor kaydı başarısız" + ex.Message;
+                    response.ResponseCode = 500;
+                }
+            }
+            return response;
+
+        }
+
+        public static SXSS_S3_CKEditor_Response SXSS_S3_GetCKEditorContent()
+        {
+            SXSS_S3_CKEditor_Response response = new SXSS_S3_CKEditor_Response();
+            using (var dbContext = new MSSQL_EF_CF_Context())
+            {
+                try
+                {
+                    response.SXSS_S3_Editor = XSS_Mapping.XSS_Editor_To_SXSS_S3_EditorView(dbContext.XSS_Editor.ToList().Last());
+                }
+                catch (Exception ex)
+                {
+                    response.Message = "Editor içeriği hazırlanırken hata oluştu" + ex.Message;
+                    response.ResponseCode = 500;
+                }
+            }
+            return response;
+        }
     }
 }

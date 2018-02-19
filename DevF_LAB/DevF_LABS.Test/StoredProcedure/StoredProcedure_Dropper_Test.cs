@@ -37,6 +37,12 @@ namespace DevF_LABS.Test.StoredProcedure
             sp_Drop_Queries.DropTrigger("DeleteInXSSUser", null);
         }
 
+        [TestMethod]
+        public void Drop_DeleteInSQLInjectionUser_Trigger()
+        {
+            sp_Drop_Queries.DropTrigger("DeleteInSQLInjectionUser", null);
+        }
+
 
     }
 

@@ -35,7 +35,7 @@ namespace DevF_LABS.Test
         [TestMethod]
         public void Memcache()
         {
-            CreateMemcache("bhdr", "10943816316");
+            CreateMemcache("mobil", "05469540686");
             GetMemcacheValue("bhdr");
 
             CreateMemcache("bhdr", "0 3600 6 %0d%0a hacked %0d%0a");

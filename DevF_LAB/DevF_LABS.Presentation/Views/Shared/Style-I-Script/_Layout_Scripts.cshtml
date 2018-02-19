@@ -17,6 +17,15 @@
     $(document).ready(function () {
         $(".file-tree").filetree();
         $('#ckEditor').ckeditor();
+        $(window).on('load', function () {
+            if (localStorage.getItem('devfHomePageModal') == undefined)
+                localStorage.setItem('devfHomePageModal', true);
+            if (localStorage.getItem('devfHomePageModal') === 'true')
+                $('#homePageModal').modal('show');
+        });
     });
 
+    function devfHomePageModal() {
+        localStorage.setItem('devfHomePageModal', false);
+    }
 </script>

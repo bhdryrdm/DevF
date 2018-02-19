@@ -23,11 +23,12 @@ namespace DevF_LABS.Presentation.Controllers
 
         #region Reflected XSS
         [HttpPost]
-        public ActionResult RXSS_S3_Login(RXSS_S3_LoginRequest request)
+        public JsonResult RXSS_S3_Login(RXSS_S3_LoginRequest request)
         {
             RXSS_S3_UserListResponse response = XSS_BusinessServices.RXSS_S3_Login(request);
             Session["LoginUserRole" + Session.SessionID] = response.LoginUser.UserRole ??  "User";
-            return PartialView("~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
+            string userListHTML = RazorViewToString.RenderRazorViewToString(this, "~/Views/Xss/ReflectedXss/_UserList.cshtml", response);
+            return Json(new object[] { userListHTML, response });
         }
 
         [HttpPost]

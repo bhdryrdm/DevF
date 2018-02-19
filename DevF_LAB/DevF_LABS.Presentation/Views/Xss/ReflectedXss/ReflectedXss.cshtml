@@ -1,4 +1,5 @@
 ﻿<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <div class="tab-pane rootTabContent" id="reflected" role="tabpanel">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs bg-light" role="tablist">
@@ -94,11 +95,12 @@
 
                             <div class="card">
                                 <form action="#" class="form-horizontal" onsubmit="getUserInformation($('#reflected_scenario_3_Email').val(), $('#reflected_scenario_3_Pasword').val()); return false;">
+
                                     <div class="card-header">
                                         <i class="icon-user"></i> Giriş Paneli
                                         <button id="reflected_scenario_3_login" type="submit" class="btn btn-sm btn-success pull-right"><i class="icons icon-login"></i> Giriş Yap</button>
                                         <button type="reset" class="btn btn-sm btn-danger pull-right" style="margin-right:5px;"><i class="fa fa-paint-brush"></i> Sıfırla</button>
-                                         <span class="pull-right" style="margin-right:5px;"><i class="fa fa-file-code-o"></i> Server Side Code > ASP.NET MVC > Controllers > XssController - RXSS_S3_Login()</span>
+                                        <span class="pull-right" style="margin-right:5px;"><i class="fa fa-file-code-o"></i> Server Side Code > ASP.NET MVC > Controllers > XssController - RXSS_S3_Login()</span>
 
                                     </div>
                                     <div class="card-body">
@@ -124,24 +126,29 @@
                                 function getUserInformation(param1, param2) {
 
                                     var success = function (returnData) {
-                                        if (returnData.length > 468 && returnData.IsSuccess) {
-                                            $('#scenario_3_userList').html(returnData);
-                                        } else {
+                                        if (!returnData.IsSuccess && returnData.IsSuccess !== undefined) {
                                             devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
+                                        } else {
+                                            if (returnData[0].length > 468 && returnData[1].IsSuccess) {
+                                                $('#scenario_3_userList').html(returnData[0]);
+                                            } else {
+                                                devf.Swal(returnData[1].ResponseCode, returnData[1].Message, "error", "Close");
+                                            }
                                         }
 
                                     };
 
                                     var form = new FormData();
-                                    form.append("RXSS_S3_LoginRequest_Email", param1)
-                                    form.append("RXSS_S3_LoginRequest_Password", param2)
+                                    form.append("RXSS_S3_LoginRequest_Email", param1);
+                                    form.append("RXSS_S3_LoginRequest_Password", param2);
+                                    form.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
                                     devf.AjaxHTMLRequest('POST', form, "html", '/XSS/RXSS_S3_Login', success, '#reflected_scenario_3_login');
                                 };
 
                                 function reflectedXSS_deleteUser(param1) {
 
                                     var success = function (returnData) {
-                                        if (!returnData.IsSuccess) {
+                                        if (!returnData.IsSuccess && returnData.IsSuccess !== undefined) {
                                             devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
                                         } else {
                                             if (returnData[0].length > 468 && returnData[1].IsSuccess) {
@@ -166,6 +173,7 @@
                         <div class="tab-pane" id="reflectedScenario_3_register">
                             <div class="card">
                                 <form action="#" class="form-horizontal" onsubmit="userRegister(); return false;">
+
                                     <div class="card-header">
                                         <i class="fa fa-address-card-o"></i> Kayıt Paneli
                                         <button id="reflected_scenario_3_register" type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-user-plus"></i> Kayıt Ol</button>
@@ -240,6 +248,7 @@
                                     form.append("RXSS_S3_RegisterRequest_Email", $('#reflected_scenario_3_register_email').val());
                                     form.append("RXSS_S3_RegisterRequest_Password", $('#reflected_scenario_3_register_pasword').val());
                                     form.append("RXSS_S3_RegisterRequest_gReCaptcha", grecaptcha.getResponse(registerReCaptcha));
+                                    form.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val())
                                     grecaptcha.reset(registerReCaptcha);
                                     devf.AjaxHTMLRequest('POST', form, "json", '/XSS/RXSS_S3_Register', success, '#reflected_scenario_3_register');
 
@@ -256,17 +265,17 @@
                             </p>
                             <b>Örnek</b>
                             <p class="mt-3">
-                                Saldırgan XX ID sine sahip kullanıcıyı silmek istediğinde aslında <code>'/XSS/RXSS_S3_Delete'</code> buradaki fonksiyonu çalıştırmaktadır fakat
+                                Saldırgan XX ID sine sahip kullanıcıyı silmek istediğinde aslında <code>'Server Side Code > ASP.NET MVC > Controllers > XssController - RXSS_S3_Delete()'</code> buradaki fonksiyonu çalıştırmaktadır fakat
                                 yetkisi olmadığından bu işlem gerçekleşmeyecektir.Admin yetkisine sahip herhangi bir kullanıcı bu fonksiyonu çalıştırırsa kullanıcı silinecektir.
                                 Saldırgan da Admin yetkisi olan bir kullanıcıyı zararlı scriptin bulunduğu bir sayfaya herhangi bir şekilde ulaştırırsa istediği kullanıcıyı sildirmiş olmaktaır.
                                 Buradaki örnek kullanıcı silmek olabilir fakat anlaşılması gereken kısım şudur ki bu yöntem ile aslında yetkiniz olmayan her şeyi yetkisi olan kullanıcıya yaptırtabilirsiniz.
                             </p>
                             <b>Not</b>
                             <p class="mt-3">
-                               Şuan aktif olan taba iki kere tıklarsanız otomatik olarak <code>'/XSS/RXSS_S3_Delete'</code> bu URL'e bir istek gönderilir.Bunu test edebilmek için önce belirlediğiniz bir kullanıcıyı silmek için 
-                               Admin yetkisi bulunmayan bir kullanıcı ile tabı açın.Daha sonra tekrar kullanıcı listesine baktığınızda herhangi bir değişiklik göremeyeceksiniz.Fakat daha sonra Admin yetkisi 
-                               bulunan bir kullanıcı ile giriş yapıp bu tabı açtığınızda kullanıcının silindiğini farkedeceksinizdir.Görüldüğü gibi Admin yetkisi bulunan kullanıcının hiçbir şeyden haberi olmadan 
-                               kullanıcıyı silmiş oldu.Bu uygulamayı test etmeden önce lütfen sayfada bulunan(F12 ile sayfayı görüntüleyebilirsiniz ve düzenleyebilirsiniz) <code>reflectedXSS_deleteUser(X)</code> 
+                                Şuan aktif olan taba iki kere tıklarsanız otomatik olarak <code>'Server Side Code > ASP.NET MVC > Controllers > XssController - RXSS_S3_Delete()'</code> bu URL'e bir istek gönderilir.Bunu test edebilmek için önce belirlediğiniz bir kullanıcıyı silmek için
+                                Admin yetkisi bulunmayan bir kullanıcı ile tabı açın.Daha sonra tekrar kullanıcı listesine baktığınızda herhangi bir değişiklik göremeyeceksiniz.Fakat daha sonra Admin yetkisi
+                                bulunan bir kullanıcı ile giriş yapıp bu tabı açtığınızda kullanıcının silindiğini farkedeceksinizdir.Görüldüğü gibi Admin yetkisi bulunan kullanıcının hiçbir şeyden haberi olmadan
+                                kullanıcıyı silmiş oldu.Bu uygulamayı test etmeden önce lütfen sayfada bulunan(F12 ile sayfayı görüntüleyebilirsiniz ve düzenleyebilirsiniz) <code>reflectedXSS_deleteUser(X)</code>
                                 fonksiyonunda X görülen yere silmek istediğiniz kullanıcı ID'sini giriniz.
                             </p>
                         </div>

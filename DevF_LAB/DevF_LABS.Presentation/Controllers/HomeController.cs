@@ -16,12 +16,16 @@ namespace DevF_LABS.Presentation.Controllers
         {
             RedisCacheManager redisCacheManager = RedisCacheManager.CreateRedisDatabase();
             List<SessionUserModel> redisSessionUserList = redisCacheManager.Get<List<SessionUserModel>>("SessionUsers");
-            SessionUserModel activeSessionUser = redisSessionUserList.FirstOrDefault(x => x.SessionID == Session.SessionID);
-            redisSessionUserList.Select(x => { x.IsActiveSession = false; return x; }).ToList();
-            if (activeSessionUser != null)
-                activeSessionUser.IsActiveSession = true;
 
-            redisSessionUserList = redisSessionUserList.OrderByDescending(x => x.IsActiveSession).Take(10).ToList();
+            if (redisSessionUserList != null)
+            {
+                SessionUserModel activeSessionUser = redisSessionUserList.FirstOrDefault(x => x.SessionID == Session.SessionID);
+                redisSessionUserList.Select(x => { x.IsActiveSession = false; return x; }).ToList();
+                if (activeSessionUser != null)
+                    activeSessionUser.IsActiveSession = true;
+                redisSessionUserList = redisSessionUserList.OrderByDescending(x => x.IsActiveSession).Take(10).ToList();
+            }
+
             ViewData["SessionCount"] = redisCacheManager.GetInt("LiveSessionCount");
             ViewData["SessionUserList"] = RazorViewToString.RenderRazorViewToString(this, "~/Views/User/_SessionUserList.cshtml", redisSessionUserList);
             return PartialView("~/Views/Shared/PartialLayout/_SessionCount.cshtml");

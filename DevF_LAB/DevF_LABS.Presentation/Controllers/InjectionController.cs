@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DevF_LABS.RequestResponse;
+using DevF_LABS.RequestResponse.Injection.SQLInjection;
+using System;
 using System.Data.SqlClient;
 using System.Web.Mvc;
-using DevF_LABS.RequestResponse.Injection.SQLInjection;
-using DevF_LABS.RequestResponse;
 
 namespace DevF_LABS.Presentation.Controllers
 {
@@ -18,7 +16,9 @@ namespace DevF_LABS.Presentation.Controllers
         public JsonResult SQLI_S1_Login(SQLI_S1_LoginRequest request)
         {
             SQLUser user = new SQLUser();
-            string sqlQuery = $"SELECT * FROM SQLInjection_User WHERE Username=@Username AND Password=@Password";
+            string sqlQuery = request.ORM_Control ? 
+                              "SELECT * FROM SQLInjection_User WHERE Username=@Username AND Password=@Password" :
+                              $"SELECT * FROM SQLInjection_User WHERE Username=N'{request.Username}' AND Password=N'{request.Password}'";
             try
             {
                 using (SqlConnection sqlConnection = new SqlConnection(base.ConnectionString))
@@ -26,13 +26,19 @@ namespace DevF_LABS.Presentation.Controllers
                     sqlConnection.Open();
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, sqlConnection))
                     {
-                        
-                        SqlParameter sqlParameter = new SqlParameter();
-                        sqlParameter.ParameterName = "@Username";
-                        sqlParameter.Value = request.Username;
-                        cmd.Parameters.Add(sqlParameter);
 
-                        cmd.Parameters.AddWithValue("@Password", request.Password);
+                        if (request.ORM_Control)
+                        {
+                            SqlParameter sqlParameter = new SqlParameter();
+
+                            // ADO.Net Parametre Ekleme I.Yol
+                            sqlParameter.ParameterName = "@Username";
+                            sqlParameter.Value = request.Username;
+                            cmd.Parameters.Add(sqlParameter);
+
+                            // ADO.Net Parametre Ekleme II.Yol
+                            cmd.Parameters.AddWithValue("@Password", request.Password);
+                        }
 
 
                         using (SqlDataReader reader = cmd.ExecuteReader())

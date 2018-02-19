@@ -1,15 +1,15 @@
 ﻿using DevF_LABS.Business.Mapping_Express;
 using DevF_LABS.Presentation.Helper;
+using DevF_LABS.Presentation.Redis;
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Linq;
-using System.Net;
-using System.Threading;
-using System.Globalization;
-using System.Collections.Generic;
-using DevF_LABS.Presentation.Redis;
 
 namespace DevF_LABS.Presentation
 {
@@ -23,7 +23,6 @@ namespace DevF_LABS.Presentation
             Mapper_Bootstrapper.RegisterMapping();
             redisCacheManager.Clear();
             Application["LiveSessionsCount"] = 0;
-            
         }
 
         protected void Application_BeginRequest()
@@ -54,6 +53,7 @@ namespace DevF_LABS.Presentation
 
         protected void Application_EndRequest()
         {
+            
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -98,8 +98,11 @@ namespace DevF_LABS.Presentation
 
             // Redis User List üzerinden aktif kullanıcıyı sil
             List<SessionUserModel> redisSessionUserList = redisCacheManager.Get<List<SessionUserModel>>("SessionUsers");
-            SessionUserModel deletedModel = redisSessionUserList.FirstOrDefault(x => x.SessionID == Session.SessionID);
-            redisCacheManager.RemoveByModel("SessionUsers", deletedModel);
+            if (redisSessionUserList != null)
+            {
+                SessionUserModel deletedModel = redisSessionUserList.FirstOrDefault(x => x.SessionID == Session.SessionID);
+                redisCacheManager.RemoveByModel("SessionUsers", deletedModel);
+            }
 
             // Redis aktif user sayısını güncelle
             redisCacheManager.Remove("LiveSessionCount");

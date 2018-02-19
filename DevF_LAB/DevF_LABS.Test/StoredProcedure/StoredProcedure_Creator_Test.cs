@@ -45,5 +45,14 @@ namespace DevF_LABS.Test.StoredProcedure
         {
             sP_CreateOrAlter_Queries.DeleteInXSSUser_Trigger();
         }
+
+        /// <summary>
+        /// SQL Injection User tablosunda 5 kullanıcı aşıldığında 1.sıradaki kullanıcı siler
+        /// </summary>
+        [TestMethod]
+        public void Create_SQLInjectionInXSSUser_Trigger()
+        {
+            sP_CreateOrAlter_Queries.DeleteInSQLInjection_Trigger();
+        }
     }
 }

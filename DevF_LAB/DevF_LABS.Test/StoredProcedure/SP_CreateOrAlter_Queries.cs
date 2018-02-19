@@ -44,7 +44,7 @@ namespace DevF_LABS.Test.StoredProcedure
                                                      "EXEC('CREATE TRIGGER DeleteInXSSCookie AS') ";
 
             string sqlQuery = $"/****** Created By -> {this._authorName}   Script Date: { DateTime.Now } ******/ " +
-                            "ALTER TRIGGER [dbo].[DeleteInXSSComment] ON  [dbo].[XSS_Cookie] AFTER INSERT " +
+                            "ALTER TRIGGER [dbo].[DeleteInXSSCookie] ON  [dbo].[XSS_Cookie] AFTER INSERT " +
                             "AS " +
                             "BEGIN " +
                                 "IF (SELECT Count(ID) FROM XSS_Cookie) > 50 " +
@@ -79,6 +79,27 @@ namespace DevF_LABS.Test.StoredProcedure
                                 "   ) " +
                                 "AS PAGED WHERE ROW > 2 " +
                                 ") " +
+                            "END";
+
+            ConnectionDB(triggerExistControlQuery, this._connectionString);
+            ConnectionDB(sqlQuery, this._connectionString);
+        }
+
+        /// <summary>
+        /// SQL Injection User sayısı 5i geçtiği zaman silen Trigger
+        /// </summary>
+        public void DeleteInSQLInjection_Trigger()
+        {
+            string triggerExistControlQuery = "IF OBJECT_ID('DeleteInSQLInjectionUser') IS NULL " +
+                                                     "EXEC('CREATE TRIGGER DeleteInSQLInjectionUser AS') ";
+
+            string sqlQuery = $"/****** Created By -> {this._authorName}   Script Date: { DateTime.Now } ******/ " +
+                            "ALTER TRIGGER [dbo].[DeleteInSQLInjectionUser] ON  [dbo].[SQLInjection_User] AFTER INSERT " +
+                            "AS " +
+                            "BEGIN " +
+                                "IF (SELECT Count(ID) FROM SQLInjection_User) > 50 " +
+                                "Delete FROM SQLInjection_User " +
+                                "Where ID IN (SELECT TOP 1 ID FROM SQLInjection_User) " +
                             "END";
 
             ConnectionDB(triggerExistControlQuery, this._connectionString);

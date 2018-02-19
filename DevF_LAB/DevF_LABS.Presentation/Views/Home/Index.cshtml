@@ -4,7 +4,48 @@
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<main class="main">
+<main class="main" onload="showHomePageModal()">
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="homePageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <img src="~/Content/img/logo.png" style="max-height:50px;max-width:50px;" />
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-center"> DevF LABS'a Hoşgeldiniz </h5>
+                    <p class="mt-3">
+                        DevF LABS Microsoft firmasının geliştirmiş olduğu .Net Framework, ASP ve C# programlama dilleri ile
+                        geliştirme yapan yazılım geliştiricileri baz alınarak geliştirilmiş bir güvenli yazılım geliştirme laboratuvardır.
+                    </p>
+                    <p class="mt-2">
+                        Tamamen açık kaynak kodlu olup MIT lisansına sahiptir.Referans gösterilmesi halinde kopyalanıp çoğaltılmasında herhangi bir sakınca yoktur.
+                    </p>
+                    <p class="mt-2">
+                        <i class="fa fa-bullhorn font-lg text-danger"></i> Lütfen uygulama içerisinde sizden istenen verilere günlük yaşantınızda kullandığınız verileri kullanmayınız!
+                    </p>
+                    <p class="mt-2">
+                        Hatalı olduğunu düşündüğünüz durumlarda lütfen <a href="https://gitlab.com/bhdryrdm/devf" target="_blank"><i class="fa fa-gitlab font-lg"></i></a> üzerinden merge request gönderebilirsiniz.
+                    </p>
+                    <p class="mt-2">
+                        Faydalı olması dileğiyle iyi çalışmalar dileriz.
+                    </p>
+                    <p class="pull-right font-weight-bold">
+                        <img src="~/Content/img/favicon.png" style="max-height:35px;max-width:35px;" /> DevF LABS Ekibi
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="devfHomePageModal()" data-dismiss="modal">Bir Daha Gösterme</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -18,9 +59,9 @@
                 <div class="col-md-12">
                     <div class="card" @*style="background:url('/Content/img/logo.png')"*@>
                         <div class="card-header">
-                                <div class="progress progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">10%</div>
-                                </div>
+                            <div class="progress progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 14%" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">14%</div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -34,7 +75,7 @@
                                                             <img style="max-height:23px;max-width:23px;" src="~/Content/img/owasplogo.png" />
                                                         </i>
                                                         <br>
-                                                        <strong class="h4">7.5 %</strong>
+                                                        <strong class="h4">14 %</strong>
                                                         <div class="chart-wrapper">
                                                             <canvas id="sparkline-chart-1" width="100" height="30"></canvas>
                                                         </div>
@@ -82,7 +123,7 @@
                                             </div>
                                             <div class="bars pl-240">
                                                 <div class="progress progress">
-                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
                                                 </div>
                                             </div>
                                         </li>
@@ -152,7 +193,7 @@
                                             </div>
                                             <div class="bars pl-240">
                                                 <div class="progress progress">
-                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 1%" aria-valuenow="1" aria-valuemin="0" aria-valuemax="100">1%</div>
+                                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">15%</div>
                                                 </div>
                                             </div>
                                         </li>

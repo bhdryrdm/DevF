@@ -8,6 +8,7 @@ using System.Web.Mvc;
 namespace DevF_LABS.Presentation.Controllers
 {
     [ValidateModelFilter]
+    [LogActionFilter]
     public class BaseController : Controller
     {
         public string ConnectionString { get; set; } = WebConfigurationManager.ConnectionStrings["MSSQL_EF_CF_Context"].ConnectionString;

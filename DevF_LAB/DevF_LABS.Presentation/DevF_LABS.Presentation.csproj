@@ -1228,6 +1228,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XsrfController.cs" />
     <Compile Include="Controllers\XssController.cs" />
+    <Compile Include="Filter\LogActionFilter.cs" />
     <Compile Include="Filter\ValidateModelFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1616,6 +1617,10 @@
     <ProjectReference Include="..\DevF_LABS.Language\DevF_LABS.Language.csproj">
       <Project>{1a748301-37b2-487d-af6a-a79e25c33462}</Project>
       <Name>DevF_LABS.Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DevF_LABS.Logs\DevF_LABS.Logs.csproj">
+      <Project>{A56EC910-EA6E-4F17-8E1E-401DA6C7E8C9}</Project>
+      <Name>DevF_LABS.Logs</Name>
     </ProjectReference>
     <ProjectReference Include="..\DevF_LABS.RequestResponse\DevF_LABS.RequestResponse.csproj">
       <Project>{9C2B4FA0-478E-4327-9B41-74327CC5DD48}</Project>

@@ -1,4 +1,5 @@
 ﻿using DevF_LABS.Business.Mapping_Express;
+using DevF_LABS.Logs;
 using DevF_LABS.Presentation.Helper;
 using DevF_LABS.Presentation.Redis;
 using System;
@@ -43,6 +44,7 @@ namespace DevF_LABS.Presentation
                         break;
                 }
             }
+            
         }
 
         private void SetLanguage(string language)

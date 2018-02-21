@@ -10,32 +10,16 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class ErrorController : Controller
     {
-        public ActionResult BadRequest()
-        {
-            return View();
-        }
+        public ActionResult BadRequest() => View();
 
-        public ActionResult BadRequestAjax()
-        {
-            return PartialView();
-        }
-        public ActionResult NotFound()
-        {
-            return View();
-        }
+        public ActionResult BadRequestAjax() => Json("");
 
-        public ActionResult NotFoundAjax()
-        {
-            return View();
-        }
+        public ActionResult NotFound() => View();
 
-        public ActionResult ServerError()
-        {
-            return View();
-        }
-        public ActionResult ServerErrorAjax()
-        {
-            return new HttpStatusCodeResult((int)Session["responseCode"], Session["error"].ToString()); 
-        }
+        public ActionResult NotFoundAjax() => Json("");
+
+        public ActionResult ServerError() => View();
+
+        public ActionResult ServerErrorAjax() => Json("");
     }
 }

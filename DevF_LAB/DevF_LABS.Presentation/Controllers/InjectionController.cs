@@ -2,17 +2,17 @@
 using DevF_LABS.RequestResponse.Injection.SQLInjection;
 using System;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace DevF_LABS.Presentation.Controllers
 {
     public class InjectionController : BaseController
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult SQLI_S1_Login(SQLI_S1_LoginRequest request)
         {
             SQLUser user = new SQLUser();
@@ -55,12 +55,13 @@ namespace DevF_LABS.Presentation.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 user.Message = "Hata oluştu";
                 user.ResponseCode = 500;
             }
-            return Json(user,JsonRequestBehavior.AllowGet);
+
+            return Json(user);
         }
 
         public class SQLUser : BaseResponse

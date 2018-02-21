@@ -18,14 +18,35 @@
         $(".file-tree").filetree();
         $('#ckEditor').ckeditor();
         $(window).on('load', function () {
+
             if (localStorage.getItem('devfHomePageModal') == undefined)
                 localStorage.setItem('devfHomePageModal', true);
             if (localStorage.getItem('devfHomePageModal') === 'true')
                 $('#homePageModal').modal('show');
+
+            if (localStorage.getItem('devfSidebarMinimizer') == undefined)
+                localStorage.setItem('devfSidebarMinimizer', false);
+            if (localStorage.getItem('devfSidebarMinimizer') === 'true') {
+                $('body').toggleClass('sidebar-minimized');
+                
+                var timesRun = 0;
+                var interval = setInterval(function () {
+                    timesRun += 1;
+                    if (timesRun === 5) {
+                        clearInterval(interval);
+                    }
+                    window.dispatchEvent(new Event('resize'));
+                }, 62.5);
+                
+            }
         });
     });
 
     function devfHomePageModal() {
         localStorage.setItem('devfHomePageModal', false);
+    }
+
+    function devfSidebarMinimizer() {
+        localStorage.setItem('devfSidebarMinimizer', true);
     }
 </script>

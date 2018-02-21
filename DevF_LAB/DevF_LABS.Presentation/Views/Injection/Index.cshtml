@@ -1,9 +1,6 @@
-﻿@using System.Web.Configuration;
-
-@{
+﻿@{
     ViewBag.Title = "Injection";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string gReCaptcha = WebConfigurationManager.AppSettings["gReCaptcha_PublicKey"].ToString();
 }
 <main class="main">
     <!-- Breadcrumb -->
@@ -16,6 +13,7 @@
     <div class="container-fluid">
         <div class="animated fadeIn">
             <div class="row">
+                @* Client Side Folder Structure *@
                 <div class="col-md-2 mb-4">
                     <ul class="file-tree">
                         <li>
@@ -68,6 +66,7 @@
                         };
                     </script>
                 </div>
+                @* Client Side Content *@
                 <div class="col-md-10" id="injectionPart">
 
                     <ul class="nav nav-tabs bg-light" role="tablist">
@@ -78,14 +77,13 @@
                     </ul>
 
                     <div class="tab-content" role="tabpanel">
-
                         <div class="tab-pane rootTabContent active" id="injectionScenarios">
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs bg-light" role="tablist">
                                     <li class="nav-item"><a class="injectionTab nav-link active" data-toggle="tab" href="#injectionDescription" role="tab">Nedir ?</a></li>
                                     <li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_1" role="tab">SQL Injection</a></li>
                                     @*<li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_2" role="tab">Senaryo 2</a></li>
-                            <li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_3" role="tab">Senaryo 3</a></li>*@
+                                      <li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_3" role="tab">Senaryo 3</a></li>*@
                                 </ul>
                                 <div class="tab-content">
                                     @* Injection Description *@
@@ -131,7 +129,7 @@
                                                 <div class="card-body">
                                                     <div class="card">
                                                         <form action="#" class="form-horizontal" onsubmit="getUserInformation($('#sqli_Email').val(), $('#sqli_Pasword').val()); return false;">
-
+                                                            @Html.AntiForgeryToken()
                                                             <div class="card-header">
                                                                 <i class="icon-user"></i> Giriş Paneli
                                                                 <button id="sqli_login" type="submit" class="btn btn-sm btn-success pull-right"><i class="icons icon-login"></i> Giriş Yap</button>
@@ -182,6 +180,7 @@
                                                                 form.append("Username", param1);
                                                                 form.append("Password", param2);
                                                                 form.append("ORM_Control", $('#ormControl').is(':checked'));
+                                                                form.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
                                                                 devf.AjaxHTMLRequest('POST', form, "json", '/Injection/SQLI_S1_Login', success, '#sqli_login');
                                                             };
                                                         </script>
@@ -283,6 +282,8 @@
                     </div>
 
                 </div>
+
+                @* Server Side Folder Structure *@
                 <div class="col-md-2 mb-4 mt-5">
                     <ul class="file-tree">
                         <li>
@@ -334,6 +335,7 @@
                         }
                     </script>
                 </div>
+                @* Server Side Github Gist Content *@
                 <div class="col-md-10 mt-5" id="serverSide" style="display:none">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs" role="tablist">

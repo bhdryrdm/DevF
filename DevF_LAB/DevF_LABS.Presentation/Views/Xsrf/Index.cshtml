@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">XSS</a></li>
+        <li class="breadcrumb-item active">Index</li>
+        <!-- Breadcrumb Menu-->
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                <div class="col-md-2 mb-4">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">XSRF / CSRF</a>
+                            <ul>
+                                <li>
+                                    <a href="#"> XSRF / CSRF </a>
+                                    <ul>
+                                        <li> <a href="#xsrfDescription" data-toggle="tab" onclick="activeTabFile('.xsrfTab','#xsrfDescription','.rootTab','#xsrfScenarios')">Nedir ?</a> </li>
+                                        <li> <a href="#xsrfScenario_1" data-toggle="tab" onclick="activeTabFile('.xsrfTab','#xsrfScenario_1','.rootTab','#xsrfScenarios')">Senaryo 1</a> </li>
+                                        @*<li> <a href="#injectionScenario_2" data-toggle="tab" onclick="activeTabFile('.injectionTab','#injectionScenario_2','.rootTab','#injectionScenarios')">Senaryo 2</a> </li>
+                                            <li> <a href="#injectionScenario_3" data-toggle="tab" onclick="activeTabFile('.injectionTab','#injectionScenario_3','.rootTab','#injectionScenarios')">Senaryo 3</a> </li>*@
+                                    </ul>
+                                </li>
+                                <li><a href="#xsrfSource" onclick="activeTabFile('.rootTab','#xsrfSource')" data-toggle="tab">Kaynaklar</a> </li>
+                                <li><a href="#xsrfFound" onclick="activeTabFile('.rootTab','#xsrfFound')" data-toggle="tab">Bulunan CSRF / XSRF</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function activeTabFile(destinationTab, destinationTabContent, parentTab, parentTabContent, grandParent, grandParentContent) {
+
+                            if (parentTab != '' && !$(parentTabContent).hasClass('active')) {
+                                // Aktif olan parent tab ve contenti silinir
+                                $(parentTab).removeClass('active');
+                                $(parentTab + 'Content').removeClass('active');
+                                //Aktif olması istenen parent tab ve contenti eklenir
+                                $($('li').find('a[href$="' + parentTabContent + '"]')[0]).addClass('active');
+                                $(parentTabContent).addClass('active');
+                            }
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            //Aktif olması istenen tab ve content aktif edilir
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                    </script>
+                </div>
+                <div class="col-md-10" id="xsrfPart">
+
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#xsrfScenarios" role="tab" aria-controls="xsrfPart">XSRF / CSRF</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#xsrfSource" role="tab" aria-controls="source">Kaynaklar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#xsrfFound" role="tab" aria-controls="found">Bulunan XSRF / CSRF</a></li>
+                    </ul>
+
+                    <div class="tab-content" role="tabpanel">
+
+                        <div class="tab-pane rootTabContent active" id="xsrfScenarios">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs bg-light" role="tablist">
+                                    <li class="nav-item"><a class="xsrfTab nav-link active" data-toggle="tab" href="#xsrfDescription" role="tab">Nedir ?</a></li>
+                                    <li class="nav-item"><a class="xsrfTab nav-link" data-toggle="tab" href="#xsrfScenario_1" role="tab">Senaryo 1</a></li>
+                                    @*<li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_2" role="tab">Senaryo 2</a></li>
+                                      <li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_3" role="tab">Senaryo 3</a></li>*@
+                                </ul>
+                                <div class="tab-content">
+                                    @* CSRF Description *@
+                                    <div class="tab-pane xsrfTabContent active" id="xsrfDescription">
+                                        <p class="mt-2">Cross Site Request Forgery yada diğer kısaltması ile bilinen XSRF zafiyeti Türkçe'ye çevrildiğinde Çapraz Site İstek Hırsızlığı anlamına gelir.</p>
+                                        <p class="mt-2">Bu zafiyet kullanıcıdan gelen isteğin saldırgan tarafından yaptırılması ile ortaya çıkmaktadır.</p>
+                                        <p class="mt-2">Kısacası kullanıcının istediği ve haberi olmadan yaptırılan isteklerin çalınmasıdır.</p>
+                                        <p class="mt-2">İsminden de anlaşılacağı üzere Request Forgery yani İstek Hırzılığı bu zafiyeti ortaya çıkaran durumdur.</p>
+                                    </div>
+                                    @* Senaryo 1 *@
+                                    <div class="tab-pane xsrfTabContent" id="xsrfScenario_1">
+                                        @* IFrame ? *@
+                                        <div class="card">
+                                            <div class="card-header" role="tab" id="headingOne">
+                                                <h5 class="mb-0">
+                                                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
+                                                        Iframe farklı sayfaların gösterilmesi amacı ile kullanılan HTML taglarından birisidir.
+                                                    </a>
+                                                </h5>
+                                            </div>
+                                            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
+                                                <div class="card-body">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Injection Scenario_2
+                                    <div class="tab-pane injectionTabContent" id="injectionScenario_2">
+                                        Senaryo2
+                                    </div>
+                                    @* Injection Scenario_3
+                                    <div class="tab-pane injectionTabContent" id="injectionScenario_3">
+                                        Senaryo3
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Partial("~/Views/Xsrf/_XsrfSourceWebSites.cshtml")
+                        @Html.Partial("~/Views/Xsrf/_FoundXsrf.cshtml")
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

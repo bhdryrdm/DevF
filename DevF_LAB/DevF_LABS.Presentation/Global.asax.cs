@@ -44,7 +44,6 @@ namespace DevF_LABS.Presentation
                         break;
                 }
             }
-            
         }
 
         private void SetLanguage(string language)
@@ -72,7 +71,7 @@ namespace DevF_LABS.Presentation
                 OperatingSystem = GetUserPlatform(Request.UserAgent),
                 CreatedTime = DateTime.Now
             };
-            redisCacheManager.Set("SessionUsers", sessionUserModel, 30);
+            redisCacheManager.Set("SessionUsers", sessionUserModel, 3600);
 
             // Redis aktif user sayısını güncelle
             redisCacheManager.Remove("LiveSessionCount");
@@ -140,7 +139,7 @@ namespace DevF_LABS.Presentation
                         Response.StatusCode = 500;
                         break;
                     default:
-                        routeData.Values.Add("action", "NotFoundJSON"); break;
+                        routeData.Values.Add("action", "NotFoundAjax"); break;
                 }
 
                 if(HttpContext.Current.Session != null)

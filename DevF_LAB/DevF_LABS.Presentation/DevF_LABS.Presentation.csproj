@@ -1589,12 +1589,14 @@
     <Content Include="Views\Xss\_FoundXss.cshtml" />
     <Content Include="Views\Injection\Index.cshtml" />
     <Content Include="Views\Xss\StoredXss\EditorContent.cshtml" />
-    <Content Include="Views\Injection\_SQLInjection.cshtml" />
     <Content Include="Views\Injection\_FoundInjections.cshtml" />
     <Content Include="Views\Injection\_InjectionPracticeWebSites.cshtml" />
     <Content Include="Views\Injection\_InjectionSourceWebSites.cshtml" />
     <Content Include="Views\ServerSide\ASP.NET_MVC\Models\Injection\SQLInjection\SQLI_S1_LoginRequest.cshtml" />
     <Content Include="Views\ServerSide\ASP.NET_MVC\Controller\InjectionController.cshtml" />
+    <Content Include="Views\Xsrf\Index.cshtml" />
+    <Content Include="Views\Xsrf\_XsrfSourceWebSites.cshtml" />
+    <Content Include="Views\Xsrf\_FoundXsrf.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

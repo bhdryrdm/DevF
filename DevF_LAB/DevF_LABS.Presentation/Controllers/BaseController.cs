@@ -9,7 +9,7 @@ namespace DevF_LABS.Presentation.Controllers
 {
     [ValidateModelFilter]
     [LogActionFilter]
-    public class BaseController : Controller
+    public class BaseController : AsyncController
     {
         public string ConnectionString { get; set; } = WebConfigurationManager.ConnectionStrings["MSSQL_EF_CF_Context"].ConnectionString;
         public class CaptchaResponse

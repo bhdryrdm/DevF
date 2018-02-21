@@ -10,7 +10,7 @@ namespace DevF_LABS.RequestResponse.Injection.SQLInjection
     public class SQLI_S1_LoginRequest
     {
         [Required(ErrorMessage = "Kullanıcı Adı zorunlu alandır!")]
-        [StringLength(20, ErrorMessage = "Kullanıcı Adı 20 karakterden fazla olamaz!")]
+        [StringLength(50, ErrorMessage = "Kullanıcı Adı 50 karakterden fazla olamaz!")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Parola zorunlu alandır!")]

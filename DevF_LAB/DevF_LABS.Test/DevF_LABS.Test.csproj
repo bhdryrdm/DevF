@@ -69,6 +69,7 @@
     <Compile Include="DBConnection\BaseConnection.cs" />
     <Compile Include="DBConnection\RunQuery.cs" />
     <Compile Include="DB_Test.cs" />
+    <Compile Include="DummyData\XSS_DummyData_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoredProcedure\SP_CreateOrAlter_Queries.cs" />
     <Compile Include="StoredProcedure\SP_Drop_Queries.cs" />

@@ -23,7 +23,7 @@
                                     <a href="#">Injection</a>
                                     <ul>
                                         <li> <a href="#injectionDescription" data-toggle="tab" onclick="activeTabFile('.injectionTab','#injectionDescription','.rootTab','#injectionScenarios')">Nedir ?</a> </li>
-                                        <li> <a href="#injectionScenario_1" data-toggle="tab" onclick="activeTabFile('.injectionTab','#injectionScenario_1','.rootTab','#injectionScenarios')">SQL Injection</a> </li>
+                                        <li> <a href="#sqliScenarios" data-toggle="tab" onclick="activeTabFile('.injectionTab','#sqliScenarios','.rootTab','#injectionScenarios')">SQL Injection</a> </li>
                                         @*<li> <a href="#injectionScenario_2" data-toggle="tab" onclick="activeTabFile('.injectionTab','#injectionScenario_2','.rootTab','#injectionScenarios')">Senaryo 2</a> </li>
                                 <li> <a href="#injectionScenario_3" data-toggle="tab" onclick="activeTabFile('.injectionTab','#injectionScenario_3','.rootTab','#injectionScenarios')">Senaryo 3</a> </li>*@
                                     </ul>
@@ -81,9 +81,7 @@
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs bg-light" role="tablist">
                                     <li class="nav-item"><a class="injectionTab nav-link active" data-toggle="tab" href="#injectionDescription" role="tab">Nedir ?</a></li>
-                                    <li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_1" role="tab">SQL Injection</a></li>
-                                    @*<li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_2" role="tab">Senaryo 2</a></li>
-                                      <li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#injectionScenario_3" role="tab">Senaryo 3</a></li>*@
+                                    <li class="nav-item"><a class="injectionTab nav-link" data-toggle="tab" href="#sqliScenarios" role="tab">SQL Injection</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     @* Injection Description *@
@@ -93,186 +91,7 @@
                                         <p class="mt-2">OWASP TOP 10 Listesinde her zaman birinci sırada bulunan bu zafiyet türü çok ciddi boyutlarda sıkıntılar yaratmaktadır.</p>
                                         <p class="mt-2">Veri kayıpları, bozulmaları, silinmeleri ile ciddi boyutlara ulaşan bir zafiyet olarak tanımlanmaktadır.</p>
                                     </div>
-                                    @* SQL Injection *@
-                                    <div class="tab-pane injectionTabContent" id="injectionScenario_1">
-
-                                        @* Nedir ? *@
-                                        <div class="card">
-                                            <div class="card-header" role="tab" id="headingOne">
-                                                <h5 class="mb-0">
-                                                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
-                                                        Nedir ?
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <p class="mt-2">SQL Injection, SQL sorgusunun amacına müdahale ederek farklı bilgileri elde etmeye denir.</p>
-                                                    <p class="mt-2">
-                                                        Kullanıcıdan alınan verilerin kontrolsüz bir şekilde sorgulanması sonucu istenen bilgilerden farklı bilgilerin sunulması
-                                                        SQL Injection zafiyetinin var olduğunu göstermektedir.
-                                                    </p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @* Uygulama *@
-                                        <div class="card">
-                                            <div class="card-header" role="tab" id="headingTwo">
-                                                <h5 class="mb-0">
-                                                    <a class="" data-toggle="collapse" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                        Uygulama
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <div class="card">
-                                                        <form action="#" class="form-horizontal" onsubmit="getUserInformation($('#sqli_Email').val(), $('#sqli_Pasword').val()); return false;">
-                                                            @Html.AntiForgeryToken()
-                                                            <div class="card-header">
-                                                                <i class="icon-user"></i> Giriş Paneli
-                                                                <button id="sqli_login" type="submit" class="btn btn-sm btn-success pull-right"><i class="icons icon-login"></i> Giriş Yap</button>
-                                                                <button type="reset" class="btn btn-sm btn-danger pull-right" style="margin-right:5px;"><i class="fa fa-paint-brush"></i> Sıfırla</button>
-                                                                <span class="pull-right" style="margin-right:5px;"><i class="fa fa-file-code-o"></i> Server Side Code > ASP.NET MVC > Controllers > InjectionController - SQLI_S1_Login()</span>
-
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div class="form-group row">
-                                                                    <label class="col-md-1 col-sm-2 col-form-label" for="sqli_Email">Email</label>
-                                                                    <div class="col-md-4 col-sm-4">
-                                                                        <input type="text" id="sqli_Email" class="form-control mb-sm-2" placeholder="Example : Bahadır' --" required>
-                                                                        <span>Bahadır-Recep-Ali-Deneme</span>
-                                                                    </div>
-                                                                    <label class="col-md-1 col-sm-2 col-form-label" for="sqli_Pasword">Parola</label>
-                                                                    <div class="col-md-4 col-sm-4">
-                                                                        <input type="password" id="sqli_Pasword" class="form-control mb-sm-2" placeholder="•••••••" required>
-                                                                    </div>
-                                                                    <div class="col-md-2">
-                                                                        <label class="col-form-label" for="ormControl"> ORM ile Sorgula &nbsp;</label>
-                                                                        <label class="switch switch-text switch-pill switch-primary mt-1">
-                                                                            <input id="ormControl" type="checkbox" class="switch-input">
-                                                                            <span class="switch-label" data-on="On" data-off="Off"></span>
-                                                                            <span class="switch-handle"></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                        <script>
-                                                            function getUserInformation(param1, param2) {
-
-                                                                var success = function (returnData) {
-                                                                    if (!returnData.IsSuccess && returnData.IsSuccess !== undefined) {
-                                                                        devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
-                                                                    } else {
-                                                                        if (returnData.IsSuccess) {
-                                                                            $('#sqli_LoginUser').html(
-                                                                                '<p  class="pull-right"><i class="fa fa-user"></i> Hoşgeldiniz ' + returnData.Username + ' parolanız ' + returnData.Password + '</p>'
-                                                                            );
-                                                                        } else {
-                                                                            devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
-                                                                        }
-                                                                    }
-                                                                };
-
-                                                                var form = new FormData();
-                                                                form.append("Username", param1);
-                                                                form.append("Password", param2);
-                                                                form.append("ORM_Control", $('#ormControl').is(':checked'));
-                                                                form.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
-                                                                devf.AjaxHTMLRequest('POST', form, "json", '/Injection/SQLI_S1_Login', success, '#sqli_login');
-                                                            };
-                                                        </script>
-                                                        <div class="col-12" id="sqli_LoginUser"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @* Payload & Sonuçlar *@
-                                        <div class="card">
-                                            <div class="card-header" role="tab" id="headingThere">
-                                                <h5 class="mb-0">
-                                                    <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                        ORM & Sonuçlar
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <p>
-                                                        <button class="offset-3 btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="true" aria-controls="multiCollapseExample1">
-                                                            ADO.NET ORM Çıktısı
-                                                        </button>
-                                                        <button class="offset-5 btn btn-sm btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="true" aria-controls="multiCollapseExample2">
-                                                            Pure SQL Çıktısı
-                                                        </button>
-                                                    </p>
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-md-7">
-                                                            <div class="multi-collapse collapse" id="multiCollapseExample1" style="">
-                                                                <div class="card card-body">
-                                                                    <script src="https://gist.github.com/bhdryrdm/e23d1ffad1543eb648370e244ce62d0d.js"></script>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12 col-md-5">
-                                                            <div class="multi-collapse collapse" id="multiCollapseExample2" style="">
-                                                                <div class="card card-body">
-                                                                    <script src="https://gist.github.com/bhdryrdm/36c25156d3ef731013ae755f4801a53a.js"></script>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @* Korunma Yöntemleri *@
-                                        <div class="card">
-                                            <div class="card-header" role="tab" id="headingFour">
-                                                <h5 class="mb-0">
-                                                    <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                                        Korunma Yöntemleri
-                                                    </a>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion" style="">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li>
-                                                            Object Relation Mapping kullanılmalıdır.
-                                                            <p class="mt-2">
-                                                                SQL Injection zafiyetinden korunmanın en iyi yolu her programlama dili için geliştirilmiş olan ORM Frameworkleridir.
-                                                                Fakat yazılımcılar tarafından yanlış kullanımı sonucu yine de ortaya SQL Injection zafiyeti çıkabilmektedir.
-                                                                Kullanılacak ORM'nin birçok kişi tarafından kullanılmış ve olgunlaşmış olması iyi bir kriter olacaktır.
-                                                            </p>
-                                                            <p class="mt-2">
-                                                                .Net yazılım geliştiricileri için Microsoft firması tarafından geliştirilmiş olan Entityframework güzel bir alternatif
-                                                                olabilir.Fakat son yıllardaki ORM'lerin performansları karşılaştırıldığında geliştiricilerin farklı ORM arayışları sonucu
-                                                                yeni birçok ORM ortaya çıkmıştır.
-                                                            </p>
-                                                            <p>
-                                                                Lütfen kullanılacak ORM açık kaynak kodlu bir proje ise kodlarını inceleyiniz.Gerekli yerlerde müdahale ediniz.
-                                                                Unutulmamlıdırki ORM'ler 100% güvenli yazılımlar değillerdir.
-                                                            </p>
-                                                        </li>
-                                                        <li>
-                                                            Kullanıcıdan alınan verileri SQL sorgusu içerisinde parametre olarak veriniz.
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    @* Injection Scenario_2
-                                    <div class="tab-pane injectionTabContent" id="injectionScenario_2">
-                                        Senaryo2
-                                    </div>
-                                    @* Injection Scenario_3
-                                    <div class="tab-pane injectionTabContent" id="injectionScenario_3">
-                                        Senaryo3
-                                    </div>*@
+                                    @Html.Partial("~/Views/Injection/_SQLInjections.cshtml")
                                 </div>
                             </div>
                         </div>
@@ -280,7 +99,6 @@
                         @Html.Partial("~/Views/Injection/_InjectionPracticeWebSites.cshtml")
                         @Html.Partial("~/Views/Injection/_FoundInjections.cshtml")
                     </div>
-
                 </div>
 
                 @* Server Side Folder Structure *@

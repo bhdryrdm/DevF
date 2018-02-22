@@ -15512,7 +15512,7 @@ base-chart.chart {
             }
 
             .sidebar-minimized .sidebar .nav-link:hover, .sidebar-minimized .sidebar .navbar .dropdown-toggle:hover, .navbar .sidebar-minimized .sidebar .dropdown-toggle:hover {
-                width: 250px;
+                width: 300px;
                 background: #20a8d8;
             }
 

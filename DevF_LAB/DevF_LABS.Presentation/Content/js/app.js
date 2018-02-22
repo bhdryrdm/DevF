@@ -81,6 +81,7 @@ $(document).ready(function ($) {
 
     $('.sidebar-minimizer').click(function () {
         $('body').toggleClass('sidebar-minimized');
+        $('body').toggleClass('brand-minimized');
         if ($('body').hasClass('sidebar-minimized'))
             localStorage.setItem('devfSidebarMinimizer',true)
         else

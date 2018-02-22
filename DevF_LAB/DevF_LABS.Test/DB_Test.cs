@@ -23,13 +23,11 @@ namespace DevF_LABS.Test
                     dbContext.Settings.Add(settigns);
                     dbContext.SaveChanges();
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
         }
         
         [TestMethod]
@@ -40,7 +38,6 @@ namespace DevF_LABS.Test
 
             CreateMemcache("bhdr", "0 3600 6 %0d%0a hacked %0d%0a");
             GetMemcacheValue("bhdr");
-
         }
 
         public void CreateMemcache(string key , string value)
@@ -51,7 +48,6 @@ namespace DevF_LABS.Test
             MemcachedClient client = new MemcachedClient(config);
 
             bool result = client.Store(StoreMode.Set, key, value);
-            
             
         }
 

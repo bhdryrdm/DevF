@@ -25,7 +25,8 @@ namespace DevF_LABS.Presentation.Controllers
                 {
                     String cookieValue = $"SessionID:{Session.SessionID}-Email:{request.BrokenAccess_S1_LoginRequest_Email}-IP:{Request.UserHostAddress}"; 
                     FormsAuthentication.SetAuthCookie(cookieValue, true);
-                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAccess/SecretPageDefault ";
+                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAccess/SecretPageDefault . " +
+                                       "Tekrar giriş yapabilmek için lütfen sayfayı yenileyin!";
                     return Json(response);
                 }
                 else
@@ -49,7 +50,8 @@ namespace DevF_LABS.Presentation.Controllers
                     else
                         Response.AppendCookie(httpCookie);
 
-                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAccess/SecretPageCustom ";
+                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAccess/SecretPageCustom ." +
+                                       "Tekrar giriş yapabilmek için lütfen sayfayı yenileyin!";
                     return Json(response);
                 }
             }

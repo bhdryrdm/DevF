@@ -13,10 +13,9 @@ namespace DevF_LABS.Presentation.Controllers
     {
         private const string cookieName = "DevF_LABS_BrokenAccessAuth_CustomCookie";
         public ActionResult Index() => View();
-
-        public ActionResult RedirectError() => RedirectToAction("NotAuthentication", "Error");
-
+        
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Login(BrokenAccess_S1_LoginRequest request)
         {
             BaseResponse response = new BaseResponse();
@@ -26,7 +25,7 @@ namespace DevF_LABS.Presentation.Controllers
                 {
                     String cookieValue = $"SessionID:{Session.SessionID}-Email:{request.BrokenAccess_S1_LoginRequest_Email}-IP:{Request.UserHostAddress}"; 
                     FormsAuthentication.SetAuthCookie(cookieValue, true);
-                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAuth/SecretPageDefault ";
+                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAccess/SecretPageDefault ";
                     return Json(response);
                 }
                 else
@@ -50,7 +49,7 @@ namespace DevF_LABS.Presentation.Controllers
                     else
                         Response.AppendCookie(httpCookie);
 
-                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAuth/SecretPageCustom ";
+                    response.Message = "Tebrikler... Gizli sayfayı görebilirsiniz! /BrokenAccess/SecretPageCustom ";
                     return Json(response);
                 }
             }
@@ -70,7 +69,7 @@ namespace DevF_LABS.Presentation.Controllers
         [BrokenAccessAuthorizeFilter]
         public ActionResult SecretPageCustom()
         {
-            ViewBag.Username = Session[Session.SessionID + "-BrokenAuthUser"];
+            ViewBag.Username = Session[Session.SessionID + "-BrokenAccessUser"];
             return View("~/Views/BrokenAccess/SecretPage.cshtml");
         }
 

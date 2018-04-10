@@ -20,5 +20,7 @@ namespace DevF_LABS.RequestResponse.BrokenAuth
 
         [Required(ErrorMessage = "Giriş türü zorunlu alandır!")]
         public bool BrokenAccess_S1_LoginRequest_LoginType { get; set; }
+
+        public string __RequestVerificationToken { get; set; }
     }
 }

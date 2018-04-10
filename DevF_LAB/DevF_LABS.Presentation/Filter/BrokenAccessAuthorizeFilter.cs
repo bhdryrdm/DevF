@@ -21,14 +21,14 @@ namespace DevF_LABS.Presentation.Filter
             if (filterContext.HttpContext.Request.Cookies.AllKeys.Contains(cookieName))
             {
                 // Session value clear
-                filterContext.HttpContext.Session[HttpContext.Current.Session.SessionID + "-BrokenAuthUser"] = "";
+                filterContext.HttpContext.Session[HttpContext.Current.Session.SessionID + "-BrokenAccessUser"] = "";
 
                 HttpCookie encyptedCookie = HttpContext.Current.Request.Cookies["DevF_LABS_BrokenAccessAuth_CustomCookie"];
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(encyptedCookie.Value);
                 userData = ticket.UserData.Split(';').ToList();
                 if(userData.Count > 0)
                 {
-                    filterContext.HttpContext.Session[HttpContext.Current.Session.SessionID + "-BrokenAuthUser"] =$"{userData[0]}  {userData[1]}  {userData[2]}";
+                    filterContext.HttpContext.Session[HttpContext.Current.Session.SessionID + "-BrokenAccessUser"] =$"{userData[0]}  {userData[1]}  {userData[2]}";
                 }
             }
            
@@ -53,8 +53,8 @@ namespace DevF_LABS.Presentation.Filter
                     filterContext.Result = new RedirectToRouteResult("Default",
                     new RouteValueDictionary
                     {
-                        { "controller", "BrokenAuth" },
-                        { "action", "RedirectError" },
+                        { "controller", "Error" },
+                        { "action", "NotAuthorized" },
                         { "returnUrl", filterContext.HttpContext.Request.RawUrl }
                     });
                 }

@@ -97,7 +97,31 @@
                                     @* Filtreler *@
                                     <div class="tab-pane brokenAccessTabContent" id="brokenAccessFilters">
                                         <div class="card">
+                                            <div class="card-header"><i class="fa fa-filter"></i> Filtreler </div>
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <ul style="font-size:12px;">
+                                                        <li>
+                                                            <p class="mt-1" style="font-size:15px">
+                                                                <code>
+                                                                    <span class="text-cyan">[Authenticate]</span> <span class="text-success"> /* Giriş yapılıp yapılmadığı kontrolü yapılır */</span>
+                                                                </code>
+                                                                <code>
+                                                                    <span class="text-cyan">[Authorize]</span> <span class="text-success"> /* İşlem için yetki kontrolü yapılır */</span>
+                                                                </code>
+                                                            </p>
+                                                        </li>
+                                                        <li class="mt-2"> Yukarıdaki örnek filtrelerden görüleceği üzere gerçekleştirelecek olan işlem birtakım filtrelere tabi tutulur. </li>
+                                                        <li class="mt-2"> Bu işlemler sonucunda kullanıcıların giriş kontrolleri yada yetki kontrolleri sağlanarak izinsiz işlemlerin önüne geçilmiş olur. </li>
+                                                        <li class="mt-2"> Uygulamada bulunan "Ön Tanımlı Giriş Kontrolü" seçeneği <span class="text-green bold">ON</span> durumunda iken DevF_LABS_BrokenAccessAuth_DefaultCookie isminde bir cookie oluşacaktır. Erişim sağlanacak sayfa <a href="/BrokenAccess/SecretPageDefault">/BrokenAccess/SecretPageDefault</a> </li>
+                                                        <li class="mt-2"> Uygulamada bulunan "Ön Tanımlı Giriş Kontrolü" seçeneği <span class="text-danger bold">OFF</span> durumunda iken DevF_LABS_BrokenAccessAuth_CustomCookie isminde bir cookie oluşacaktır. Erişim sağlanacak sayfa <a href="/BrokenAccess/SecretPageCustom">/BrokenAccess/SecretPageCustom</a> </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
                                             <form onsubmit="login(); return false;">
+                                                @Html.AntiForgeryToken()
                                                 <div class="card-header">
                                                     <i class="icon-user"></i> Giriş Paneli
                                                     <button id="brokenAccess_s1_login" type="submit" class="btn btn-sm btn-success pull-right"><i class="icons icon-login"></i> Giriş Yap</button>
@@ -140,10 +164,11 @@
                                                     };
 
                                                     var form = new FormData();
-                                                    form.append("brokenAccess_S1_LoginRequest_Email", $('#BrokenAccess_S1_loginRequest_Email').val());
-                                                    form.append("brokenAccess_S1_LoginRequest_Password", $('#BrokenAccess_S1_LoginRequest_Password').val());
+                                                    form.append("BrokenAccess_S1_LoginRequest_Email", $('#brokenAccess_S1_loginRequest_Email').val());
+                                                    form.append("BrokenAccess_S1_LoginRequest_Password", $('#brokenAccess_S1_LoginRequest_Password').val());
+                                                    form.append("__RequestVerificationToken", $('input[name="__RequestVerificationToken"]').val());
                                                     form.append("brokenAccess_S1_LoginRequest_LoginType", $('#loginTypeControlCheckBox').is(':checked'));
-                                                    devf.AjaxHTMLRequest('POST', form, "json", '/BrokenAuth/Login', success, '#brokenAccess_s1_login');
+                                                    devf.AjaxHTMLRequest('POST', form, "json", '/BrokenAccess/Login', success, '#brokenAccess_s1_login');
                                                 };
                                             </script>
                                         </div>
@@ -156,7 +181,7 @@
                                                 Giriş kontrolü Cookie ile yapılıyorsa lütfen Web.config içerisinde machineKey kullanınız.Bu sayede şifrelenen Cookie yapısı saldırgan tarafından çözülüp farklı bir makinede 
                                                 tekrar şifrelenen herhangi bir Cookie çözümlenemeyecektir.Uygulamanız için IIS üzerinden machinekey oluşturabilirsiniz.
                                                 <p class="mt-2">
-                                                    <code style="font-size:15px;">
+                                                    <code style="font-size:13px;">
                                                         <span class="row"> &lt;system.web&gt;</span>
                                                         <span class="row">
                                                             &nbsp;&nbsp;&nbsp;&nbsp; &lt;machineKey validationKey="83BDD6F29FEF43C0256106B322F775DE77D8704CC3A5E07B9D2BD2253337374A3A64DD466D6A2CA81C6FBF27F6BFF637FC24CE8C17B0540BB191E07B90CB5DC0"
@@ -168,7 +193,7 @@
                                                     </code>
                                                 </p>
                                             </li>
-                                            <li class="mt-2"> Uygulamaların kritik olarak görülen kısımlarında 2FA kullanınız.</li>
+                                            <li class="mt-2"> Uygulamaların kritik olarak görülen özellikle de ödeme işlemleri kısmında 2FA yada 3D Secure kullanınız.</li>
                                             <li class="mt-2"> Session sürelerini uzun süre belirlemeyiniz.</li>
                                         </ul>
                                         <b> Unutulmaması Gerekenler</b> <i class="fa fa-bullhorn"></i>

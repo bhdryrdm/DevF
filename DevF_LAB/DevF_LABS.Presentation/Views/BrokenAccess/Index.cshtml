@@ -1,0 +1,273 @@
+﻿@{
+    ViewBag.Title = "Injection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Broken Access Control</a></li>
+        <li class="breadcrumb-item active">Index</li>
+        <!-- Breadcrumb Menu-->
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                @* Client Side Folder Structure *@
+                <div class="col-md-2 mb-4">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Broken Access</a>
+                            <ul>
+                                <li>
+                                    <a href="#">brokenAccess</a>
+                                    <ul>
+                                        <li> <a href="#brokenAccessDescription" data-toggle="tab" onclick="activeTabFile('.brokenAccessTab','#brokenAccessDescription','.rootTab','#brokenAccessScenarios')">Nedir ?</a></li>
+                                        <li> <a href="#brokenAccessFilters" data-toggle="tab" onclick="activeTabFile('.brokenAccessTab','#brokenAccessFilters','.rootTab','#brokenAccessScenarios')">Filtreler</a></li>
+                                        <li> <a href="#brokenAccessScenariosProtectionMethod" data-toggle="tab" onclick="activeTabFile('.injectionTab','#brokenAccessScenariosProtectionMethod','.rootTab','#brokenAccessScenarios')">Korunma Yöntemleri</a></li>
+                                        @*<li> <a href="#injectionScenario_3" data-toggle="tab" onclick="activeTabFile('.injectionTab','#injectionScenario_3','.rootTab','#injectionScenarios')">Senaryo 3</a> </li>*@
+                                    </ul>
+                                </li>
+                                <li><a href="#brokenAccessSource" onclick="activeTabFile('.rootTab','#brokenAccessSource')" data-toggle="tab">Kaynaklar</a> </li>
+                                <li><a href="#brokenAccessExample" onclick="activeTabFile('.rootTab','#brokenAccessExample')" data-toggle="tab">Alıştırmalar</a> </li>
+                                <li><a href="#brokenAccessFound" onclick="activeTabFile('.rootTab','#brokenAccessFound')" data-toggle="tab">Bulunan Broken Authentication</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function activeTabFile(destinationTab, destinationTabContent, parentTab, parentTabContent, grandParent, grandParentContent) {
+
+                            if (parentTab != '' && !$(parentTabContent).hasClass('active')) {
+                                // Aktif olan parent tab ve contenti silinir
+                                $(parentTab).removeClass('active');
+                                $(parentTab + 'Content').removeClass('active');
+                                //Aktif olması istenen parent tab ve contenti eklenir
+                                $($('li').find('a[href$="' + parentTabContent + '"]')[0]).addClass('active');
+                                $(parentTabContent).addClass('active');
+                            }
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            //Aktif olması istenen tab ve content aktif edilir
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                    </script>
+                </div>
+                @* Client Side Content *@
+                <div class="col-md-10" id="brokenAccessPart">
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#brokenAccessScenarios" role="tab" aria-controls="brokenAccessPart">Broken Access</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#brokenAccessSource" role="tab" aria-controls="source">Kaynaklar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#brokenAccessExample" role="tab" aria-controls="practice">Alıştırmalar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#brokenAccessFound" role="tab" aria-controls="found">Bulunan Broken Access</a></li>
+                    </ul>
+
+                    <div class="tab-content" role="tabpanel">
+                        <div class="tab-pane rootTabContent active" id="brokenAccessScenarios">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs bg-light" role="tablist">
+                                    <li class="nav-item"><a class="brokenAccessTab nav-link active" data-toggle="tab" href="#brokenAccessDescription" role="tab">Nedir ?</a></li>
+                                    <li class="nav-item"><a class="brokenAccessTab nav-link" data-toggle="tab" href="#brokenAccessFilters" role="tab">Filtreler</a></li>
+                                    <li class="nav-item"><a class="brokenAccessTab nav-link" data-toggle="tab" href="#brokenAccessScenariosProtectionMethod" role="tab">Korunma Yöntemleri</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    @* brokenAccess Description *@
+                                    <div class="tab-pane brokenAccessTabContent active" id="brokenAccessDescription">
+                                        <p class="mt-2">Broken Access Control Türkçe'ye Kırık Hesap Kontrolü şeklinde çevrilmektedir.Türkçe çevrisinden biraz da olsa zafiyetin nereden ortaya çıktığı bellidir. </p>
+                                        <p class="mt-2">Kısacası bu zafiyet saldırganın izni ve yetkisi olmadan izinsiz bir şekilde bir takım verileri görüntüleyebilmesi,değiştirebilmesi gibi birçok işlemi yapabilmesinden kaynaklanır.</p>
+                                        <p class="mt-2">Banka sistemleri, otomasyonlar, forumlar ve daha birçok uygulamada kullanıcıdan alınan değerler yetki kontolüne tabi tutulmadığı takdirde saldırgan yetkisi varmış gibi davranışlar sergiler.</p>
+                                        <p class="mt-2">Örneğin, bankada çalışan personellerin bordrolarını görüntüleyebilmeleri, kullanıcı profillerinin güncellenmesi ve silinmesi, otomasyon sistemlerindeki transkript görüntülemeleri </p>
+                                        <p class="mt-2">gibi kullanıcıya özel olarak yapılan işlemlerin kullanıcının giriş yapıp yapmadığı ve yetkisinin olup olmadığı kontrolü sağlanarak işlem yapılmalıdır.</p>
+                                        <p class="mt-2">Somut bir örnek vermek gerekirse 1 ID'sine sahip Bahadır kullanıcısı sadece 1 ID'sine sahip kullanıcıyı güncelleyebilmelidir.ID bilgisi de Client-Side yerine Server-Side üzerinden alınmalıdır. </p>
+                                        <p class="mt-2">Çünkü Client-Side üzerinden saldırgan 1 ID'sine sahip olmasına rağmen başka bir ID göndererek o kullanıcının bilgilerini güncelleme talebi gönderebilir.</p>
+                                    </div>
+                                    @* Filtreler *@
+                                    <div class="tab-pane brokenAccessTabContent" id="brokenAccessFilters">
+                                        <div class="card">
+                                            <form onsubmit="login(); return false;">
+                                                <div class="card-header">
+                                                    <i class="icon-user"></i> Giriş Paneli
+                                                    <button id="brokenAccess_s1_login" type="submit" class="btn btn-sm btn-success pull-right"><i class="icons icon-login"></i> Giriş Yap</button>
+                                                    <button type="reset" class="btn btn-sm btn-danger pull-right" style="margin-right:5px;"><i class="fa fa-paint-brush"></i> Sıfırla</button>
+                                                    <a href="#brokenAccessController" onclick="serverSideTab('.serverSideTab','#brokenAccessController')" data-toggle="tab">
+                                                        <span class="pull-right" style="margin-right:5px;"><i class="fa fa-file-code-o"></i> Server Side Code > ASP.NET MVC > Controllers > BrokenAccessController - Login()</span>
+                                                    </a>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group row">
+                                                        <label class="col-md-1 col-form-label" for="reflected_scenario_3_Email">Email</label>
+                                                        <div class="col-md-3">
+                                                            <input type="email" id="brokenAccess_S1_loginRequest_Email" class="form-control mb-sm-2" placeholder="example@example.com" required>
+                                                            <span> Default Email <code>admin@devf.com</code></span>
+                                                        </div>
+                                                        <label class="col-md-1 col-form-label" for="reflected_scenario_3_Pasword">Parola</label>
+                                                        <div class="col-md-3">
+                                                            <input type="password" id="brokenAccess_S1_LoginRequest_Password" class="form-control mb-sm-2" placeholder="•••••••" required>
+                                                            <span> Default Password <code>123</code></span>
+                                                        </div>
+                                                        <div class="offset-1">
+                                                            <label class="col-form-label" for="loginTypeControlCheckBox"> Ön Tanımlı Giriş Kontrolü &nbsp;</label>
+                                                            <label class="mt-1 switch switch-text switch-pill switch-primary">
+                                                                <input id="loginTypeControlCheckBox" type="checkbox" class="switch-input" checked>
+                                                                <span class="switch-label" data-on="On" data-off="Off"></span>
+                                                                <span class="switch-handle"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <script>
+                                                function login() {
+                                                    var success = function (returnData) {
+                                                        if (returnData.IsSuccess) {
+                                                            devf.Swal(returnData.ResponseCode, returnData.Message, "success", "Close");
+                                                        } else {
+                                                            devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
+                                                        }
+                                                    };
+
+                                                    var form = new FormData();
+                                                    form.append("brokenAccess_S1_LoginRequest_Email", $('#BrokenAccess_S1_loginRequest_Email').val());
+                                                    form.append("brokenAccess_S1_LoginRequest_Password", $('#BrokenAccess_S1_LoginRequest_Password').val());
+                                                    form.append("brokenAccess_S1_LoginRequest_LoginType", $('#loginTypeControlCheckBox').is(':checked'));
+                                                    devf.AjaxHTMLRequest('POST', form, "json", '/BrokenAuth/Login', success, '#brokenAccess_s1_login');
+                                                };
+                                            </script>
+                                        </div>
+                                    </div>
+                                    @* Korunma Yöntemleri ? *@
+                                    <div class="tab-pane brokenAccessTabContent" id="brokenAccessScenariosProtectionMethod">
+                                        <b> Yapılması Gerekenler </b> <i class="fa fa-shield"></i>
+                                        <ul style="font-size:12px;">
+                                            <li>
+                                                Giriş kontrolü Cookie ile yapılıyorsa lütfen Web.config içerisinde machineKey kullanınız.Bu sayede şifrelenen Cookie yapısı saldırgan tarafından çözülüp farklı bir makinede 
+                                                tekrar şifrelenen herhangi bir Cookie çözümlenemeyecektir.Uygulamanız için IIS üzerinden machinekey oluşturabilirsiniz.
+                                                <p class="mt-2">
+                                                    <code style="font-size:15px;">
+                                                        <span class="row"> &lt;system.web&gt;</span>
+                                                        <span class="row">
+                                                            &nbsp;&nbsp;&nbsp;&nbsp; &lt;machineKey validationKey="83BDD6F29FEF43C0256106B322F775DE77D8704CC3A5E07B9D2BD2253337374A3A64DD466D6A2CA81C6FBF27F6BFF637FC24CE8C17B0540BB191E07B90CB5DC0"
+                                                        </span>
+                                                        <span class="row">
+                                                            &nbsp;&nbsp;&nbsp;&nbsp; decryptionKey="4411595512AD6A65D5C09842DB764FA1BAAC04A37FD6C7E4827D42ED8F8C496E" validation="HMACSHA512" decryption="AES" /&gt;
+                                                        </span>
+                                                        <span class="row">&lt;/system.web&gt;</span>
+                                                    </code>
+                                                </p>
+                                            </li>
+                                            <li class="mt-2"> Uygulamaların kritik olarak görülen kısımlarında 2FA kullanınız.</li>
+                                            <li class="mt-2"> Session sürelerini uzun süre belirlemeyiniz.</li>
+                                        </ul>
+                                        <b> Unutulmaması Gerekenler</b> <i class="fa fa-bullhorn"></i>
+                                        <ul class="mt-2">
+                                            <li>Kullanıcıdan doğrudan alınan Client-Side bilgiler ile "Giriş Kontrolü" yada "Yetki Kontrolü" yapmayınız!</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Partial("~/Views/BrokenAccess/_BrokenAccessSourceWebSites.cshtml")
+                        @Html.Partial("~/Views/BrokenAccess/_BrokenAccessPracticeWebSites.cshtml")
+                        @Html.Partial("~/Views/BrokenAccess/_FoundBrokenAccess.cshtml")
+                    </div>
+                </div>
+                @* Server Side Folder Structure *@
+                <div class="col-md-2 mb-4 mt-5">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Server Side Code</a>
+                            <ul>
+                                <li>
+                                    <a href="#">ASP.NET MVC</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Controllers</a>
+                                            <ul>
+                                                <li><a href="#baseController" onclick="serverSideTab('.serverSideTab','#baseController')" data-toggle="tab">BaseController</a> </li>
+                                                <li><a href="#brokenAccessController" onclick="serverSideTab('.serverSideTab','#brokenAccessController')" data-toggle="tab">BrokenAccessController</a> </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Models</a>
+                                            <ul>
+                                                <li><a href="#brokenAccess_s1_loginRequest" onclick="serverSideTab('.serverSideTab','#brokenAccess_s1_loginRequest')" data-toggle="tab">BrokenAccess_S1_LoginRequest</a> </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active d-block');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideAllTabClose(destinationTabContent) {
+                            $('#serverSide').css('display', 'none');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+                        };
+
+                        function closeTab(destinationTabContent) {
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).removeClass('active d-block');
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('d-none');
+                        }
+                    </script>
+                </div>
+                @* Server Side Github Gist Content *@
+                <div class="col-md-10 mt-5" id="serverSide" style="display:none">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab">
+                                    BaseController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#baseController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#brokenAccessController" role="tab">
+                                    BrokenAccessController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#brokenAccessController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#brokenAccess_s1_loginRequest" role="tab">
+                                    BrokenAccess_S1_LoginRequest
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#brokenAccess_s1_loginRequest')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
+                        </ul>
+                        <div class="tab-content" role="tabpanel">
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BaseController.cshtml")
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BrokenAccessController.cshtml")
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Models/BrokenAccess/BrokenAccess_S1_LoginRequest.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

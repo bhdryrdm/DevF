@@ -7,9 +7,9 @@ using System.Web.Mvc;
 
 namespace DevF_LABS.Presentation.Filter
 {
-    public class LogActionFilter : FilterAttribute, IActionFilter
+    public class LogActionFilter : ActionFilterAttribute, IActionFilter
     {
-        public void OnActionExecuting(ActionExecutingContext filterContext)
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             string sessionID = filterContext.RequestContext.HttpContext.Session.SessionID;
             string controllerName = filterContext.Controller.ToString();
@@ -18,7 +18,7 @@ namespace DevF_LABS.Presentation.Filter
             NLogLogger.Log(new Exception("Nothing"), "Log_Action_OnActionExecuting", LogPriority.Low);
         }
 
-        public void OnActionExecuted(ActionExecutedContext filterContext)
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             string sessionID = filterContext.RequestContext.HttpContext.Session.SessionID;
             string controllerName = filterContext.Controller.ToString();

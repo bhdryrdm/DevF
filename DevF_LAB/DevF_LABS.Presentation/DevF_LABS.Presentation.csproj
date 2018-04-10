@@ -1228,6 +1228,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BrokenAccessController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InjectionController.cs" />
@@ -1235,6 +1236,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\XsrfController.cs" />
     <Compile Include="Controllers\XssController.cs" />
+    <Compile Include="Filter\BrokenAccessAuthorizeFilter.cs" />
     <Compile Include="Filter\LogActionFilter.cs" />
     <Compile Include="Filter\ValidateModelFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -1605,7 +1607,15 @@
     <Content Include="Views\Xsrf\_XsrfSourceWebSites.cshtml" />
     <Content Include="Views\Xsrf\_FoundXsrf.cshtml" />
     <Content Include="Views\Injection\_SQLInjections.cshtml" />
-    <Content Include="Views\Injection\_CommonForms.cshtml" />
+    <Content Include="Views\BrokenAccess\Index.cshtml" />
+    <Content Include="Views\BrokenAccess\_FoundBrokenAccess.cshtml" />
+    <Content Include="Views\BrokenAccess\_BrokenAccessPracticeWebSites.cshtml" />
+    <Content Include="Views\BrokenAccess\_BrokenAccessSourceWebSites.cshtml" />
+    <Content Include="Views\ServerSide\ASP.NET_MVC\Controller\BrokenAccessController.cshtml" />
+    <Content Include="Views\Error\NotAuthentication.cshtml" />
+    <Content Include="Views\BrokenAccess\SecretPage.cshtml" />
+    <Content Include="Views\BrokenAccess\AuthorityForgottenPage.cshtml" />
+    <Content Include="Views\ServerSide\ASP.NET_MVC\Models\BrokenAccess\BrokenAccess_S1_LoginRequest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

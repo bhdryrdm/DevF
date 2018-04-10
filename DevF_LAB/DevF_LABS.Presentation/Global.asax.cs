@@ -1,5 +1,4 @@
 ﻿using DevF_LABS.Business.Mapping_Express;
-using DevF_LABS.Logs;
 using DevF_LABS.Presentation.Helper;
 using DevF_LABS.Presentation.Redis;
 using System;
@@ -8,7 +7,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -24,6 +22,7 @@ namespace DevF_LABS.Presentation
             Mapper_Bootstrapper.RegisterMapping();
             redisCacheManager.Clear();
             Application["LiveSessionsCount"] = 0;
+            MvcHandler.DisableMvcResponseHeader = true;
         }
 
         protected void Application_BeginRequest()
@@ -54,7 +53,12 @@ namespace DevF_LABS.Presentation
 
         protected void Application_EndRequest()
         {
-            
+            HttpContext.Current.Response.Headers.Remove("Server");
+            HttpContext.Current.Response.Headers.Remove("X-AspNet-Version");
+            HttpContext.Current.Response.Headers.Remove("X-AspNetMvc-Version");
+            HttpContext.Current.Response.Headers.Remove("X-Powered-By");
+            HttpContext.Current.Response.AddHeader("X-Content-Type-Options", "nosniff");
+            HttpContext.Current.Response.AddHeader("X-Xss-Protection", "1; mode=block");
         }
 
         protected void Session_Start(object sender, EventArgs e)

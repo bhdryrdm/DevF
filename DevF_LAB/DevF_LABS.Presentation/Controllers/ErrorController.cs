@@ -21,5 +21,7 @@ namespace DevF_LABS.Presentation.Controllers
         public ActionResult ServerError() => View();
 
         public ActionResult ServerErrorAjax() => Json("");
+
+        public ActionResult NotAuthentication() => View(); 
     }
 }

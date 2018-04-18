@@ -129,9 +129,10 @@
                                         if (!returnData.IsSuccess && returnData.IsSuccess !== undefined) {
                                             devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
                                         } else {
-                                            if (returnData[0].length > 468 && returnData[1].IsSuccess) {
+                                            if (returnData[0].length > 508 && returnData[1].IsSuccess) {
                                                 $('#scenario_3_userList').html(returnData[0]);
                                             } else {
+                                                $('#scenario_3_userList').html(returnData[0]);
                                                 devf.Swal(returnData[1].ResponseCode, returnData[1].Message, "error", "Close");
                                             }
                                         }
@@ -151,7 +152,7 @@
                                         if (!returnData.IsSuccess && returnData.IsSuccess !== undefined) {
                                             devf.Swal(returnData.ResponseCode, returnData.Message, "error", "Close");
                                         } else {
-                                            if (returnData[0].length > 468 && returnData[1].IsSuccess) {
+                                            if (returnData[0].length > 508 && returnData[1].IsSuccess) {
                                                 $('#scenario_3_userList').html(returnData[0]);
                                                 devf.Swal("User Delete", returnData[1].Message, "success", "Close");
                                             } else {
@@ -235,7 +236,7 @@
                             <script>
                                 function userRegister() {
                                     var success = function (returnData) {
-                                        if (returnData[0].length > 468 && returnData[1].IsSuccess) {
+                                        if (returnData[0].length > 508 && returnData[1].IsSuccess) {
                                             $('#scenario_3_userList').html(returnData[0]);
                                             devf.Swal("User Register", returnData[1].Message, "success", "Close");
                                         } else {

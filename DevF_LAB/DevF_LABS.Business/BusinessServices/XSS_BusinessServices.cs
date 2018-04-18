@@ -26,10 +26,15 @@ namespace DevF_LABS.Business.BusinessServices
                         response.LoginUser = XSS_Mapping.XSS_User_To_RXSS_S3_UserView(user);
                         response.UserList = XSS_Mapping.XSS_User_To_RXSS_S3_UserView(dbContext.XSS_User.ToList());
                     }
+                    else
+                    {
+                        response.IsSuccess = false;
+                        response.Message = "Kullanıcı bulunamadı!";
+                        response.ResponseCode = 404;
+                    }
                 }
                 catch (Exception)
                 {
-                    throw;
                 }
             }
             return response;

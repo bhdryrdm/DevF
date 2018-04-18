@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Security MisConfiguration</a></li>
+        <li class="breadcrumb-item active">Index</li>
+        <!-- Breadcrumb Menu-->
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                @* Client Side Folder Structure *@
+                <div class="col-md-2 mb-4">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Security Misconfiguration</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Security Misconfiguration</a>
+                                    <ul>
+                                        <li> <a href="#securitymisconfigDescription" data-toggle="tab" onclick="activeTabFile('.securitymisconfigTab','#securitymisconfigDescription','.rootTab','#securitymisconfigScenarios')">Nedir ?</a></li>
+                                        <li> <a href="#securitymisconfigWebconfig" data-toggle="tab" onclick="activeTabFile('.securitymisconfigTab','#securitymisconfigWebconfig','.rootTab','#securitymisconfigScenarios')">Web.Config</a></li>
+                                        <li> <a href="#securitymisconfigGlobalAsax" data-toggle="tab" onclick="activeTabFile('.securitymisconfigTab','#securitymisconfigGlobalAsax','.rootTab','#securitymisconfigScenarios')">Global.asax</a></li>
+                                        <li> <a href="#securitymisconfigScenariosProtectionMethod" data-toggle="tab" onclick="activeTabFile('.securitymisconfigTab','#securitymisconfigScenariosProtectionMethod','.rootTab','#securitymisconfigScenarios')">Korunma Yöntemleri</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#securitymisconfigSource" onclick="activeTabFile('.rootTab','#securitymisconfigSource')" data-toggle="tab">Kaynaklar</a> </li>
+                                <li><a href="#securitymisconfigFound" onclick="activeTabFile('.rootTab','#securitymisconfigFound')" data-toggle="tab">Bulunan Security Misconfiguration</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function activeTabFile(destinationTab, destinationTabContent, parentTab, parentTabContent, grandParent, grandParentContent) {
+
+                            if (parentTab != '' && !$(parentTabContent).hasClass('active')) {
+                                // Aktif olan parent tab ve contenti silinir
+                                $(parentTab).removeClass('active');
+                                $(parentTab + 'Content').removeClass('active');
+                                //Aktif olması istenen parent tab ve contenti eklenir
+                                $($('li').find('a[href$="' + parentTabContent + '"]')[0]).addClass('active');
+                                $(parentTabContent).addClass('active');
+                            }
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            //Aktif olması istenen tab ve content aktif edilir
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                    </script>
+                </div>
+                @* Client Side Content *@
+                <div class="col-md-10" id="securitymisconfigPart">
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#securitymisconfigScenarios" role="tab" aria-controls="securitymisconfigPart">Security Misconfiguration</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#securitymisconfigSource" role="tab" aria-controls="source">Kaynaklar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#securitymisconfigFound" role="tab" aria-controls="found">Bulunan Security Misconfiguration</a></li>
+                    </ul>
+
+                    <div class="tab-content" role="tabpanel">
+                        <div class="tab-pane rootTabContent active" id="securitymisconfigScenarios">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs bg-light" role="tablist">
+                                    <li class="nav-item"><a class="securitymisconfigTab nav-link active" data-toggle="tab" href="#securitymisconfigDescription" role="tab">Nedir ?</a></li>
+                                    <li class="nav-item"><a class="securitymisconfigTab nav-link" data-toggle="tab" href="#securitymisconfigWebconfig" role="tab">Web.Config</a></li>
+                                    <li class="nav-item"><a class="securitymisconfigTab nav-link" data-toggle="tab" href="#securitymisconfigGlobalAsax" role="tab">Global.asax</a></li>
+                                    <li class="nav-item"><a class="securitymisconfigTab nav-link" data-toggle="tab" href="#securitymisconfigScenariosProtectionMethod" role="tab">Korunma Yöntemleri</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    @* securitymisconfig Description *@
+                                    <div class="tab-pane securitymisconfigTabContent active" id="securitymisconfigDescription">
+                                        <p class="mt-2">Security Misconfiguration OWASP projesine göre en çok bulunan zafiyet türüdür.</p>
+                                        <p class="mt-2">Zafiyet Türkçe karşılığı olarak Unutulmuş Güvenlik Konfigürsayonu anlamına gelmektedir.</p>
+                                        <p class="mt-2">Özellikle kullanılan uygulamaların, servislerin yada cihazların ön tanımlı ayarlarının değiştirilmemesi yada güncellenmemesi sonucu ortaya çıkmaktadır.</p>
+                                    </div>
+                                    @* Web.Config *@
+                                    <div class="tab-pane securitymisconfigTabContent" id="securitymisconfigWebconfig">
+                                        <div class="card">
+                                            <div class="card-header"><i class="fa fa-file-text-o"></i> Web.Config </div>
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <ul style="font-size:12px;">
+                                                        <li class="mt-2"> Web.Config .NET FRAMEWORK projelerinde bulunan konfigürasyon dosyasıdır. </li>
+                                                        <li class="mt-2"> Login sayfası, header bilgileri, cookie ayarları gibi birçok konfigürasyon ayarları burada tanımlanmaktadır. </li>
+                                                        <li class="mt-2"> Her web uygulamasında buna benzer bir yapı bulunmaktadır. </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Global.asax *@
+                                    <div class="tab-pane securitymisconfigTabContent" id="securitymisconfigGlobalAsax">
+                                        <div class="card">
+                                            <div class="card-header"><i class="fa fa-file-text-o"></i> Global.asax </div>
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <ul style="font-size:12px;">
+                                                        <li class="mt-2"> Global.asax .NET FRAMEWORK projelerinde bulunan Application Life Cycle dosyasıdır. </li>
+                                                        <li class="mt-2"> Yine Web.config dosyasından ayarlanabilen Login sayfası, header bilgileri, cookie ayarları gibi birçok konfigürasyon ayarları burada tanımlanabilmektedir. </li>
+                                                        <li class="mt-2"> Aynı zamanda Global.asax içerisinde Application Life Cycle yani Uygulama Yaşam Döngüsüne ait birçok fonksiyon içerisinde ayarlamalar yapılabilmektedir.  </li>
+                                                        <li class="mt-2"> Örnek olarak projemizin Global.asax dosyasna <a href="https://gitlab.com/bhdryrdm/DevF/blob/master/DevF_LAB/DevF_LABS.Presentation/Global.asax.cs"> buradan </a> erişebilirsiniz. </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Korunma Yöntemleri ? *@
+                                    <div class="tab-pane securitymisconfigTabContent" id="securitymisconfigScenariosProtectionMethod">
+                                        <b> Yapılması Gerekenler </b> <i class="fa fa-shield"></i>
+                                        <ul style="font-size:12px;">
+                                            <li class="mt-2"> Uygulama yada servisler için güvenlik yaması yayınlanmışsa en kısa sürede güncellemeyi yapınız. </li>
+                                            <li class="mt-2"> Sistem konfigürasyon dosyaları için ön tanımlı ayarları ve herhangi bir uygulamayı kullanabilmek için size atanan default parolaları mutlaka değiştiriniz.</li>
+                                            <li class="mt-2"> Dijital kapı kilit, kredi kartı, pin gibi kısa olan parolalarınızı sık sık değiştiriniz. </li>
+                                            <li class="mt-2"> Uygulama içerisinde gereksiz olan 3rd party uygulama yada servisleri kullanmayınız.</li>
+                                            <li class="mt-2"> Uygulama içerisinde gereksiz olan javascript ve css dosyalarını kullanmayınız.</li>
+                                        </ul>
+                                        <b> Unutulmaması Gerekenler</b> <i class="fa fa-bullhorn"></i>
+                                        <ul class="mt-2">
+                                            <li> Uygulamayı en az bağımlı şekile getriniz böylece bağımlı olunan dosya, uygulama, servislerde çıkabilecek zafiyetlerden mümkün olduğunca korunmuş olursunuz. </li>
+                                            <li> Birçok zafiyet ortaya çıktıktan sonra uygulanmayan ve güncellenmeyen yamalardan dolayı yaşamlarını sürdürmektedir. </li>
+                                            <li> Özellikle buna hizmet eden Shodan gibi arama motorları yada Nessus gibi sunuculardaki açık portları tarayan uygulamaları örnek verebiliriz. </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Partial("~/Views/SecurityMisconfig/_SecurityMisconfigurationSourceWebSites.cshtml")
+                        @Html.Partial("~/Views/SecurityMisconfig/_Foundsecuritymisconfiguration.cshtml")
+                    </div>
+                </div>
+                @* Server Side Folder Structure *@
+                <div class="col-md-2 mb-4 mt-5">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Server Code</a>
+                            <ul>
+                                <li>
+                                    <a href="#">ASP.NET MVC</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Controllers</a>
+                                            <ul>
+                                                <li><a href="#baseController" onclick="serverSideTab('.serverSideTab','#baseController')" data-toggle="tab">BaseController</a> </li>
+                                                <li><a href="#securitymisconfigController" onclick="serverSideTab('.serverSideTab','#securitymisconfigController')" data-toggle="tab">SecMisconfigController</a> </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active d-block');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideAllTabClose(destinationTabContent) {
+                            $('#serverSide').css('display', 'none');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+                        };
+
+                        function closeTab(destinationTabContent) {
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).removeClass('active d-block');
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('d-none');
+                        }
+                    </script>
+                </div>
+                @* Server Side Github Gist Content *@
+                <div class="col-md-10 mt-5" id="serverSide" style="display:none">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab">
+                                    BaseController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#baseController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#securitymisconfigController" role="tab">
+                                    securitymisconfigController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#securitymisconfigController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
+                        </ul>
+                        <div class="tab-content" role="tabpanel">
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BaseController.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

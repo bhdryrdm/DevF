@@ -117,79 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Global_GReCaptcha" xml:space="preserve">
-    <value>Unvalid GReCaptcha!</value>
+  <data name="RXSS_S3_DeleteRequest_UserID_Range" xml:space="preserve">
+    <value>Lütfen 1-2147283647 arasında bir değer giriniz!</value>
   </data>
-  <data name="Global_Unauthorize" xml:space="preserve">
-    <value>Unauthrozied operation!</value>
-  </data>
-  <data name="Recep_YeniKeyu" xml:space="preserve">
-    <value>Auth</value>
-  </data>
-  <data name="Global_OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="RXSS_Description_WhatIsXSS" xml:space="preserve">
-    <value>What Is Reflected XSS(Cross Site Scripting) ?</value>
-  </data>
-  <data name="RXSS_Description_P1" xml:space="preserve">
-    <value>When translating into Turkish, even if it means 'Reflected' or 'Mirrored', we can say that it is harmless among the types of Reflected type XSS.</value>
-  </data>
-  <data name="RXSS_Description_P2" xml:space="preserve">
-    <value>Reflected XSS is a non-persistent and only a weakness for the user running the malicious script.</value>
-  </data>
-  <data name="RXSS_Description_P3" xml:space="preserve">
-    <value>In addition, this type of XSS is the most common type of XSS.</value>
-  </data>
-  <data name="RXSS_Scenario_1_WorldOfScripts" xml:space="preserve">
-    <value>World Of Scripts</value>
-  </data>
-  <data name="RXSS_Scenario_1_P1" xml:space="preserve">
-    <value>In its simplest form it can be tested with Reflected XSS</value>
-  </data>
-  <data name="RXSS_Scenario_1_P1_Alert" xml:space="preserve">
-    <value>Clicked Alert Button!</value>
-  </data>
-  <data name="RXSS_Scenario_1_P2" xml:space="preserve">
-    <value>So if the malicious script can be run in any way on the browser, Reflected XSS is there.</value>
-  </data>
-  <data name="RXSS_Scenario_1_P3" xml:space="preserve">
-    <value>To better understand the subject, please review the example on the Example 2 tab.</value>
-  </data>
-  <data name="Global_SearchButton" xml:space="preserve">
-    <value>Search Button</value>
-  </data>
-  <data name="RXSS_Scenario_2_P1" xml:space="preserve">
-    <value>Many of today's websites provide users a quick way the information in the website with the search button.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P2" xml:space="preserve">
-    <value>When the search is made based on the number of characters entered in the last time, and Reflected XSS is unavoidable when the value entered immediately after is reflected on the screen! </value>
-  </data>
-  <data name="Global_Application" xml:space="preserve">
-    <value>Application</value>
-  </data>
-  <data name="RXSS_Scenario_2_P3" xml:space="preserve">
-    <value>The searched word is shown on the screen, enter the desired phrase when the 'Search!' button is triggered in the textbox below</value>
-  </data>
-  <data name="Global_Example" xml:space="preserve">
-    <value>Example</value>
-  </data>
-  <data name="RXSS_Scenario_2_P4" xml:space="preserve">
-    <value>Instead of a script, you can try it out first with bold(&amp;lt;b /&amp;gt;) or italic(&amp;lt;i /&amp;gt;) HTML tags.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P5" xml:space="preserve">
-    <value>As you can see, the searched word will be written in bold.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P6" xml:space="preserve">
-    <value>Finally, when we test that there is no tag restriction, we can create an example for Reflected XSS.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P7" xml:space="preserve">
-    <value>As you can see, you will see that the script written in the Textbox field works.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P8" xml:space="preserve">
-    <value>Searching Word:</value>
-  </data>
-  <data name="RXSS_Scenario_2_P8_Input" xml:space="preserve">
-    <value>Enter Search Word ...</value>
+  <data name="RXSS_S3_DeleteRequest_UserID_Required" xml:space="preserve">
+    <value>Kullanıcı ID zorunlu alandır!</value>
   </data>
 </root>

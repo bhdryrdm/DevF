@@ -61,6 +61,24 @@ namespace DevF_LABS.Language.Presentation.Controllers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application.
+        /// </summary>
+        public static string Global_Application {
+            get {
+                return ResourceManager.GetString("Global_Application", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Example.
+        /// </summary>
+        public static string Global_Example {
+            get {
+                return ResourceManager.GetString("Global_Example", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unvalid GReCaptcha!.
         /// </summary>
         public static string Global_GReCaptcha {
@@ -75,6 +93,15 @@ namespace DevF_LABS.Language.Presentation.Controllers {
         public static string Global_OK {
             get {
                 return ResourceManager.GetString("Global_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Button.
+        /// </summary>
+        public static string Global_SearchButton {
+            get {
+                return ResourceManager.GetString("Global_SearchButton", resourceCulture);
             }
         }
         
@@ -178,15 +205,6 @@ namespace DevF_LABS.Language.Presentation.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string RXSS_Scenario_2_Application {
-            get {
-                return ResourceManager.GetString("RXSS_Scenario_2_Application", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Many of today&apos;s websites provide users a quick way the information in the website with the search button..
         /// </summary>
         public static string RXSS_Scenario_2_P1 {
@@ -205,11 +223,65 @@ namespace DevF_LABS.Language.Presentation.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search Button.
+        ///   Looks up a localized string similar to The searched word is shown on the screen, enter the desired phrase when the &apos;Search!&apos; button is triggered in the textbox below.
         /// </summary>
-        public static string RXSS_Scenario_2_SearchButton {
+        public static string RXSS_Scenario_2_P3 {
             get {
-                return ResourceManager.GetString("RXSS_Scenario_2_SearchButton", resourceCulture);
+                return ResourceManager.GetString("RXSS_Scenario_2_P3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instead of a script, you can try it out first with bold(&amp;lt;b /&amp;gt;) or italic(&amp;lt;i /&amp;gt;) HTML tags..
+        /// </summary>
+        public static string RXSS_Scenario_2_P4 {
+            get {
+                return ResourceManager.GetString("RXSS_Scenario_2_P4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As you can see, the searched word will be written in bold..
+        /// </summary>
+        public static string RXSS_Scenario_2_P5 {
+            get {
+                return ResourceManager.GetString("RXSS_Scenario_2_P5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finally, when we test that there is no tag restriction, we can create an example for Reflected XSS..
+        /// </summary>
+        public static string RXSS_Scenario_2_P6 {
+            get {
+                return ResourceManager.GetString("RXSS_Scenario_2_P6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As you can see, you will see that the script written in the Textbox field works..
+        /// </summary>
+        public static string RXSS_Scenario_2_P7 {
+            get {
+                return ResourceManager.GetString("RXSS_Scenario_2_P7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching Word:.
+        /// </summary>
+        public static string RXSS_Scenario_2_P8 {
+            get {
+                return ResourceManager.GetString("RXSS_Scenario_2_P8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Search Word ....
+        /// </summary>
+        public static string RXSS_Scenario_2_P8_Input {
+            get {
+                return ResourceManager.GetString("RXSS_Scenario_2_P8_Input", resourceCulture);
             }
         }
     }

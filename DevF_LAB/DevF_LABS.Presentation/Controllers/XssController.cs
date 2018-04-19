@@ -78,7 +78,7 @@ namespace DevF_LABS.Presentation.Controllers
             if (!GoogleRecaptchaControl(request.SXSS_S1_CommentRequest_gReCaptcha))
             {
                 response.IsSuccess = false;
-                response.Message = "Not valid gReCaptcha!";
+                response.Message = Lang.Global_GReCaptcha;
                 response.ResponseCode = 400;
             }
             else
@@ -105,7 +105,7 @@ namespace DevF_LABS.Presentation.Controllers
             if (!GoogleRecaptchaControl(request.SXSS_S1_CommentRequest_gReCaptcha))
             {
                 response.IsSuccess = false;
-                response.Message = "Not valid gReCaptcha!";
+                response.Message = Lang.Global_GReCaptcha;
                 response.ResponseCode = 400;
             }
             else

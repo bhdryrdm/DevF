@@ -59,6 +59,10 @@
     <Folder Include="XSS\DomXSS\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DevF_LABS.Language\DevF_LABS.Language.csproj">
+      <Project>{1a748301-37b2-487d-af6a-a79e25c33462}</Project>
+      <Name>DevF_LABS.Language</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DevF_LABS.ViewModel\DevF_LABS.ViewModel.csproj">
       <Project>{8F471C52-EB74-471D-8B9B-FDC78772A583}</Project>
       <Name>DevF_LABS.ViewModel</Name>

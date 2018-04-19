@@ -1,4 +1,6 @@
-﻿<script src='https://www.google.com/recaptcha/api.js'></script>
+﻿@using Lang = DevF_LABS.Language.Presentation.Controllers.XssController
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="tab-pane rootTabContent" id="reflected" role="tabpanel">
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs bg-light" role="tablist">
@@ -10,17 +12,17 @@
         <div class="tab-content">
             @* Reflected XSS Description *@
             <div class="tab-pane reflectedTabContent active" id="reflectedDescription">
-                <b>Reflected XSS Nedir ?</b>
-                <p class="mt-3">Türkçeye çeviri yapıldığında 'Yansıyan' yada 'Yansıtılmış' gibi anlamlara gelse de Reflected tipi XSS türleri arasında zararsız olanı diyebiliriz.</p>
-                <p>Reflected XSS kalıcı olmayan ve sadece zararlı scripti çalıştıran kullanıcı için geçerli olan bir zafiyettir.</p>
-                <p>Ayrıca bu XSS türü en yaygın olarak görülen XSS türüdür.</p>
+                <b>@Lang.RXSS_Description_WhatIsXSS</b>
+                <p class="mt-3">@Lang.RXSS_Description_P1</p>
+                <p>@Lang.RXSS_Description_P2</p>
+                <p>@Lang.RXSS_Description_P3</p>
             </div>
             @* Reflected XSS Scenario_1 *@
             <div class="tab-pane reflectedTabContent" id="reflectedScenario_1">
-                <b>Scriptlerin Dünyası</b>
-                <p class="mt-3">En basit şekil ile açıklamak gerekirse Reflected XSS <code>alert('Alert Butonuna tıklandı!');</code> kodu ile test edilebilir.</p>
-                <p>Yani zararlı script browser üzerinde herhangi bir şekilde çalıştırılabiliyorsa Reflected XSS oraya çıkmıştır.</p>
-                <p>Konuyu daha iyi anlamak için lütfen Örnek 2 sekmesindeki örneği inceleyiniz.</p>
+                <b>@Lang.RXSS_Scenario_1_WorldOfScripts</b>
+                <p class="mt-3">@Lang.RXSS_Scenario_1_P1 <code>alert('@Lang.RXSS_Scenario_1_P1_Alert');</code> </p>
+                <p>@Lang.RXSS_Scenario_1_P2</p>
+                <p>@Lang.RXSS_Scenario_1_P3</p>
                 <button class="btn btn-sm btn-danger" style="margin-left:10px;" onclick="reflectedXSSAlert()">Alert Butonu</button>
                 <script>
                     function reflectedXSSAlert() {
@@ -30,27 +32,27 @@
             </div>
             @* Reflected XSS Scenario_2 *@
             <div class="tab-pane reflectedTabContent" id="reflectedScenario_2">
-                <b>Arama Butonu</b>
-                <p class="mt-3">Günümüz web sitelerinin bir çoğu arama butonu ile web sitesi içerisindeki bilgileri kullanıcılara hızlı bir şekilde sunuyorlar.</p>
-                <p>Özellikle son zamanlarda girilen karakter sayısına göre arama yapıldığını ve hemen arkasından  girilen değer ekrana yansıtıldığı zaman Reflected XSS ortaya çıkması kaçınılmazdır! </p>
-                <b>Uygulama</b>
-                <p class="mt-3">Aşağıda görülen textbox içerisine aranmak istenen ifade girilip 'Search!' butonu tetiklendiğinde aranılan kelime ekranda gösterilmektedir.</p>
-                <p><code>Bahadır</code> &nbsp;<span class="label label-success">Örnek</span></p>
-                <p>Normal ifadeler yerine öncelikle HTML üzerinde kalın(&lt;b /&gt;) yada italik(&lt;i /&gt;) yazabileceğimiz taglar ile deneyebilirsiniz.</p>
-                <p><code>&lt;b&gt;Bahadır&lt;/b&gt;</code>&nbsp;<span class="label label-success">Örnek</span> Görüleceği üzere aranılan kelime kalın yazılarla yazılacaktır.</p>
-                <p>Son olarak herhangi bir tag kısıtlaması da olmadığını test ettiğimizde Reflected XSS için örnek oluşturabiliriz.</p>
-                <p><code>&lt;script&gt;alert("Hey,This is a Reflected XSS!")&lt;/script&gt;</code>&nbsp;<span class="label label-success">Örnek</span>Görüleceği gibi textbox alanına yazılan scriptin çalıştığını göreceksiniz.</p>
+                <b>@Lang.Global_SearchButton</b>
+                <p class="mt-3">@Lang.RXSS_Scenario_2_P1</p>
+                <p>@Lang.RXSS_Scenario_2_P2</p>
+                <b>@Lang.Global_Application</b>
+                <p class="mt-3">@Lang.RXSS_Scenario_2_P3</p>
+                <p><code>Bahadır</code> &nbsp;<span class="label label-success">@Lang.Global_Example</span></p>
+                <p>Script yerine öncelikle HTML taglerinden, kalın(&lt;b /&gt;) yada italik(&lt;i /&gt;) olanlar ile deneyebilirsiniz.</p>
+                <p><code>&lt;b&gt;Bahadır&lt;/b&gt;</code>&nbsp;<span class="label label-success">@Lang.Global_Example</span> @Lang.RXSS_Scenario_2_P5</p>
+                <p>@Lang.RXSS_Scenario_2_P6</p>
+                <p><code>&lt;script&gt;alert("Hey,This is a Reflected XSS!")&lt;/script&gt;</code>&nbsp;<span class="label label-success">@Lang.Global_Example</span>@Lang.RXSS_Scenario_2_P7</p>
 
-                <p id="searchingWord">Aradığınız Kelime : </p>
+                <p id="searchingWord">@Lang.RXSS_Scenario_2_P8</p>
                 <div class="input-group">
-                    <input type="email" id="searchText" class="form-control" placeholder="Aranacak Kelime Giriniz...">
+                    <input type="email" id="searchText" class="form-control" placeholder="@Lang.RXSS_Scenario_2_P8_Input">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-primary" onclick="reflectedXSSSearch($('#searchText').val())">Search!</button>
                     </span>
                 </div>
                 <script>
                     function reflectedXSSSearch(param) {
-                        $('#searchingWord').html('Aradığınız Kelime : ');
+                        $('#searchingWord').html('@Lang.RXSS_Scenario_2_P8');
                         $('#searchingWord').append(param);
                     }
                 </script>

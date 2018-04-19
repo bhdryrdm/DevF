@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Lang = DevF_LABS.Language.Vertical.XSS.XssRequestResponse;
 
 namespace DevF_LABS.RequestResponse.XSS.ReflectedXSS
 {
     public class RXSS_S3_DeleteRequest
     {
-        [Required(ErrorMessage ="Kullanıcı ID zorunlu alandır!")]
-        [Range(1, int.MaxValue, ErrorMessage = "Lütfen 1-2147283647 arasında bir değer giriniz!")]
+        [Required(ErrorMessageResourceType = typeof(Lang), ErrorMessageResourceName = "RXSS_S3_DeleteRequest_UserID_Required")]
+        [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(Lang), ErrorMessageResourceName = "RXSS_S3_DeleteRequest_UserID_Range")]
         public int UserID { get; set; }
     }
 }

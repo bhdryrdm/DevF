@@ -97,79 +97,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Recep_YeniKeyu" xml:space="preserve">
-    <value>Yetki</value>
+  <data name="RXSS_S3_DeleteRequest_UserID_Required" xml:space="preserve">
+    <value>UserID Required Field</value>
   </data>
-  <data name="Global_OK" xml:space="preserve">
-    <value>Tamam</value>
-  </data>
-  <data name="RXSS_Description_WhatIsXSS" xml:space="preserve">
-    <value>XSS(Cross Site Scripting) Nedir ?</value>
-  </data>
-  <data name="Global_GReCaptcha" xml:space="preserve">
-    <value>Geçersiz GReCaptha!</value>
-  </data>
-  <data name="Global_Unauthorize" xml:space="preserve">
-    <value>Yetkisiz İşlem!</value>
-  </data>
-  <data name="RXSS_Description_P1" xml:space="preserve">
-    <value>Türkçeye çeviri yapıldığında 'Yansıyan' yada 'Yansıtılmış' gibi anlamlara gelse de Reflected tipi XSS türleri arasında zararsız olanı diyebiliriz.</value>
-  </data>
-  <data name="RXSS_Description_P2" xml:space="preserve">
-    <value>Reflected XSS kalıcı olmayan ve sadece zararlı scripti çalıştıran kullanıcı için geçerli olan bir zafiyettir.</value>
-  </data>
-  <data name="RXSS_Description_P3" xml:space="preserve">
-    <value>Ayrıca bu XSS türü en yaygın olarak görülen XSS türüdür.</value>
-  </data>
-  <data name="RXSS_Scenario_1_WorldOfScripts" xml:space="preserve">
-    <value>Scriptlerin Dünyası</value>
-  </data>
-  <data name="RXSS_Scenario_1_P1" xml:space="preserve">
-    <value>En basit şekil ile açıklamak gerekirse Reflected XSS kodu ile test edilebilir.</value>
-  </data>
-  <data name="RXSS_Scenario_1_P1_Alert" xml:space="preserve">
-    <value>Alert Butonuna tıklandı!</value>
-  </data>
-  <data name="RXSS_Scenario_1_P2" xml:space="preserve">
-    <value>Yani zararlı script browser üzerinde herhangi bir şekilde çalıştırılabiliyorsa Reflected XSS oraya çıkmıştır.</value>
-  </data>
-  <data name="RXSS_Scenario_1_P3" xml:space="preserve">
-    <value>Konuyu daha iyi anlamak için lütfen Örnek 2 sekmesindeki örneği inceleyiniz.</value>
-  </data>
-  <data name="Global_SearchButton" xml:space="preserve">
-    <value>Arama Butonu</value>
-  </data>
-  <data name="RXSS_Scenario_2_P1" xml:space="preserve">
-    <value>Günümüz web sitelerinin bir çoğu arama butonu ile web sitesi içerisindeki bilgileri kullanıcılara hızlı bir şekilde sunuyorlar.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P2" xml:space="preserve">
-    <value>Özellikle son zamanlarda girilen karakter sayısına göre arama yapıldığını ve hemen arkasından  girilen değer ekrana yansıtıldığı zaman Reflected XSS ortaya çıkması kaçınılmazdır! </value>
-  </data>
-  <data name="Global_Application" xml:space="preserve">
-    <value>Uygulama</value>
-  </data>
-  <data name="RXSS_Scenario_2_P3" xml:space="preserve">
-    <value>Aşağıda görülen textbox içerisine aranmak istenen ifade girilip 'Search!' butonu tetiklendiğinde aranılan kelime ekranda gösterilmektedir.</value>
-  </data>
-  <data name="Global_Example" xml:space="preserve">
-    <value>Örnek</value>
-  </data>
-  <data name="RXSS_Scenario_2_P4" xml:space="preserve">
-    <value>Script yerine öncelikle HTML taglerinden kalın ya da italik olanlar ile deneyebilirsiniz.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P5" xml:space="preserve">
-    <value>Görüleceği üzere aranılan kelime kalın yazılarla yazılacaktır.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P6" xml:space="preserve">
-    <value>Son olarak herhangi bir tag kısıtlaması da olmadığını test ettiğimizde Reflected XSS için örnek oluşturabiliriz.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P7" xml:space="preserve">
-    <value>Görüleceği gibi textbox alanına yazılan scriptin çalıştığını göreceksiniz.</value>
-  </data>
-  <data name="RXSS_Scenario_2_P8" xml:space="preserve">
-    <value>Aradığınız Kelime : </value>
-  </data>
-  <data name="RXSS_Scenario_2_P8_Input" xml:space="preserve">
-    <value>Aranacak Kelime Giriniz...</value>
+  <data name="RXSS_S3_DeleteRequest_UserID_Range" xml:space="preserve">
+    <value>Please </value>
   </data>
 </root>

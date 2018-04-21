@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Sensitive Data Exposure</a></li>
+        <li class="breadcrumb-item active">Index</li>
+        <!-- Breadcrumb Menu-->
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                @* Client Side Folder Structure *@
+                <div class="col-md-2 mb-4">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Sensitive Data Exposure</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Sensitive Data Exposure</a>
+                                    <ul>
+                                        <li> <a href="#sensitivedataexposureDescription" data-toggle="tab" onclick="activeTabFile('.sensitivedataexposureTab', '#sensitivedataexposureDescription', '.rootTab', '#sensitivedataexposureScenarios')">Nedir ?</a></li>
+                                        <li> <a href="#sensitivedataexposureWebconfig" data-toggle="tab" onclick="activeTabFile('.sensitivedataexposureTab', '#sensitivedataexposureWebconfig', '.rootTab', '#sensitivedataexposureScenarios')">Web.Config</a></li>
+                                        <li> <a href="#sensitivedataexposureGlobalAsax" data-toggle="tab" onclick="activeTabFile('.sensitivedataexposureTab', '#sensitivedataexposureGlobalAsax', '.rootTab', '#sensitivedataexposureScenarios')">Global.asax</a></li>
+                                        <li> <a href="#sensitivedataexposureScenariosProtectionMethod" data-toggle="tab" onclick="activeTabFile('.sensitivedataexposureTab', '#sensitivedataexposureScenariosProtectionMethod', '.rootTab', '#sensitivedataexposureScenarios')">Korunma Yöntemleri</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#sensitivedataexposureSource" onclick="activeTabFile('.rootTab', '#sensitivedataexposureSource')" data-toggle="tab">Kaynaklar</a> </li>
+                                <li><a href="#sensitivedataexposureFound" onclick="activeTabFile('.rootTab', '#sensitivedataexposureFound')" data-toggle="tab">Bulunan Sensitive Data Exposure</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function activeTabFile(destinationTab, destinationTabContent, parentTab, parentTabContent, grandParent, grandParentContent) {
+
+                            if (parentTab != '' && !$(parentTabContent).hasClass('active')) {
+                                // Aktif olan parent tab ve contenti silinir
+                                $(parentTab).removeClass('active');
+                                $(parentTab + 'Content').removeClass('active');
+                                //Aktif olması istenen parent tab ve contenti eklenir
+                                $($('li').find('a[href$="' + parentTabContent + '"]')[0]).addClass('active');
+                                $(parentTabContent).addClass('active');
+                            }
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            //Aktif olması istenen tab ve content aktif edilir
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                    </script>
+                </div>
+                @* Client Side Content *@
+                <div class="col-md-10" id="sensitivedataexposurePart">
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#sensitivedataexposureScenarios" role="tab" aria-controls="sensitivedataexposurePart">Sensitive Data Exposure</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#sensitivedataexposureSource" role="tab" aria-controls="source">Kaynaklar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#sensitivedataexposureFound" role="tab" aria-controls="found">Bulunan Sensitive Data Exposure</a></li>
+                    </ul>
+
+                    <div class="tab-content" role="tabpanel">
+                        <div class="tab-pane rootTabContent active" id="sensitivedataexposureScenarios">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs bg-light" role="tablist">
+                                    <li class="nav-item"><a class="sensitivedataexposureTab nav-link active" data-toggle="tab" href="#sensitivedataexposureDescription" role="tab">Nedir ?</a></li>
+                                    <li class="nav-item"><a class="sensitivedataexposureTab nav-link" data-toggle="tab" href="#sensitivedataexposureWebconfig" role="tab">Web.Config</a></li>
+                                    <li class="nav-item"><a class="sensitivedataexposureTab nav-link" data-toggle="tab" href="#sensitivedataexposureGlobalAsax" role="tab">Global.asax</a></li>
+                                    <li class="nav-item"><a class="sensitivedataexposureTab nav-link" data-toggle="tab" href="#sensitivedataexposureScenariosProtectionMethod" role="tab">Korunma Yöntemleri</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    @* sensitivedataexposure Description *@
+                                    <div class="tab-pane sensitivedataexposureTabContent active" id="sensitivedataexposureDescription">
+                                        <p class="mt-2">Sensitive Data Exposure bir uygulamanın hassas bilgileri yeterli şekilde koruyamadğında ortaya çıkan bir zafiyettir.</p>
+                                        <p class="mt-2">Zafiyetin Türkçe karşılığı ise Hassas Veriyi Açıkta Bırakma anlamına gelmektedir.</p>
+                                        <p class="mt-2">Verilerin şifrelenmemesi ya da yeterince güçlü olmayan, eski şifreleme algoritmaları ile saklanması ortaya çıkmasındaki en büyük sebeplerdendir.</p>
+                                    </div>
+                                    @* Web.Config *@
+                                    <div class="tab-pane sensitivedataexposureTabContent" id="sensitivedataexposureWebconfig">
+                                        <div class="card">
+                                            <div class="card-header"><i class="fa fa-file-text-o"></i> Web.Config </div>
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <ul style="font-size:12px;">
+                                                        <li class="mt-2"> Web.Config .NET FRAMEWORK projelerinde bulunan konfigürasyon dosyasıdır. </li>
+                                                        <li class="mt-2"> Login sayfası, header bilgileri, cookie ayarları gibi birçok konfigürasyon ayarları burada tanımlanmaktadır. </li>
+                                                        <li class="mt-2"> Her web uygulamasında buna benzer bir yapı bulunmaktadır. </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Global.asax *@
+                                    <div class="tab-pane sensitivedataexposureTabContent" id="sensitivedataexposureGlobalAsax">
+                                        <div class="card">
+                                            <div class="card-header"><i class="fa fa-file-text-o"></i> Global.asax </div>
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <ul style="font-size:12px;">
+                                                        <li class="mt-2"> Global.asax .NET FRAMEWORK projelerinde bulunan Application Life Cycle dosyasıdır. </li>
+                                                        <li class="mt-2"> Yine Web.config dosyasından ayarlanabilen Login sayfası, header bilgileri, cookie ayarları gibi birçok konfigürasyon ayarları burada tanımlanabilmektedir. </li>
+                                                        <li class="mt-2"> Aynı zamanda Global.asax içerisinde Application Life Cycle yani Uygulama Yaşam Döngüsüne ait birçok fonksiyon içerisinde ayarlamalar yapılabilmektedir.  </li>
+                                                        <li class="mt-2"> Örnek olarak projemizin Global.asax dosyasna <a href="https://gitlab.com/bhdryrdm/DevF/blob/master/DevF_LAB/DevF_LABS.Presentation/Global.asax.cs"> buradan </a> erişebilirsiniz. </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Korunma Yöntemleri ? *@
+                                    <div class="tab-pane sensitivedataexposureTabContent" id="sensitivedataexposureScenariosProtectionMethod">
+                                        <b> Yapılması Gerekenler </b> <i class="fa fa-shield"></i>
+                                        <ul style="font-size:12px;">
+                                            <li class="mt-2"> Banka hesap bilgileri, kredi kartı bilgileri, kişisel sağlık bilgileri, adres ve kimlik bilgileri vs. gibi birçok bilgi güçlü bir şifreleme algoritmasıyla şifrelenmelidir.</li>
+                                            <li class="mt-2"> Şifrelerin arada bir değiştirilmesi gerekmekte ve farklı ortamlarda aynı şifrenin kullanılmaması gerekir.</li>
+                                            <li class="mt-2"> Sunucuya gönderilen veriler açık metin şeklinde değil şifreli olarak iletilmelidir.</li>
+                                            <li class="mt-2"> Kullanıcı ve server arasındaki tüm verilerin şifrelenmiş ve gizli olarak iletilebilmesi için https, ftps ve smtps protokolleri tercih edilmelidir.</li>
+                                            <li class="mt-2"> Hassas verilerin çalınması durumunda mevcut verilerin yedeğinin olması faydalı olur.</li>
+                                            <li class="mt-2"> Uygulamalarda varsayılan şeklinde olan şifrelerin mutlaka değiştirilmesi gerekmektedir.</li>
+                                        </ul>
+                                        <b> Unutulmaması Gerekenler</b> <i class="fa fa-bullhorn"></i>
+                                        <ul class="mt-2">
+                                            <li> Kullanılan şifreleme algoritmasının güçlü olması, hassas verileri saldırgan ele geçirse dahi şifreli veriyi çözemeyeceğinden verilerin korunmasını sağlayacaktır.</li>
+                                            <li> Sunucuyla kullanıcı arasındaki veri iletim işlemlerinin şifreli olacak şekilde belirlenmesi ağı dinleyen saldırganların hassas verilere ulaşmasına engel olacaktır.</li>
+                                            <li> Hassas verilerin açığa çıkması işlemi dışardan yapılacak saldırıların yanısıra içerden de olabilir.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Partial("~/Views/SensitiveDataExposure/_SensitiveDataExposureSourceWebSites.cshtml")
+                        @Html.Partial("~/Views/SensitiveDataExposure/_Foundsensitivedataexposure.cshtml")
+                    </div>
+                </div>
+                @* Server Side Folder Structure *@
+                <div class="col-md-2 mb-4 mt-5">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Server Code</a>
+                            <ul>
+                                <li>
+                                    <a href="#">ASP.NET MVC</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Controllers</a>
+                                            <ul>
+                                                <li><a href="#baseController" onclick="serverSideTab('.serverSideTab','#baseController')" data-toggle="tab">BaseController</a> </li>
+                                                <li><a href="#sensitivedataexposureController" onclick="serverSideTab('.serverSideTab', '#sensitivedataexposureController')" data-toggle="tab">SecMisconfigController</a> </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active d-block');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideAllTabClose(destinationTabContent) {
+                            $('#serverSide').css('display', 'none');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+                        };
+
+                        function closeTab(destinationTabContent) {
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).removeClass('active d-block');
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('d-none');
+                        }
+                    </script>
+                </div>
+                @* Server Side Github Gist Content *@
+                <div class="col-md-10 mt-5" id="serverSide" style="display:none">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab">
+                                    BaseController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#baseController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#securitymisconfigController" role="tab">
+                                    sensitivedataexposureController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#sensitivedataexposureController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
+                        </ul>
+                        <div class="tab-content" role="tabpanel">
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BaseController.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+

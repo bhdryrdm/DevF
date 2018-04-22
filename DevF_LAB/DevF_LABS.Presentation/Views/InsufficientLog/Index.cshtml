@@ -8,7 +8,7 @@
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Sensitive Data Exposure</a></li>
+        <li class="breadcrumb-item"><a href="#">Insufficient Logging & Monitoring</a></li>
         <li class="breadcrumb-item active">Index</li>
         <!-- Breadcrumb Menu-->
     </ol>
@@ -19,17 +19,17 @@
                 <div class="col-md-2 mb-4">
                     <ul class="file-tree">
                         <li>
-                            <a href="#">Sensitive Data Exposure</a>
+                            <a href="#">Insufficient Logging & Monitoring</a>
                             <ul>
                                 <li>
-                                    <a href="#">Sensitive Data Exposure</a>
+                                    <a href="#">insufficientlog</a>
                                     <ul>
-                                        <li> <a href="#sensitivedataexposureDescription" data-toggle="tab" onclick="activeTabFile('.sensitivedataexposureTab', '#sensitivedataexposureDescription', '.rootTab', '#sensitivedataexposureScenarios')">Nedir ?</a></li>
-                                        <li> <a href="#sensitivedataexposureScenariosProtectionMethod" data-toggle="tab" onclick="activeTabFile('.sensitivedataexposureTab', '#sensitivedataexposureScenariosProtectionMethod', '.rootTab', '#sensitivedataexposureScenarios')">Korunma Yöntemleri</a></li>
+                                        <li> <a href="#insufficientlogDescription" data-toggle="tab" onclick="activeTabFile('.insufficientlogTab', '#insufficientlogDescription', '.rootTab', '#insufficientlogScenarios')">Nedir ?</a></li>
+                                        <li> <a href="#insufficientlogScenariosProtectionMethod" data-toggle="tab" onclick="activeTabFile('.insufficientlogTab', '#insufficientlogScenariosProtectionMethod', '.rootTab', '#insufficientlogScenarios')">Korunma Yöntemleri</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#sensitivedataexposureSource" onclick="activeTabFile('.rootTab', '#sensitivedataexposureSource')" data-toggle="tab">Kaynaklar</a> </li>
-                                <li><a href="#sensitivedataexposureFound" onclick="activeTabFile('.rootTab', '#sensitivedataexposureFound')" data-toggle="tab">Bulunan Sensitive Data Exposure</a> </li>
+                                <li><a href="#insufficientlogSource" onclick="activeTabFile('.rootTab', '#insufficientlogSource')" data-toggle="tab">Kaynaklar</a> </li>
+                                <li><a href="#insufficientlogFound" onclick="activeTabFile('.rootTab', '#insufficientlogFound')" data-toggle="tab">Bulunan Insufficient Logging & Monitoring</a> </li>
                             </ul>
                         </li>
                     </ul>
@@ -66,50 +66,45 @@
                     </script>
                 </div>
                 @* Client Side Content *@
-                <div class="col-md-10" id="sensitivedataexposurePart">
+                <div class="col-md-10" id="insufficientlogPart">
                     <ul class="nav nav-tabs bg-light" role="tablist">
-                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#sensitivedataexposureScenarios" role="tab" aria-controls="sensitivedataexposurePart">Sensitive Data Exposure</a></li>
-                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#sensitivedataexposureSource" role="tab" aria-controls="source">Kaynaklar</a></li>
-                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#sensitivedataexposureFound" role="tab" aria-controls="found">Bulunan Sensitive Data Exposure</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#insufficientlogScenarios" role="tab" aria-controls="insufficientlogPart">Insufficient Logging & Monitoring</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#insufficientlogSource" role="tab" aria-controls="source">Kaynaklar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#insufficientlogFound" role="tab" aria-controls="found">Bulunan Insufficient Logging & Monitoring</a></li>
                     </ul>
 
                     <div class="tab-content" role="tabpanel">
-                        <div class="tab-pane rootTabContent active" id="sensitivedataexposureScenarios">
+                        <div class="tab-pane rootTabContent active" id="insufficientlogScenarios">
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs bg-light" role="tablist">
-                                    <li class="nav-item"><a class="sensitivedataexposureTab nav-link active" data-toggle="tab" href="#sensitivedataexposureDescription" role="tab">Nedir ?</a></li>
-                                    <li class="nav-item"><a class="sensitivedataexposureTab nav-link" data-toggle="tab" href="#sensitivedataexposureScenariosProtectionMethod" role="tab">Korunma Yöntemleri</a></li>
+                                    <li class="nav-item"><a class="insufficientlogTab nav-link active" data-toggle="tab" href="#insufficientlogDescription" role="tab">Nedir ?</a></li>
+                                    <li class="nav-item"><a class="insufficientlogTab nav-link" data-toggle="tab" href="#insufficientlogScenariosProtectionMethod" role="tab">Korunma Yöntemleri</a></li>
                                 </ul>
                                 <div class="tab-content">
-                                    @* sensitivedataexposure Description *@
-                                    <div class="tab-pane sensitivedataexposureTabContent active" id="sensitivedataexposureDescription">
-                                        <p class="mt-2">Sensitive Data Exposure bir uygulamanın hassas bilgileri yeterli şekilde koruyamadğında ortaya çıkan bir zafiyettir.</p>
-                                        <p class="mt-2">Zafiyetin Türkçe karşılığı ise Hassas Veriyi Açıkta Bırakma anlamına gelmektedir.</p>
-                                        <p class="mt-2">Verilerin şifrelenmemesi ya da yeterince güçlü olmayan, eski şifreleme algoritmaları ile saklanması ortaya çıkmasındaki en büyük sebeplerdendir.</p>
+                                    @* securitymisconfig Description *@
+                                    <div class="tab-pane insufficientlogTabContent active" id="insufficientlogDescription">
+                                        <p class="mt-2">Bu zafiyet, yeteri kadar log kayıtlarının oluşturulmamasından ve monitoring işleminin yapılmamasından kaynaklanır.</p>
+                                        <p class="mt-2">Zafiyet Türkçe olarak yetersiz günlük oluşturma ve izleme anlamına gelmektedir.</p>
+                                        <p class="mt-2">Dışarıdan bakıldığı zaman bu zafiyeti tespit etmek gerçekten güçtür.</p>
                                     </div>
                                     @* Korunma Yöntemleri ? *@
-                                    <div class="tab-pane sensitivedataexposureTabContent" id="sensitivedataexposureScenariosProtectionMethod">
+                                    <div class="tab-pane insufficientlogTabContent" id="insufficientlogScenariosProtectionMethod">
                                         <b> Yapılması Gerekenler </b> <i class="fa fa-shield"></i>
                                         <ul style="font-size:12px;">
-                                            <li class="mt-2"> Banka hesap bilgileri, kredi kartı bilgileri, kişisel sağlık bilgileri, adres ve kimlik bilgileri vs. gibi birçok bilgi güçlü bir şifreleme algoritmasıyla şifrelenmelidir.</li>
-                                            <li class="mt-2"> Şifrelerin arada bir değiştirilmesi gerekmekte ve farklı ortamlarda aynı şifrenin kullanılmaması gerekir.</li>
-                                            <li class="mt-2"> Sunucuya gönderilen veriler açık metin şeklinde değil şifreli olarak iletilmelidir.</li>
-                                            <li class="mt-2"> Kullanıcı ve server arasındaki tüm verilerin şifrelenmiş ve gizli olarak iletilebilmesi için https, ftps ve smtps protokolleri tercih edilmelidir.</li>
-                                            <li class="mt-2"> Hassas verilerin çalınması durumunda mevcut verilerin yedeğinin olması faydalı olur.</li>
-                                            <li class="mt-2"> Uygulamalarda varsayılan şeklinde olan şifrelerin mutlaka değiştirilmesi gerekmektedir.</li>
+                                            <li class="mt-2"> Yapılan başarılı ya da başarısız giriş denemeleri, sunucu uyuruları ve önemli birçok işlemler loglanarak kontrol edilmeli ve gerekli görüldüğü takdirde üst yöneticilere bildirilmelidir.</li>
+                                            <li class="mt-2"> Eğer işlemler loglanırsa, herhangi bir brutforce saldırı girişimi erken bir şekilde tespit edilip önlenebilir.</li>
+
                                         </ul>
                                         <b> Unutulmaması Gerekenler</b> <i class="fa fa-bullhorn"></i>
                                         <ul class="mt-2">
-                                            <li> Kullanılan şifreleme algoritmasının güçlü olması, hassas verileri saldırgan ele geçirse dahi şifreli veriyi çözemeyeceğinden verilerin korunmasını sağlayacaktır.</li>
-                                            <li> Sunucuyla kullanıcı arasındaki veri iletim işlemlerinin şifreli olacak şekilde belirlenmesi ağı dinleyen saldırganların hassas verilere ulaşmasına engel olacaktır.</li>
-                                            <li> Hassas verilerin açığa çıkması işlemi dışardan yapılacak saldırıların yanısıra içerden de olabilir.</li>
+                                            <li> Saldırgan sunucudan çok fazla veri indirmeye başlarsa ve ağ trafiğinde olağandışı değişiklikler meydana gelirse bu durum verilerin çalınması ihtimalini ortaya çıkarabilir.</li> 
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @Html.Partial("~/Views/SensitiveDataExposure/_SensitiveDataExposureSourceWebSites.cshtml")
-                        @Html.Partial("~/Views/SensitiveDataExposure/_Foundsensitivedataexposure.cshtml")
+                        @Html.Partial("~/Views/InsufficientLog/_InsufficientLogSourceWebSites.cshtml")
+                        @Html.Partial("~/Views/InsufficientLog/_FoundInsufficientLog.cshtml")
                     </div>
                 </div>
                 @* Server Side Folder Structure *@
@@ -125,7 +120,7 @@
                                             <a href="#">Controllers</a>
                                             <ul>
                                                 <li><a href="#baseController" onclick="serverSideTab('.serverSideTab','#baseController')" data-toggle="tab">BaseController</a> </li>
-                                                <li><a href="#sensitivedataexposureController" onclick="serverSideTab('.serverSideTab', '#sensitivedataexposureController')" data-toggle="tab">SecMisconfigController</a> </li>
+                                                <li><a href="#securitymisconfigController" onclick="serverSideTab('.serverSideTab','#securitymisconfigController')" data-toggle="tab">SecMisconfigController</a> </li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -170,8 +165,8 @@
                             </li>
                             <li class="nav-item">
                                 <a class="serverSideTab nav-link" data-toggle="tab" href="#securitymisconfigController" role="tab">
-                                    sensitivedataexposureController
-                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#sensitivedataexposureController')"></i>
+                                    securitymisconfigController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#securitymisconfigController')"></i>
                                 </a>
                             </li>
                             <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
@@ -185,4 +180,5 @@
         </div>
     </div>
 </main>
+
 

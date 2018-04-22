@@ -1236,10 +1236,14 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InjectionController.cs" />
+    <Compile Include="Controllers\InsecureDeserialController.cs" />
+    <Compile Include="Controllers\InsufficientLogController.cs" />
+    <Compile Include="Controllers\KnownVulnerabilitiesController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\SecurityMisconfigController.cs" />
     <Compile Include="Controllers\SensitiveDataExposureController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\XeeController.cs" />
     <Compile Include="Controllers\XsrfController.cs" />
     <Compile Include="Controllers\XssController.cs" />
     <Compile Include="Filter\BrokenAccessAuthorizeFilter.cs" />
@@ -1630,6 +1634,18 @@
     <Content Include="Views\SensitiveDataExposure\_FoundSensitiveDataExposure.cshtml" />
     <Content Include="Views\SensitiveDataExposure\_SensitiveDataExposureSourceWebSites.cshtml" />
     <Content Include="Views\SensitiveDataExposure\Index.cshtml" />
+    <Content Include="Views\InsecureDeserial\_FoundInsecureDeserial.cshtml" />
+    <Content Include="Views\InsecureDeserial\_InsecureDeserialSourceWebSites.cshtml" />
+    <Content Include="Views\InsecureDeserial\Index.cshtml" />
+    <Content Include="Views\InsufficientLog\_FoundInsufficientLog.cshtml" />
+    <Content Include="Views\InsufficientLog\_InsufficientLogSourceWebSites.cshtml" />
+    <Content Include="Views\InsufficientLog\Index.cshtml" />
+    <Content Include="Views\KnownVulnerabilities\_FoundKnownVulnerabilities.cshtml" />
+    <Content Include="Views\KnownVulnerabilities\_KnownVulnerabilitiesSourceWebSites.cshtml" />
+    <Content Include="Views\KnownVulnerabilities\Index.cshtml" />
+    <Content Include="Views\Xee\_FoundXee.cshtml" />
+    <Content Include="Views\Xee\_XeeSourceWebSites.cshtml" />
+    <Content Include="Views\Xee\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

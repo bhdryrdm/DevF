@@ -1232,6 +1232,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BrokenAccessController.cs" />
+    <Compile Include="Controllers\BrokenAuthController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InjectionController.cs" />
@@ -1625,6 +1626,9 @@
     <Content Include="Views\ServerSide\ASP.NET_MVC\Controller\SecurityMisconf.cshtml" />
     <Content Include="Views\SecurityMisconfig\_FoundSecurityMisconfiguration.cshtml" />
     <Content Include="Views\SecurityMisconfig\_SecurityMisconfigurationSourceWebSites.cshtml" />
+    <Content Include="Views\BrokenAuth\Index.cshtml" />
+    <Content Include="Views\BrokenAuth\_FoundBrokenAuthentication.cshtml" />
+    <Content Include="Views\BrokenAuth\_BrokenAuthenticationSourceWebSites.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

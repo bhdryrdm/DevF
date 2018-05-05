@@ -149,7 +149,7 @@ namespace DevF_LABS.Business.BusinessServices
                             dbContext.XSS_Cookie.Add(item);
                     }
                     dbContext.SaveChanges();
-                    response.Message = "Maalesef Cookieleriniz çalındı! :(";
+                    response.Message = "Maalesef Cookieleriniz çalındı! :( /XSS/SXSS_S2_StolenCookieList ile ulaşabilirsiniz!";
                 }
                 catch (Exception ex)
                 {

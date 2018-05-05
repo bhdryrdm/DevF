@@ -1,0 +1,223 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main">
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Broken Authentication</a></li>
+        <li class="breadcrumb-item active">Index</li>
+        <!-- Breadcrumb Menu-->
+    </ol>
+    <div class="container-fluid">
+        <div class="animated fadeIn">
+            <div class="row">
+                @* Client Side Folder Structure *@
+                <div class="col-md-2 mb-4">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Broken Authentication</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Broken Authentication</a>
+                                    <ul>
+                                        <li> <a href="#brokenauthDescription" data-toggle="tab" onclick="activeTabFile('.brokenauthTab','#brokenauthDescription','.rootTab','#brokenauthScenarios')">Nedir ?</a></li>
+                                        <li> <a href="#brokenauthWebconfig" data-toggle="tab" onclick="activeTabFile('.brokenauthTab','#brokenauthWebconfig','.rootTab','#brokenauthScenarios')">Web.Config</a></li>
+                                        <li> <a href="#brokenauthGlobalAsax" data-toggle="tab" onclick="activeTabFile('.brokenauthTab','#brokenauthGlobalAsax','.rootTab','#brokenauthScenarios')">Global.asax</a></li>
+                                        <li> <a href="#brokenauthProtectionMethod" data-toggle="tab" onclick="activeTabFile('.brokenauthTab','#brokenauthScenariosProtectionMethod','.rootTab','#brokenauthScenarios')">Korunma Yöntemleri</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#brokenauthSource" onclick="activeTabFile('.rootTab','#brokenauthSource')" data-toggle="tab">Kaynaklar</a> </li>
+                                <li><a href="#brokenauthFound" onclick="activeTabFile('.rootTab','#brokenauthFound')" data-toggle="tab">Bulunan Broken Authentication</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function activeTabFile(destinationTab, destinationTabContent, parentTab, parentTabContent, grandParent, grandParentContent) {
+
+                            if (parentTab != '' && !$(parentTabContent).hasClass('active')) {
+                                // Aktif olan parent tab ve contenti silinir
+                                $(parentTab).removeClass('active');
+                                $(parentTab + 'Content').removeClass('active');
+                                //Aktif olması istenen parent tab ve contenti eklenir
+                                $($('li').find('a[href$="' + parentTabContent + '"]')[0]).addClass('active');
+                                $(parentTabContent).addClass('active');
+                            }
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            //Aktif olması istenen tab ve content aktif edilir
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active');
+                            $(destinationTabContent).addClass('active');
+                        };
+                    </script>
+                </div>
+                @* Client Side Content *@
+                <div class="col-md-10" id="brokenauthPart">
+                    <ul class="nav nav-tabs bg-light" role="tablist">
+                        <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#brokenauthScenarios" role="tab" aria-controls="brokenauthPart">Broken Authentication</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#brokenauthSource" role="tab" aria-controls="source">Kaynaklar</a></li>
+                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#brokenauthFound" role="tab" aria-controls="found">Bulunan Broken Authentication</a></li>
+                    </ul>
+
+                    <div class="tab-content" role="tabpanel">
+                        <div class="tab-pane rootTabContent active" id="brokenauthScenarios">
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs bg-light" role="tablist">
+                                    <li class="nav-item"><a class="brokenauthTab nav-link active" data-toggle="tab" href="#brokenauthDescription" role="tab">Nedir ?</a></li>
+                                    <li class="nav-item"><a class="brokenauthTab nav-link" data-toggle="tab" href="#brokenauthWebconfig" role="tab">Web.Config</a></li>
+                                    <li class="nav-item"><a class="brokenauthTab nav-link" data-toggle="tab" href="#brokenauthGlobalAsax" role="tab">Global.asax</a></li>
+                                    <li class="nav-item"><a class="brokenauthTab nav-link" data-toggle="tab" href="#brokenauthScenariosProtectionMethod" role="tab">Korunma Yöntemleri</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    @* Broken Auth Description *@
+                                    <div class="tab-pane brokenauthTabContent active" id="brokenauthDescription">
+                                        <p class="mt-2"> Broken Authentication Türkçeye Bozuk Kimlik Doğrulaması olarak çevrilebilir. </p>
+                                        <p class="mt-2"> Zafiyet uygulamaların giriş, oturum yönetimi, kimlik kontrollerinin düzgün yapılandırılmaması sonucu ortaya çıkmaktadır.</p>
+                                        <p class="mt-2"> Genel olarak ön tanımlı olan parolaların değiştirilmemesi yada brute force yani kaba kuvvet saldırıları tarafından çözümlenen parolaların kullanılması dolayısıyla bu zafiyet görülebilir.</p>
+                                    </div>
+                                    @* Web.Config *@
+                                    <div class="tab-pane brokenauthTabContent" id="brokenauthWebconfig">
+                                        <div class="card">
+                                            <div class="card-header"><i class="fa fa-file-text-o"></i> Web.Config </div>
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <ul style="font-size:12px;">
+                                                        <li class="mt-2"> Web.Config .NET FRAMEWORK projelerinde bulunan konfigürasyon dosyasıdır. </li>
+                                                        <li class="mt-2"> Login sayfası, header bilgileri, cookie ayarları gibi birçok konfigürasyon ayarları burada tanımlanmaktadır. </li>
+                                                        <li class="mt-2"> Her web uygulamasında buna benzer bir yapı bulunmaktadır. </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Global.asax *@
+                                    <div class="tab-pane brokenauthTabContent" id="brokenauthGlobalAsax">
+                                        <div class="card">
+                                            <div class="card-header"><i class="fa fa-file-text-o"></i> Global.asax </div>
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <ul style="font-size:12px;">
+                                                        <li class="mt-2"> Global.asax .NET FRAMEWORK projelerinde bulunan Application Life Cycle dosyasıdır. </li>
+                                                        <li class="mt-2"> Yine Web.config dosyasından ayarlanabilen Login sayfası, header bilgileri, cookie ayarları gibi birçok konfigürasyon ayarları burada tanımlanabilmektedir. </li>
+                                                        <li class="mt-2"> Aynı zamanda Global.asax içerisinde Application Life Cycle yani Uygulama Yaşam Döngüsüne ait birçok fonksiyon içerisinde ayarlamalar yapılabilmektedir.  </li>
+                                                        <li class="mt-2"> Örnek olarak projemizin Global.asax dosyasna <a href="https://gitlab.com/bhdryrdm/DevF/blob/master/DevF_LAB/DevF_LABS.Presentation/Global.asax.cs"> buradan </a> erişebilirsiniz. </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @* Korunma Yöntemleri ? *@
+                                    <div class="tab-pane brokenauthTabContent" id="brokenauthScenariosProtectionMethod">
+                                        <b> Yapılması Gerekenler </b> <i class="fa fa-shield"></i>
+                                        <ul style="font-size:12px;">
+                                            <li class="mt-2"> Uygulamanızda yada servislerinizde kullanılacak olan parolaları güçlü bir şekilde oluşturunuz. </li>
+                                            <li class="mt-2"> Parola ile giriş sağlanan her yerde parola için harf, rakam, özel karakter gibi zorunluluklar getiriniz.</li>
+                                            <li class="mt-2"> Veritabanına kayıt edilecek parolaları kesinlikle clear text olarak kaydetmeyiniz ve güvenliğinden şüphe duyulan Hash algoritmalarını kullanmayınız. </li>
+                                            <li class="mt-2"> Kritik önem taşıyan kısımlarda muhakkak robot kontrolü yapınız ve captcha kullanınız.</li>
+                                            <li class="mt-2"> Uygulama giriş sayfalarında OTP yada 2FA gibi yapılar kullanınız.</li>
+                                            <li class="mt-2"> Giriş sayfasında alınacak bilgilere göre kısıtlamalar getiriniz.Kullanıcı çok fazla yanlış deneme sonucunda kara listeye alınız.</li>
+                                        </ul>
+                                        <b> Unutulmaması Gerekenler</b> <i class="fa fa-bullhorn"></i>
+                                        <ul class="mt-2">
+                                            <li> Parolaların hashlenmesi %100 güvenlik sağlandığı anlamına gelmemektedir bu yüzden Salt yani parolaları tuzlamalısınız. </li>
+                                            <li> Kullanıcıdan alınacak herhangi bir veri bulunan uygulamalarınız için kesinlikle SSL sertifikası almalısınız. </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.Partial("~/Views/BrokenAuth/_BrokenAuthenticationSourceWebSites.cshtml")
+                        @Html.Partial("~/Views/BrokenAuth/_FoundBrokenAuthentication.cshtml")
+                    </div>
+                </div>
+                @* Server Side Folder Structure *@
+                <div class="col-md-2 mb-4 mt-5">
+                    <ul class="file-tree">
+                        <li>
+                            <a href="#">Server Code</a>
+                            <ul>
+                                <li>
+                                    <a href="#">ASP.NET MVC</a>
+                                    <ul>
+                                        <li>
+                                            <a href="#">Controllers</a>
+                                            <ul>
+                                                <li><a href="#baseController" onclick="serverSideTab('.serverSideTab','#baseController')" data-toggle="tab">BaseController</a> </li>
+                                                <li><a href="#brokenauthController" onclick="serverSideTab('.serverSideTab','#brokenauthController')" data-toggle="tab">BrokenAuthenticationController</a> </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <script>
+                        function serverSideTab(destinationTab, destinationTabContent) {
+                            $('#serverSide').css('display', 'block');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active d-block');
+                            $(destinationTabContent).addClass('active');
+                        };
+                        function serverSideAllTabClose(destinationTabContent) {
+                            $('#serverSide').css('display', 'none');
+
+                            //Aktif olan tab ve content silinir
+                            $(destinationTab).removeClass('active');
+                            $(destinationTab + 'Content').removeClass('active');
+                        };
+
+                        function closeTab(destinationTabContent) {
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).removeClass('active d-block');
+                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('d-none');
+                        }
+                    </script>
+                </div>
+                @* Server Side Github Gist Content *@
+                <div class="col-md-10 mt-5" id="serverSide" style="display:none">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab">
+                                    BaseController
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#baseController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="serverSideTab nav-link" data-toggle="tab" href="#brokenauthController" role="tab">
+                                    Broken Authentication Controller
+                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#brokenauthController')"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
+                        </ul>
+                        <div class="tab-content" role="tabpanel">
+                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BaseController.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+

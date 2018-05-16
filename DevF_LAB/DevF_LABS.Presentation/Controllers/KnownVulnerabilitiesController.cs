@@ -8,10 +8,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class KnownVulnerabilitiesController : Controller
     {
-        // GET: KnownVulnerabilities
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
     }
 }

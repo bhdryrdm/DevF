@@ -10,7 +10,5 @@ namespace OWASP.Controllers
     public class XsrfController : BaseController
     {
         public ActionResult Index() => View();
-
-
     }
 }

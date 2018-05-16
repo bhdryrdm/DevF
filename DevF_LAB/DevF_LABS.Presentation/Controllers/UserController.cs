@@ -9,7 +9,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
         public ActionResult SessionUserList() => PartialView();
     }
 }

@@ -8,10 +8,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class XeeController : Controller
     {
-        // GET: Xee
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
     }
 }

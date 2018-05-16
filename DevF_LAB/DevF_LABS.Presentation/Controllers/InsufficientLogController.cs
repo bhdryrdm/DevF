@@ -8,10 +8,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class InsufficientLogController : Controller
     {
-        // GET: InsufficientLog
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
     }
 }

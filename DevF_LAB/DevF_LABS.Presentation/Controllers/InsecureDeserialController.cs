@@ -8,10 +8,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class InsecureDeserialController : Controller
     {
-        // GET: InsecureDeserial
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
     }
 }

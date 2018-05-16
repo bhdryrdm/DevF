@@ -8,10 +8,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class SecurityMisconfigController : Controller
     {
-        // GET: SecurityMisconfig
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
     }
 }

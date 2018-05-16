@@ -8,10 +8,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class BrokenAuthController : Controller
     {
-        // GET: BrokenAuth
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
     }
 }

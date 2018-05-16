@@ -8,10 +8,6 @@ namespace DevF_LABS.Presentation.Controllers
 {
     public class SensitiveDataExposureController : Controller
     {
-        // GET: SensitiveData
-        public ActionResult Index()
-        {
-            return View();
-        }
+        public ActionResult Index() => View();
     }
 }

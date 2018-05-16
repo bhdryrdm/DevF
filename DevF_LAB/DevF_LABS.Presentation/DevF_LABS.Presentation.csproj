@@ -1638,7 +1638,6 @@
     <Content Include="Views\InsecureDeserial\_FoundInsecureDeserial.cshtml" />
     <Content Include="Views\InsecureDeserial\_InsecureDeserialSourceWebSites.cshtml" />
     <Content Include="Views\InsecureDeserial\Index.cshtml" />
-    <Content Include="Views\InsufficientLog\_FoundInsufficientLog.cshtml" />
     <Content Include="Views\InsufficientLog\_InsufficientLogSourceWebSites.cshtml" />
     <Content Include="Views\InsufficientLog\Index.cshtml" />
     <Content Include="Views\KnownVulnerabilities\_FoundKnownVulnerabilities.cshtml" />
@@ -1647,6 +1646,9 @@
     <Content Include="Views\Xee\_FoundXee.cshtml" />
     <Content Include="Views\Xee\_XeeSourceWebSites.cshtml" />
     <Content Include="Views\Xee\Index.cshtml" />
+    <Content Include="Views\BrokenAuth\Index.cshtml" />
+    <Content Include="Views\BrokenAuth\_BrokenAuthenticationSourceWebSites.cshtml" />
+    <Content Include="Views\BrokenAuth\_FoundBrokenAuthentication.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

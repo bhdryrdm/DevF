@@ -22,14 +22,14 @@
                             <a href="#">Insufficient Logging & Monitoring</a>
                             <ul>
                                 <li>
-                                    <a href="#">insufficientlog</a>
+                                    <a href="#">Insufficient</a>
                                     <ul>
                                         <li> <a href="#insufficientlogDescription" data-toggle="tab" onclick="activeTabFile('.insufficientlogTab', '#insufficientlogDescription', '.rootTab', '#insufficientlogScenarios')">Nedir ?</a></li>
+                                        <li> <a href="#insufficientlogExample" data-toggle="tab" onclick="activeTabFile('.insufficientlogTab', '#insufficientlogExample', '.rootTab', '#insufficientlogScenarios')">Örnek</a></li>
                                         <li> <a href="#insufficientlogScenariosProtectionMethod" data-toggle="tab" onclick="activeTabFile('.insufficientlogTab', '#insufficientlogScenariosProtectionMethod', '.rootTab', '#insufficientlogScenarios')">Korunma Yöntemleri</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#insufficientlogSource" onclick="activeTabFile('.rootTab', '#insufficientlogSource')" data-toggle="tab">Kaynaklar</a> </li>
-                                <li><a href="#insufficientlogFound" onclick="activeTabFile('.rootTab', '#insufficientlogFound')" data-toggle="tab">Bulunan Insufficient Logging & Monitoring</a> </li>
                             </ul>
                         </li>
                     </ul>
@@ -70,7 +70,6 @@
                     <ul class="nav nav-tabs bg-light" role="tablist">
                         <li class="nav-item"><a class="rootTab nav-link active" data-toggle="tab" href="#insufficientlogScenarios" role="tab" aria-controls="insufficientlogPart">Insufficient Logging & Monitoring</a></li>
                         <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#insufficientlogSource" role="tab" aria-controls="source">Kaynaklar</a></li>
-                        <li class="nav-item"><a class="rootTab nav-link" data-toggle="tab" href="#insufficientlogFound" role="tab" aria-controls="found">Bulunan Insufficient Logging & Monitoring</a></li>
                     </ul>
 
                     <div class="tab-content" role="tabpanel">
@@ -78,6 +77,7 @@
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs bg-light" role="tablist">
                                     <li class="nav-item"><a class="insufficientlogTab nav-link active" data-toggle="tab" href="#insufficientlogDescription" role="tab">Nedir ?</a></li>
+                                    <li class="nav-item"><a class="insufficientlogTab nav-link" data-toggle="tab" href="#insufficientlogExample" role="tab">Örnek</a></li>
                                     <li class="nav-item"><a class="insufficientlogTab nav-link" data-toggle="tab" href="#insufficientlogScenariosProtectionMethod" role="tab">Korunma Yöntemleri</a></li>
                                 </ul>
                                 <div class="tab-content">
@@ -86,6 +86,17 @@
                                         <p class="mt-2">Bu zafiyet, yeteri kadar log kayıtlarının oluşturulmamasından ve monitoring işleminin yapılmamasından kaynaklanır.</p>
                                         <p class="mt-2">Zafiyet Türkçe olarak yetersiz günlük oluşturma ve izleme anlamına gelmektedir.</p>
                                         <p class="mt-2">Dışarıdan bakıldığı zaman bu zafiyeti tespit etmek gerçekten güçtür.</p>
+                                    </div>
+                                    @* securitymisconfig Description *@
+                                    <div class="tab-pane insufficientlogTabContent" id="insufficientlogExample">
+                                        <p class="mt-2">
+                                            Örnek Monitoring için <a href="https://status.github.com/messages">Github</a> | 
+                                            <a href="https://www.fireeye.com/cyber-map/threat-map.html">Fireeye</a> |
+                                            <a href="https://rt.goaccess.io/?20180411160222&ref=hpimg">Goaccess</a>
+                                            tıklayarak ulaşabilirsiniz.
+                                        </p>
+                                        <p class="mt-2">.NET Framework Örnek Log Filter</p>
+                                        <script src="https://gist.github.com/bhdryrdm/6ac9fa959da4e8ba83f51849bb9ee2eb.js"></script>
                                     </div>
                                     @* Korunma Yöntemleri ? *@
                                     <div class="tab-pane insufficientlogTabContent" id="insufficientlogScenariosProtectionMethod">
@@ -97,83 +108,13 @@
                                         </ul>
                                         <b> Unutulmaması Gerekenler</b> <i class="fa fa-bullhorn"></i>
                                         <ul class="mt-2">
-                                            <li> Saldırgan sunucudan çok fazla veri indirmeye başlarsa ve ağ trafiğinde olağandışı değişiklikler meydana gelirse bu durum verilerin çalınması ihtimalini ortaya çıkarabilir.</li> 
+                                            <li> Saldırgan sunucudan çok fazla veri indirmeye başlarsa ve ağ trafiğinde olağandışı değişiklikler meydana gelirse bu durum verilerin çalınması ihtimalini ortaya çıkarabilir.</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @Html.Partial("~/Views/InsufficientLog/_InsufficientLogSourceWebSites.cshtml")
-                        @Html.Partial("~/Views/InsufficientLog/_FoundInsufficientLog.cshtml")
-                    </div>
-                </div>
-                @* Server Side Folder Structure *@
-                <div class="col-md-2 mb-4 mt-5">
-                    <ul class="file-tree">
-                        <li>
-                            <a href="#">Server Code</a>
-                            <ul>
-                                <li>
-                                    <a href="#">ASP.NET MVC</a>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Controllers</a>
-                                            <ul>
-                                                <li><a href="#baseController" onclick="serverSideTab('.serverSideTab','#baseController')" data-toggle="tab">BaseController</a> </li>
-                                                <li><a href="#securitymisconfigController" onclick="serverSideTab('.serverSideTab','#securitymisconfigController')" data-toggle="tab">SecMisconfigController</a> </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <script>
-                        function serverSideTab(destinationTab, destinationTabContent) {
-                            $('#serverSide').css('display', 'block');
-
-                            //Aktif olan tab ve content silinir
-                            $(destinationTab).removeClass('active');
-                            $(destinationTab + 'Content').removeClass('active');
-
-                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('active d-block');
-                            $(destinationTabContent).addClass('active');
-                        };
-                        function serverSideAllTabClose(destinationTabContent) {
-                            $('#serverSide').css('display', 'none');
-
-                            //Aktif olan tab ve content silinir
-                            $(destinationTab).removeClass('active');
-                            $(destinationTab + 'Content').removeClass('active');
-                        };
-
-                        function closeTab(destinationTabContent) {
-                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).removeClass('active d-block');
-                            $($('li').find('a[href$="' + destinationTabContent + '"]')[1]).addClass('d-none');
-                        }
-                    </script>
-                </div>
-                @* Server Side Github Gist Content *@
-                <div class="col-md-10 mt-5" id="serverSide" style="display:none">
-                    <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="serverSideTab nav-link" data-toggle="tab" href="#baseController" role="tab">
-                                    BaseController
-                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#baseController')"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="serverSideTab nav-link" data-toggle="tab" href="#securitymisconfigController" role="tab">
-                                    securitymisconfigController
-                                    <i class="fa fa-window-close fa-lg" onclick="closeTab('#securitymisconfigController')"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item pull-right"><button type="button" class="btn btn-dark" onclick="serverSideAllTabClose('.serverSideTab')"> <i class="icon-close"></i></button></li>
-                        </ul>
-                        <div class="tab-content" role="tabpanel">
-                            @Html.Partial("~/Views/ServerSide/ASP.NET_MVC/Controller/BaseController.cshtml")
-                        </div>
                     </div>
                 </div>
             </div>
